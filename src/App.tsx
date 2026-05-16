@@ -1,5 +1,4 @@
 // src/App.tsx
-import { Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -25,7 +24,7 @@ function Footer() {
 
 export default function App() {
   return (
-    <Suspense fallback={null}>
+    <>
       <Navbar />
       <main>
         <Hero />
@@ -34,6 +33,6 @@ export default function App() {
         <PracticeSection sectionKey="changshou" bgClass="bg-bg-darker" />
       </main>
       <Footer />
-    </Suspense>
+    </>
   )
 }

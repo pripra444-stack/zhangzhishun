@@ -28,8 +28,8 @@ export default function BiographyScroll() {
         <div
           className="mx-auto cursor-pointer"
           style={{ width: '88%' }}
-          onMouseEnter={handleOpen}
-          onMouseLeave={() => setOpen(false)}
+          onPointerEnter={e => { if (e.pointerType === 'mouse') handleOpen() }}
+          onPointerLeave={e => { if (e.pointerType === 'mouse') setOpen(false) }}
           onClick={() => { setOpen(o => !o); setHintVisible(false) }}
         >
           <motion.div

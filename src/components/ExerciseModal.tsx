@@ -102,8 +102,10 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
               style={{ borderTop: '1px solid #4488cc22' }}
             >
               <button
+                type="button"
                 onClick={() => prev && onNavigate(prev)}
                 disabled={!prev}
+                tabIndex={!prev ? -1 : undefined}
                 className="text-xs text-portal-blue/60 tracking-wider font-sans px-3 py-1.5 border rounded transition-colors duration-200 disabled:opacity-20 hover:text-portal-blue hover:border-portal-blue/50"
                 style={{ borderColor: '#4488cc33' }}
               >
@@ -111,6 +113,7 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
               </button>
 
               <button
+                type="button"
                 onClick={onClose}
                 className="text-xs text-portal-blue/40 font-sans tracking-wider hover:text-portal-blue transition-colors"
               >
@@ -118,8 +121,10 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
               </button>
 
               <button
+                type="button"
                 onClick={() => next && onNavigate(next)}
                 disabled={!next}
+                tabIndex={!next ? -1 : undefined}
                 className="text-xs text-portal-blue/60 tracking-wider font-sans px-3 py-1.5 border rounded transition-colors duration-200 disabled:opacity-20 hover:text-portal-blue hover:border-portal-blue/50"
                 style={{ borderColor: '#4488cc33' }}
               >

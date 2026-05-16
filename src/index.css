@@ -34,3 +34,14 @@
     box-shadow: 0 0 25px #4488cc66, 0 0 50px #4488cc22, inset 0 0 20px #0a2040;
   }
 }
+
+@layer components {
+  .gate-circle {
+    @apply portal-glow transition-all duration-300;
+    border-color: #4488cc66;
+  }
+  .gate-circle:hover {
+    @apply portal-glow-hover;
+    border-color: #4488cc99;
+  }
+}

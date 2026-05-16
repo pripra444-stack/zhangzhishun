@@ -61,11 +61,8 @@ export default function Hero() {
         }}
       >
         {/* Заменить на <img src="/images/master.png" /> когда появится фото */}
-        <div className="w-full h-full flex flex-col items-center justify-center gap-3">
+        <div className="w-full h-full flex flex-col items-center justify-center">
           <span className="text-5xl opacity-20">🧘</span>
-          <span className="text-xs text-gold/40 tracking-widest font-sans text-center">
-            Фото мастера<br />张至顺
-          </span>
         </div>
       </motion.div>
 

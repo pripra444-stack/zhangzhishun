@@ -19,21 +19,9 @@ export default function GateCircle({ exercise, onClick }: Props) {
       onClick={() => onClick(exercise)}
     >
       <div
-        className="w-20 h-20 md:w-24 md:h-24 rounded-full relative overflow-hidden border-2 transition-all duration-300"
+        className="w-20 h-20 md:w-24 md:h-24 rounded-full relative overflow-hidden border-2 gate-circle"
         style={{
-          borderColor: '#4488cc66',
           background: 'radial-gradient(circle at 40% 35%, #1a4080 0%, #0a1e3a 60%, #060e1e 100%)',
-          boxShadow: '0 0 15px #4488cc33, 0 0 30px #4488cc11, inset 0 0 20px #0a2040',
-        }}
-        onMouseEnter={e => {
-          const el = e.currentTarget as HTMLElement
-          el.style.boxShadow = '0 0 25px #4488cc66, 0 0 50px #4488cc22, inset 0 0 20px #0a2040'
-          el.style.borderColor = '#4488cc99'
-        }}
-        onMouseLeave={e => {
-          const el = e.currentTarget as HTMLElement
-          el.style.boxShadow = '0 0 15px #4488cc33, 0 0 30px #4488cc11, inset 0 0 20px #0a2040'
-          el.style.borderColor = '#4488cc66'
         }}
       >
         {exercise.image ? (
