@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg-deep text-white font-sans overflow-x-hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-deep;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d4a85333;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .gold-glow {
+    text-shadow: 0 0 40px #d4a85555, 0 0 80px #d4a85322;
+  }
+  .portal-glow {
+    box-shadow: 0 0 15px #4488cc33, 0 0 30px #4488cc11, inset 0 0 20px #0a2040;
+  }
+  .portal-glow-hover {
+    box-shadow: 0 0 25px #4488cc66, 0 0 50px #4488cc22, inset 0 0 20px #0a2040;
+  }
+}
