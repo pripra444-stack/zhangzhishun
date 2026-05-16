@@ -1,0 +1,273 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0e1a; color: #fff; font-family: sans-serif; }
+
+  h2 { color: #d4a853; text-align: center; padding: 28px 0 6px; font-size: 1.3rem; letter-spacing: 0.05em; }
+  .subtitle { text-align: center; color: #8899aa; font-size: 0.88rem; margin-bottom: 28px; }
+
+  .options { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; padding: 0 24px 40px; }
+
+  .option {
+    background: #111827;
+    border: 2px solid #1e2d45;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    overflow: hidden;
+    width: 300px;
+  }
+  .option:hover { border-color: #d4a853; transform: translateY(-3px); }
+  .option.selected { border-color: #d4a853; box-shadow: 0 0 20px rgba(212,168,83,0.25); }
+
+  .letter {
+    background: #d4a853;
+    color: #0a0e1a;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 5px 14px;
+    display: block;
+    letter-spacing: 0.08em;
+  }
+
+  .mock {
+    height: 240px;
+    background: #0d1525;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .section-title {
+    font-size: 0.7rem;
+    color: #d4a853;
+    letter-spacing: 0.2em;
+    text-align: center;
+  }
+
+  /* VARIANT A — золотая рамка, фото внутри, номер снаружи */
+  .gates-a {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 220px;
+  }
+  .gate-a {
+    position: relative;
+    width: 72px;
+    height: 72px;
+  }
+  .gate-a .ring {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 2px solid #d4a853;
+    box-shadow: 0 0 10px #d4a85333, inset 0 0 10px #0a1628;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a3050, #0d1e36);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.45rem; color: #8899aa88;
+  }
+  .gate-a .num {
+    position: absolute;
+    top: -5px; right: -5px;
+    width: 18px; height: 18px;
+    background: #d4a853;
+    color: #0a0e1a;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem; font-weight: bold;
+  }
+
+  /* VARIANT B — двойная рамка, номер внутри, подпись снизу */
+  .gates-b {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    max-width: 240px;
+  }
+  .gate-b {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .gate-b .outer {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    border: 2px solid #d4a85366;
+    padding: 3px;
+  }
+  .gate-b .inner {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 1px solid #d4a85333;
+    background: linear-gradient(135deg, #142040, #0a1628);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; color: #d4a85388;
+    overflow: hidden;
+  }
+  .gate-b .label {
+    font-size: 0.42rem;
+    color: #8899aa;
+    letter-spacing: 0.05em;
+    text-align: center;
+    max-width: 70px;
+  }
+
+  /* VARIANT C — светящийся портал, туман внутри, крупнее */
+  .gates-c {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    max-width: 240px;
+  }
+  .gate-c {
+    position: relative;
+    width: 72px; height: 72px;
+  }
+  .gate-c .glow-ring {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 2px solid #4488cc;
+    box-shadow: 0 0 12px #4488cc55, 0 0 24px #4488cc22, inset 0 0 16px #0a2040;
+    background: radial-gradient(circle at 40% 35%, #1a4080 0%, #0a1e3a 60%, #060e1e 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .gate-c .mist {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 30px;
+    background: linear-gradient(0deg, #1a406066, transparent);
+    border-radius: 0 0 50px 50px;
+  }
+  .gate-c .fig {
+    font-size: 0.42rem;
+    color: #aaccee88;
+    position: relative; z-index: 1;
+  }
+  .gate-c .num-c {
+    position: absolute;
+    bottom: -2px; left: 50%; transform: translateX(-50%);
+    background: #0a1628;
+    border: 1px solid #4488cc66;
+    color: #4488cc;
+    font-size: 0.5rem;
+    padding: 1px 7px;
+    border-radius: 8px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .card-label { padding: 12px 16px 16px; }
+  .card-label h3 { color: #d4a853; font-size: 0.92rem; margin-bottom: 4px; }
+  .card-label p { color: #8899aa; font-size: 0.76rem; line-height: 1.4; }
+</style>
+
+<h2>Стиль круглых ворот упражнений</h2>
+<p class="subtitle">Как выглядят 8 кружков-ворот в разделах практик?</p>
+
+<div class="options">
+
+  <!-- VARIANT A -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A — Золотая рамка + фото</div>
+    <div class="mock">
+      <div class="section-title">金刚功 · Алмазная крепость</div>
+      <div class="gates-a">
+        <div class="gate-a"><div class="ring">фото</div><div class="num">1</div></div>
+        <div class="gate-a"><div class="ring">фото</div><div class="num">2</div></div>
+        <div class="gate-a"><div class="ring">фото</div><div class="num">3</div></div>
+        <div class="gate-a"><div class="ring">фото</div><div class="num">4</div></div>
+        <div class="gate-a"><div class="ring">фото</div><div class="num">5</div></div>
+        <div class="gate-a"><div class="ring">фото</div><div class="num">6</div></div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Золотые врата</h3>
+      <p>Золотая окружность, фото/видео внутри, номер-бейдж сверху. Тепло, торжественно.</p>
+    </div>
+  </div>
+
+  <!-- VARIANT B -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B — Двойная рамка + название</div>
+    <div class="mock">
+      <div class="section-title">金刚功 · Алмазная крепость</div>
+      <div class="gates-b">
+        <div class="gate-b">
+          <div class="outer"><div class="inner">①</div></div>
+          <div class="label">Подъём неба</div>
+        </div>
+        <div class="gate-b">
+          <div class="outer"><div class="inner">②</div></div>
+          <div class="label">Лук и стрела</div>
+        </div>
+        <div class="gate-b">
+          <div class="outer"><div class="inner">③</div></div>
+          <div class="label">Раздвижение</div>
+        </div>
+        <div class="gate-b">
+          <div class="outer"><div class="inner">④</div></div>
+          <div class="label">Вращение</div>
+        </div>
+        <div class="gate-b">
+          <div class="outer"><div class="inner">⑤</div></div>
+          <div class="label">Взмах рукав</div>
+        </div>
+        <div class="gate-b">
+          <div class="outer"><div class="inner">⑥</div></div>
+          <div class="label">Поклон земле</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Двойная рамка + подпись</h3>
+      <p>Двойной круг, иероглиф-номер внутри, название упражнения снизу. Академично.</p>
+    </div>
+  </div>
+
+  <!-- VARIANT C -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C — Синий светящийся портал</div>
+    <div class="mock">
+      <div class="section-title">金刚功 · Алмазная крепость</div>
+      <div class="gates-c">
+        <div class="gate-c">
+          <div class="glow-ring"><div class="fig">мастер</div><div class="mist"></div></div>
+          <div class="num-c">1 · Небо</div>
+        </div>
+        <div class="gate-c">
+          <div class="glow-ring"><div class="fig">мастер</div><div class="mist"></div></div>
+          <div class="num-c">2 · Лук</div>
+        </div>
+        <div class="gate-c">
+          <div class="glow-ring"><div class="fig">мастер</div><div class="mist"></div></div>
+          <div class="num-c">3 · Земля</div>
+        </div>
+        <div class="gate-c">
+          <div class="glow-ring"><div class="fig">мастер</div><div class="mist"></div></div>
+          <div class="num-c">4 · Дракон</div>
+        </div>
+        <div class="gate-c">
+          <div class="glow-ring"><div class="fig">мастер</div><div class="mist"></div></div>
+          <div class="num-c">5 · Тигр</div>
+        </div>
+        <div class="gate-c">
+          <div class="glow-ring"><div class="fig">мастер</div><div class="mist"></div></div>
+          <div class="num-c">6 · Феникс</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Светящийся портал</h3>
+      <p>Синее свечение как портал, туман внутри, короткое название снизу. Мистично.</p>
+    </div>
+  </div>
+
+</div>

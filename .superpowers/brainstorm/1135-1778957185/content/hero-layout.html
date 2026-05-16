@@ -1,0 +1,208 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0e1a; color: #fff; font-family: sans-serif; }
+
+  h2 { color: #d4a853; text-align: center; padding: 28px 0 6px; font-size: 1.3rem; letter-spacing: 0.05em; }
+  .subtitle { text-align: center; color: #8899aa; font-size: 0.88rem; margin-bottom: 28px; }
+
+  .options { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; padding: 0 24px 40px; }
+
+  .option {
+    background: #111827;
+    border: 2px solid #1e2d45;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    overflow: hidden;
+    width: 320px;
+  }
+  .option:hover { border-color: #d4a853; transform: translateY(-3px); }
+  .option.selected { border-color: #d4a853; box-shadow: 0 0 20px rgba(212,168,83,0.25); }
+
+  .letter {
+    background: #d4a853;
+    color: #0a0e1a;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 5px 14px;
+    display: inline-block;
+    letter-spacing: 0.1em;
+  }
+
+  .mock {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ---- VARIANT A: Full-screen portrait, text overlay bottom ---- */
+  .mock-a {
+    height: 220px;
+    background: linear-gradient(180deg, #0d1525 0%, #1a2744 40%, #0d1525 100%);
+    display: flex;
+    align-items: flex-end;
+  }
+  .mock-a .figure {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 110px; height: 200px;
+    background: linear-gradient(180deg, #c9a84c33 0%, #c9a84c66 60%, transparent 100%);
+    border-radius: 4px 4px 0 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; color: #d4a85388; letter-spacing: 0.05em; text-align: center;
+  }
+  .mock-a .mountain {
+    position: absolute;
+    bottom: 50px; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, transparent, #0a2040cc);
+  }
+  .mock-a .overlay {
+    position: relative; z-index: 2;
+    width: 100%; padding: 16px;
+    background: linear-gradient(0deg, #0a0e1a 0%, transparent 100%);
+    text-align: center;
+  }
+  .mock-a .hieroglyph { font-size: 1.5rem; color: #d4a853; letter-spacing: 0.15em; display: block; }
+  .mock-a .name { font-size: 0.7rem; color: #aabbcc; letter-spacing: 0.2em; margin-top: 4px; }
+  .mock-a .tagline { font-size: 0.6rem; color: #667788; margin-top: 3px; }
+
+  /* ---- VARIANT B: Split — photo left, text right ---- */
+  .mock-b {
+    height: 220px;
+    background: #0d1525;
+    display: flex;
+  }
+  .mock-b .left {
+    width: 45%;
+    background: linear-gradient(135deg, #1a2744, #0d1525);
+    display: flex; align-items: center; justify-content: center;
+    border-right: 1px solid #d4a85322;
+    font-size: 0.6rem; color: #d4a85366; letter-spacing: 0.05em;
+    flex-direction: column; gap: 6px;
+  }
+  .mock-b .portrait-rect {
+    width: 70px; height: 110px;
+    border: 1px solid #d4a85344;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #c9a84c22, #c9a84c44);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem; color: #d4a85388;
+  }
+  .mock-b .right {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+    padding: 20px 16px;
+  }
+  .mock-b .right .hieroglyph { font-size: 1.3rem; color: #d4a853; letter-spacing: 0.12em; }
+  .mock-b .right .name { font-size: 0.68rem; color: #8899aa; letter-spacing: 0.18em; margin-top: 6px; }
+  .mock-b .right .desc { font-size: 0.58rem; color: #55667788; margin-top: 10px; line-height: 1.5; }
+  .mock-b .right .btn { margin-top: 12px; background: transparent; border: 1px solid #d4a853; color: #d4a853; font-size: 0.58rem; padding: 5px 12px; border-radius: 2px; letter-spacing: 0.1em; }
+
+  /* ---- VARIANT C: Full-screen cinematic — горы фон, мастер по центру крупно ---- */
+  .mock-c {
+    height: 220px;
+    background: radial-gradient(ellipse at 50% 30%, #1a2d50 0%, #080e1c 70%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mock-c .mountains {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70px;
+    background: linear-gradient(180deg, transparent, #0a1628);
+    clip-path: polygon(0% 100%, 15% 40%, 30% 65%, 45% 25%, 60% 55%, 75% 30%, 90% 50%, 100% 20%, 100% 100%);
+    opacity: 0.5;
+  }
+  .mock-c .mist {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40px;
+    background: linear-gradient(0deg, #1a3060aa, transparent);
+  }
+  .mock-c .figure-c {
+    width: 80px; height: 160px;
+    background: linear-gradient(180deg, #c9a84c55, #c9a84c22 80%, transparent);
+    border-radius: 3px 3px 0 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.5rem; color: #d4a85366;
+    position: relative; z-index: 2;
+  }
+  .mock-c .top-text {
+    position: absolute; top: 14px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    z-index: 2;
+  }
+  .mock-c .subtitle-c { font-size: 0.55rem; color: #8899aa; letter-spacing: 0.25em; text-transform: uppercase; }
+  .mock-c .hieroglyph-c { font-size: 1.6rem; color: #d4a853; letter-spacing: 0.18em; }
+
+  .card-label { padding: 10px 16px 14px; }
+  .card-label h3 { color: #d4a853; font-size: 0.95rem; margin-bottom: 4px; }
+  .card-label p { color: #8899aa; font-size: 0.78rem; line-height: 1.4; }
+</style>
+
+<h2>Как выглядит Hero-секция?</h2>
+<p class="subtitle">Посмотри три варианта — кликни на тот, что ближе к твоей идее</p>
+
+<div class="options">
+
+  <!-- VARIANT A -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A — Портрет на весь экран</div>
+    <div class="mock mock-a">
+      <div class="figure">Фото<br>мастера</div>
+      <div class="mountain"></div>
+      <div class="overlay">
+        <span class="hieroglyph">炁體源流</span>
+        <div class="name">张至顺 · Чжан Чжи Шунь</div>
+        <div class="tagline">Даосские практики оздоровления и медитации</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Полноэкранный портрет</h3>
+      <p>Фото мастера занимает весь экран, иероглифы и имя — поверх снизу. Максимально атмосферно.</p>
+    </div>
+  </div>
+
+  <!-- VARIANT B -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B — Разделённый экран</div>
+    <div class="mock mock-b">
+      <div class="left">
+        <div class="portrait-rect">Фото</div>
+      </div>
+      <div class="right">
+        <div class="hieroglyph">炁體源流</div>
+        <div class="name">张至顺 · Чжан Чжи Шунь</div>
+        <div class="desc">Даосские практики оздоровления<br>и медитации. Школа мастера.</div>
+        <div class="btn">Узнать практики →</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Split-layout</h3>
+      <p>Фото слева, текст и кнопка справа. Более «сайтовый» вид, хорошо читается.</p>
+    </div>
+  </div>
+
+  <!-- VARIANT C -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C — Кинематографичный</div>
+    <div class="mock mock-c">
+      <div class="top-text">
+        <div class="subtitle-c">Даосские практики · 道家功夫</div>
+        <div class="hieroglyph-c">炁體源流</div>
+      </div>
+      <div class="figure-c">Мастер</div>
+      <div class="mountains"></div>
+      <div class="mist"></div>
+    </div>
+    <div class="card-label">
+      <h3>Кинематографичный</h3>
+      <p>Иероглифы сверху, мастер по центру крупно, горы с туманом на фоне. Эффект постера.</p>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,263 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0e1a; color: #fff; font-family: sans-serif; }
+
+  h2 { color: #d4a853; text-align: center; padding: 28px 0 6px; font-size: 1.3rem; letter-spacing: 0.05em; }
+  .subtitle { text-align: center; color: #8899aa; font-size: 0.88rem; margin-bottom: 28px; }
+
+  .options { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; padding: 0 24px 40px; }
+
+  .option {
+    background: #111827;
+    border: 2px solid #1e2d45;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    overflow: hidden;
+    width: 290px;
+  }
+  .option:hover { border-color: #d4a853; transform: translateY(-3px); }
+  .option.selected { border-color: #d4a853; box-shadow: 0 0 20px rgba(212,168,83,0.25); }
+
+  .letter {
+    background: #d4a853;
+    color: #0a0e1a;
+    font-weight: 800;
+    font-size: 0.78rem;
+    padding: 5px 14px;
+    display: block;
+    letter-spacing: 0.08em;
+  }
+
+  .mock {
+    height: 230px;
+    background: #080e1c;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* VARIANT A — модальное окно поверх страницы */
+  .modal-overlay {
+    position: absolute; inset: 0;
+    background: #04080f99;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-box {
+    width: 220px;
+    background: linear-gradient(180deg, #0d1e36, #081428);
+    border: 1px solid #4488cc66;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 30px #4488cc22;
+  }
+  .modal-top {
+    height: 90px;
+    background: radial-gradient(ellipse at 50% 40%, #1a4080, #060e1e);
+    border-bottom: 1px solid #4488cc33;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .modal-top .video-icon {
+    width: 36px; height: 36px;
+    border: 2px solid #4488cc88;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; color: #4488cc;
+  }
+  .modal-top .label-top {
+    position: absolute; top: 6px; left: 0; right: 0;
+    text-align: center; font-size: 0.5rem; color: #4488cc88; letter-spacing: 0.15em;
+  }
+  .modal-body { padding: 10px 12px; }
+  .modal-body h4 { color: #d4a853; font-size: 0.65rem; letter-spacing: 0.1em; margin-bottom: 5px; }
+  .modal-body p { color: #7788aa; font-size: 0.5rem; line-height: 1.6; }
+  .modal-close {
+    position: absolute; top: 6px; right: 8px;
+    color: #4488cc44; font-size: 0.7rem; cursor: pointer;
+  }
+  .modal-nav {
+    display: flex; justify-content: space-between;
+    padding: 6px 12px;
+    border-top: 1px solid #4488cc22;
+    font-size: 0.5rem; color: #4488cc66;
+  }
+
+  /* VARIANT B — страница раскрывается вниз (аккордеон) */
+  .grid-bg {
+    position: absolute; inset: 0;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    padding: 10px;
+    align-content: flex-start;
+  }
+  .mini-gate {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 1px solid #4488cc44;
+    background: radial-gradient(circle, #1a4080 0%, #060e1e 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.5rem; color: #4488cc66;
+    flex-shrink: 0;
+  }
+  .mini-gate.active {
+    border-color: #4488cc;
+    box-shadow: 0 0 10px #4488cc44;
+  }
+  .accordion {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, #0d1e36ee, #081428);
+    border-top: 1px solid #4488cc44;
+    padding: 8px 12px;
+    height: 100px;
+  }
+  .accordion h4 { color: #d4a853; font-size: 0.6rem; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .accordion p { color: #7788aa; font-size: 0.48rem; line-height: 1.6; }
+  .accordion .a-media {
+    display: flex; gap: 6px; margin-top: 6px;
+  }
+  .a-thumb {
+    width: 40px; height: 28px;
+    background: radial-gradient(circle, #1a4080, #060e1e);
+    border: 1px solid #4488cc33;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.45rem; color: #4488cc55;
+  }
+
+  /* VARIANT C — переход на отдельную страницу (full screen) */
+  .full-page {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, #060e1e 0%, #0a1628 100%);
+    display: flex; flex-direction: column;
+  }
+  .fp-top {
+    flex: 0 0 120px;
+    background: radial-gradient(ellipse at 50% 60%, #1a4080 0%, #060e1e 80%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    border-bottom: 1px solid #4488cc33;
+  }
+  .fp-top .back {
+    position: absolute; top: 8px; left: 10px;
+    font-size: 0.5rem; color: #4488cc88;
+    letter-spacing: 0.08em;
+  }
+  .fp-top .ex-num {
+    position: absolute; top: 8px; right: 10px;
+    font-size: 0.5rem; color: #4488cc66;
+  }
+  .fp-top .video-ph {
+    width: 50px; height: 50px;
+    border: 2px solid #4488cc66;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; color: #4488cc88;
+    box-shadow: 0 0 20px #4488cc33;
+  }
+  .fp-body { flex: 1; padding: 10px 14px; }
+  .fp-body h4 { color: #d4a853; font-size: 0.68rem; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .fp-body p { color: #7788aa; font-size: 0.48rem; line-height: 1.6; }
+  .fp-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 14px;
+    border-top: 1px solid #4488cc22;
+    font-size: 0.5rem; color: #4488cc77;
+  }
+
+  .card-label { padding: 10px 16px 14px; }
+  .card-label h3 { color: #d4a853; font-size: 0.9rem; margin-bottom: 4px; }
+  .card-label p { color: #8899aa; font-size: 0.75rem; line-height: 1.4; }
+</style>
+
+<h2>Что происходит при клике на портал?</h2>
+<p class="subtitle">Как пользователь видит детали упражнения?</p>
+
+<div class="options">
+
+  <!-- VARIANT A -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A — Всплывающее окно (модал)</div>
+    <div class="mock">
+      <div class="modal-overlay">
+        <div class="modal-box" style="position:relative">
+          <div class="modal-close">✕</div>
+          <div class="modal-top">
+            <div class="label-top">УПРАЖНЕНИЕ 1 · 金刚功</div>
+            <div class="video-icon">▶</div>
+          </div>
+          <div class="modal-body">
+            <h4>Подъём Неба</h4>
+            <p>Стоя ровно, медленно поднимаем руки через стороны вверх, соединяем ладони над головой. Дыхание плавное, сознание в центре...</p>
+          </div>
+          <div class="modal-nav">
+            <span>← Назад</span>
+            <span>Вперёд →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Модальное окно</h3>
+      <p>Поверх страницы появляется окно с видео/фото и описанием. Фон затемняется, есть кнопки «назад/вперёд».</p>
+    </div>
+  </div>
+
+  <!-- VARIANT B -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B — Раскрывается под кружком</div>
+    <div class="mock">
+      <div class="grid-bg">
+        <div class="mini-gate">1</div>
+        <div class="mini-gate active">2</div>
+        <div class="mini-gate">3</div>
+        <div class="mini-gate">4</div>
+        <div class="mini-gate">5</div>
+        <div class="mini-gate">6</div>
+        <div class="mini-gate">7</div>
+        <div class="mini-gate">8</div>
+      </div>
+      <div class="accordion">
+        <h4>Упражнение 2 · Лук и стрела</h4>
+        <p>Встать прямо, ноги на ширине плеч. Одна рука вытягивается как тетива лука, другая — как стрела...</p>
+        <div class="a-media">
+          <div class="a-thumb">фото</div>
+          <div class="a-thumb">фото</div>
+          <div class="a-thumb">▶ видео</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Аккордеон снизу</h3>
+      <p>Кружки остаются видны, снизу выезжает панель с описанием и медиа. Всё в одном экране.</p>
+    </div>
+  </div>
+
+  <!-- VARIANT C -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C — Отдельная страница</div>
+    <div class="mock">
+      <div class="full-page">
+        <div class="fp-top">
+          <div class="back">← Алмазная крепость</div>
+          <div class="ex-num">1 / 8</div>
+          <div class="video-ph">▶</div>
+        </div>
+        <div class="fp-body">
+          <h4>Упражнение 1 · Подъём Неба</h4>
+          <p>Стоя ровно, медленно поднимаем руки через стороны вверх, соединяем ладони над головой. Дыхание плавное, сознание в центре. Повторить 8 раз...</p>
+        </div>
+        <div class="fp-nav">
+          <span>← Пред.</span>
+          <span>· · ● · · · · ·</span>
+          <span>След. →</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Отдельная страница</h3>
+      <p>Клик переносит на новую страницу упражнения: крупное видео/фото, полное описание, навигация между упражнениями.</p>
+    </div>
+  </div>
+
+</div>
