@@ -1,0 +1,49 @@
+{
+  "nav": { "logo": "炁體源流" },
+  "hero": {
+    "subtitle": "Daoist Practices · Health and Meditation",
+    "hieroglyph": "炁體源流",
+    "masterZh": "张至顺",
+    "masterRu": "Zhang Zhi Shun",
+    "scrollHint": "↓  scroll down  ↓"
+  },
+  "bio": {
+    "title": "张至顺 · Master's Biography",
+    "hint": "— hover to unfurl the scroll —",
+    "text": "Zhang Zhi Shun was born in 1912 in Henan province. From an early age he studied Daoist practices under the guidance of masters on Wudang Mountain. He became abbot of the monastery and devoted his life to preserving and transmitting ancient qigong techniques. He wrote the treatise «炁體源流» — «Source and Flow of Primordial Qi». He lived over 120 years, practicing until his final days."
+  },
+  "sections": {
+    "jingang": { "zh": "金刚功", "sub": "Diamond Fortress · 8 Exercises" },
+    "changshou": { "zh": "长寿功", "sub": "Longevity Practice · 8 Exercises" }
+  },
+  "modal": {
+    "close": "✕ close",
+    "prev": "← Previous",
+    "next": "Next →",
+    "exercise": "Exercise",
+    "placeholder": "Video and photos will be added later"
+  },
+  "footer": { "sub": "张至顺 · School of Daoist Practices" },
+  "exercises": {
+    "jingang": {
+      "1": { "name": "Lifting the Sky", "label": "Sky", "desc": "Stand upright, feet shoulder-width apart. Slowly raise arms to the sides and up, joining palms overhead. Smooth, deep breathing. Repeat 8 times." },
+      "2": { "name": "Bow and Arrow", "label": "Bow", "desc": "Stand straight. One arm extends like a bowstring, the other like an arrow pointing to the side. Alternate sides smoothly. Repeat 8 times each side." },
+      "3": { "name": "Separating Heaven and Earth", "label": "Separation", "desc": "One hand rises up, the other descends — stretching the space between heaven and earth. Smooth breathing. Repeat 8 times." },
+      "4": { "name": "Tiger's Gaze", "label": "Tiger", "desc": "Turn head and torso, gaze directed backward like a tiger surveying its territory. Shoulders relaxed. Repeat 8 times each side." },
+      "5": { "name": "Dragon Enters the Sea", "label": "Dragon", "desc": "Smooth forward bend with arms extended — the dragon plunges into the waters. Spine lengthens. Repeat 8 times." },
+      "6": { "name": "Phoenix Spreads Wings", "label": "Phoenix", "desc": "Arms open wide to the sides, chest expands. Deep breathing. Sensation of flight. Repeat 8 times." },
+      "7": { "name": "Turtle Extends Neck", "label": "Turtle", "desc": "Head slowly extends forward and back, strengthening the cervical spine. Smooth movement, no jerking. Repeat 8 times." },
+      "8": { "name": "Bow to the Earth", "label": "Bow", "desc": "A deep bow of gratitude to the earth and teachers. Hands joined before the chest. Completion of the set." }
+    },
+    "changshou": {
+      "1": { "name": "Opening the Gates", "label": "Opening", "desc": "Hands open from center outward — opening the gates of vital energy. Slow deep breathing. Repeat 8 times." },
+      "2": { "name": "Wave of the Surf", "label": "Wave", "desc": "Smooth wave-like arm movements imitating ocean surf. Body relaxed, movement from center. Repeat 8 times." },
+      "3": { "name": "Crane Stands", "label": "Crane", "desc": "Stand on one leg, arms spread like crane wings. Develops balance and concentration. Repeat 8 times each leg." },
+      "4": { "name": "Snake Glides", "label": "Snake", "desc": "Smooth undulating movement through the whole body from head to feet, like a gliding snake. Spine softens. Repeat 8 times." },
+      "5": { "name": "Bear Walks", "label": "Bear", "desc": "Heavy, confident steps with rolling gait, arms swinging freely. Strengthens the lower body. Repeat 8 rounds." },
+      "6": { "name": "Deer Runs", "label": "Deer", "desc": "Light, springy movements — a deer racing through the forest. Energy rises up the spine. Repeat 8 times." },
+      "7": { "name": "Monkey Reaches", "label": "Monkey", "desc": "Alternating arm reaches forward-upward, like a monkey reaching for fruit. Stretches lateral muscles. Repeat 8 times each." },
+      "8": { "name": "Closing the Gates", "label": "Closing", "desc": "Hands gently come together to center — closing the gates, preserving accumulated energy within. Completion of longevity practice." }
+    }
+  }
+}
