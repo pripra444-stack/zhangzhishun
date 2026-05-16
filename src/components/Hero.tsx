@@ -51,18 +51,34 @@ export default function Hero() {
 
       {/* Master figure — z:2 */}
       <motion.div
-        className="absolute z-[2] bottom-28 left-1/2 -translate-x-1/2 w-56 md:w-72 h-[60vh]"
+        className="absolute z-[2] bottom-0 left-1/2 -translate-x-1/2 w-64 md:w-80 lg:w-96 h-[75vh]"
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6, duration: 1.0 }}
-        style={{
-          background: 'linear-gradient(180deg, #d4a85322 0%, #d4a85444 40%, #d4a85322 70%, transparent 100%)',
-          borderRadius: '4px 4px 0 0',
-        }}
       >
-        {/* Заменить на <img src="/images/master.png" /> когда появится фото */}
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <span className="text-5xl opacity-20">🧘</span>
+        <img
+          src="/images/master.png"
+          alt="张至顺 · Чжан Чжи Шунь"
+          className="w-full h-full object-contain object-bottom drop-shadow-2xl"
+          style={{ filter: 'drop-shadow(0 0 40px #d4a85322)' }}
+          onError={(e) => {
+            const target = e.currentTarget
+            target.style.display = 'none'
+            const next = target.nextElementSibling as HTMLElement | null
+            if (next) next.style.display = 'flex'
+          }}
+        />
+        <div
+          className="w-full h-full flex-col items-center justify-center hidden"
+          style={{ display: 'none' }}
+        >
+          <div
+            className="w-40 h-[55vh] opacity-15"
+            style={{
+              background: 'linear-gradient(180deg, #d4a85322 0%, #d4a85455 40%, #d4a85322 70%, transparent 100%)',
+              borderRadius: '50% 50% 0 0',
+            }}
+          />
         </div>
       </motion.div>
 
