@@ -8,47 +8,42 @@ interface Props {
   onClick: (exercise: Exercise) => void
 }
 
+// Размер одного элемента — подбирается под контейнер 380px, 2 колонки
+const CARD_SIZE = 'clamp(160px, 42vw, 260px)'
+
 export default function GateCircle({ exercise, onClick }: Props) {
   const { t } = useTranslation()
 
   return (
     <motion.div
       className="flex flex-col items-center cursor-pointer select-none"
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       onClick={() => onClick(exercise)}
     >
-      {/* Number above */}
+      {/* Номер упражнения */}
       <div
         className="text-gold mb-1 font-sans"
-        style={{ fontSize: '0.7rem', letterSpacing: '0.1em', opacity: 0.8 }}
+        style={{ fontSize: '0.72rem', letterSpacing: '0.12em', opacity: 0.85 }}
       >
         {exercise.id}
       </div>
 
-      {/* Gate frame card */}
+      {/* Квадратная карточка — фрейм + фото */}
       <div
         className="relative"
-        style={{ width: 'clamp(130px, 42vw, 170px)', height: 'clamp(130px, 42vw, 170px)' }}
+        style={{ width: CARD_SIZE, height: CARD_SIZE }}
       >
-        {/* Gate frame image — full card */}
-        <img
-          src="/images/gate-frame.png"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover z-[2] pointer-events-none"
-          style={{ filter: 'brightness(0.9)' }}
-        />
-
-        {/* Exercise photo / placeholder — circular, centered in gate opening (~62%) */}
+        {/* Фото упражнения — круг, занимает 78% карточки, центрирован */}
         <div
-          className="absolute rounded-full overflow-hidden z-[1]"
+          className="absolute rounded-full overflow-hidden"
           style={{
-            width: '62%',
-            height: '62%',
-            top: '19%',
-            left: '19%',
+            width: '78%',
+            height: '78%',
+            top: '11%',
+            left: '11%',
+            zIndex: 1,
             background: 'radial-gradient(circle at 40% 35%, #1a4080 0%, #0a1e3a 60%, #060e1e 100%)',
           }}
         >
@@ -60,26 +55,34 @@ export default function GateCircle({ exercise, onClick }: Props) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="text-[#4488cc44] text-2xl">☯</span>
+              <span className="text-[#4488cc44] text-3xl">☯</span>
             </div>
           )}
         </div>
 
-        {/* Hover glow overlay */}
-        <motion.div
-          className="absolute inset-0 rounded-full z-[3] pointer-events-none"
+        {/* Золотая круглая рамка — mix-blend-mode: screen делает чёрный прозрачным */}
+        <img
+          src="/images/circle-frame.png"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none"
           style={{
-            width: '62%', height: '62%', top: '19%', left: '19%',
-            background: 'transparent',
+            zIndex: 2,
+            mixBlendMode: 'screen',
+            filter: 'brightness(1.1)',
           }}
-          whileHover={{ boxShadow: '0 0 30px #d4a85344, 0 0 60px #d4a85322' }}
         />
       </div>
 
-      {/* Label below */}
+      {/* Подпись */}
       <div
         className="mt-1 text-center font-sans"
-        style={{ fontSize: '0.58rem', color: '#8899aa', letterSpacing: '0.05em', maxWidth: '90%' }}
+        style={{
+          fontSize: '0.6rem',
+          color: '#a89060',
+          letterSpacing: '0.06em',
+          maxWidth: '90%',
+        }}
       >
         {t(exercise.labelKey)}
       </div>

@@ -29,7 +29,12 @@ export default function App() {
       <main>
         <Hero />
         <BiographyScroll />
-        <PracticeSection sectionKey="jingang" bgClass="bg-bg-section" />
+        <PracticeSection
+          sectionKey="jingang"
+          bgClass="bg-bg-section"
+          bgImage="/images/phoenix-bg.png"
+          bgImageOpacity={0.65}
+        />
         <PracticeSection sectionKey="changshou" bgClass="bg-bg-darker" />
       </main>
       <Footer />
