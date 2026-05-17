@@ -27,7 +27,14 @@ export default function PracticeSection({ sectionKey, bgClass = 'bg-bg-section' 
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.7 }}
       >
-        <div className="font-serif text-gold text-4xl md:text-5xl tracking-[0.15em] gold-glow">
+        <div
+          className="text-gold gold-glow"
+          style={{
+            fontFamily: '"KNYuanmo", "MFLiHei", serif',
+            fontSize: 'clamp(2rem, 8vw, 3.5rem)',
+            letterSpacing: '0.12em',
+          }}
+        >
           {t(`sections.${sectionKey}.zh`)}
         </div>
         <div className="text-text-muted text-xs tracking-[0.3em] font-sans mt-2 uppercase">
@@ -41,10 +48,10 @@ export default function PracticeSection({ sectionKey, bgClass = 'bg-bg-section' 
         style={{ background: 'linear-gradient(90deg, transparent, #d4a85366, transparent)' }}
       />
 
-      {/* Gates grid — 2 columns on mobile, 4 on sm+ */}
+      {/* Gates grid — всегда 2 колонки (как в референсе) */}
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-4 gap-5"
-        style={{ maxWidth: 500 }}
+        className="grid grid-cols-2 gap-3"
+        style={{ maxWidth: 380, width: '100%' }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: '-60px' }}
