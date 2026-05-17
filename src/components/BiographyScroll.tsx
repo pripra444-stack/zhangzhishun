@@ -18,7 +18,7 @@ export default function BiographyScroll() {
       {/* ── Свиток-изображение (кнопка) ── */}
       <motion.div
         className="relative cursor-pointer select-none"
-        style={{ width: 'min(480px, 90vw)' }}
+        style={{ width: 'min(820px, 90vw)' }}
         whileHover={{ scale: 1.02 }}
         transition={{ type: 'spring', stiffness: 260, damping: 24 }}
         onPointerEnter={e => { if (e.pointerType === 'mouse') handleOpen() }}
@@ -68,7 +68,7 @@ export default function BiographyScroll() {
         {open && (
           <motion.div
             className="w-full overflow-hidden"
-            style={{ maxWidth: 'min(520px, 92vw)' }}
+            style={{ maxWidth: 'min(820px, 92vw)' }}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

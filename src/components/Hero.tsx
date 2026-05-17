@@ -27,11 +27,11 @@ export default function Hero() {
         />
       </div>
 
-      {/* Z:1 — мастер, занимает весь экран, object-contain центрирует фигуру */}
+      {/* Z:2 — мастер, занимает весь экран, object-contain центрирует фигуру */}
       <motion.img
         src="/images/master.png"
         alt="张至顺"
-        className="absolute z-[1] inset-0 w-full h-full"
+        className="absolute z-[2] inset-0 w-full h-full"
         style={{
           objectFit: 'contain',
           objectPosition: 'center bottom',
@@ -42,9 +42,9 @@ export default function Hero() {
         transition={{ delay: 0.35, duration: 1.1, ease: 'easeOut' }}
       />
 
-      {/* Z:2 — SVG "炁體源流" поверх тела мастера */}
+      {/* Z:1 — SVG "炁體源流" ЗА мастером */}
       <motion.div
-        className="absolute z-[2] left-0 right-0 flex justify-center"
+        className="absolute z-[1] left-0 right-0 flex justify-center"
         style={{ top: '30%' }}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
