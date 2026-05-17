@@ -8,8 +8,8 @@ interface Props {
   onClick: (exercise: Exercise) => void
 }
 
-// Размер одного элемента — подбирается под контейнер 380px, 2 колонки
-const CARD_SIZE = 'clamp(160px, 42vw, 260px)'
+// Размер карточки — крупный, чтобы заполнять 2 колонки
+const CARD_SIZE = 'clamp(170px, 45vw, 320px)'
 
 export default function GateCircle({ exercise, onClick }: Props) {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ export default function GateCircle({ exercise, onClick }: Props) {
   return (
     <motion.div
       className="flex flex-col items-center cursor-pointer select-none"
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       onClick={() => onClick(exercise)}
@@ -25,17 +25,17 @@ export default function GateCircle({ exercise, onClick }: Props) {
       {/* Номер упражнения */}
       <div
         className="text-gold mb-1 font-sans"
-        style={{ fontSize: '0.72rem', letterSpacing: '0.12em', opacity: 0.85 }}
+        style={{ fontSize: '0.8rem', letterSpacing: '0.14em', opacity: 0.85 }}
       >
         {exercise.id}
       </div>
 
-      {/* Квадратная карточка — фрейм + фото */}
+      {/* Квадратная карточка — рамка + фото */}
       <div
         className="relative"
         style={{ width: CARD_SIZE, height: CARD_SIZE }}
       >
-        {/* Фото упражнения — круг, занимает 78% карточки, центрирован */}
+        {/* Фото упражнения — круг 78% карточки, без синего фона */}
         <div
           className="absolute rounded-full overflow-hidden"
           style={{
@@ -44,23 +44,18 @@ export default function GateCircle({ exercise, onClick }: Props) {
             top: '11%',
             left: '11%',
             zIndex: 1,
-            background: 'radial-gradient(circle at 40% 35%, #1a4080 0%, #0a1e3a 60%, #060e1e 100%)',
           }}
         >
-          {exercise.image ? (
+          {exercise.image && (
             <img
               src={exercise.image}
               alt={t(exercise.nameKey)}
               className="w-full h-full object-cover"
             />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <span className="text-[#4488cc44] text-3xl">☯</span>
-            </div>
           )}
         </div>
 
-        {/* Золотая круглая рамка — mix-blend-mode: screen делает чёрный прозрачным */}
+        {/* Золотая круглая рамка (circle-frame.png) — screen убирает чёрный фон */}
         <img
           src="/images/circle-frame.png"
           alt=""
@@ -69,16 +64,16 @@ export default function GateCircle({ exercise, onClick }: Props) {
           style={{
             zIndex: 2,
             mixBlendMode: 'screen',
-            filter: 'brightness(1.1)',
+            filter: 'brightness(1.15)',
           }}
         />
       </div>
 
       {/* Подпись */}
       <div
-        className="mt-1 text-center font-sans"
+        className="mt-2 text-center font-sans"
         style={{
-          fontSize: '0.6rem',
+          fontSize: '0.65rem',
           color: '#a89060',
           letterSpacing: '0.06em',
           maxWidth: '90%',
