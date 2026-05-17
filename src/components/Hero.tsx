@@ -42,6 +42,13 @@ export default function Hero() {
         transition={{ delay: 0.35, duration: 1.1, ease: 'easeOut' }}
       />
 
+      {/* Z:1 — Золотой туман между горами и мастером */}
+      <div className="absolute z-[1] inset-0 overflow-hidden pointer-events-none">
+        <div className="mist-layer mist-1" />
+        <div className="mist-layer mist-2" />
+        <div className="mist-layer mist-3" />
+      </div>
+
       {/* Z:1 — SVG "炁體源流" ЗА мастером */}
       <motion.div
         className="absolute z-[1] left-0 right-0 flex justify-center"
