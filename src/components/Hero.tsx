@@ -42,8 +42,8 @@ export default function Hero() {
         transition={{ delay: 0.35, duration: 1.1, ease: 'easeOut' }}
       />
 
-      {/* Z:1 — Золотой туман между горами и мастером */}
-      <div className="absolute z-[1] inset-0 overflow-hidden pointer-events-none">
+      {/* Z:3 — Золотой туман ПЕРЕД мастером (аура), pointer-events off */}
+      <div className="absolute z-[3] inset-0 overflow-hidden pointer-events-none">
         <div className="mist-layer mist-1" />
         <div className="mist-layer mist-2" />
         <div className="mist-layer mist-3" />
@@ -68,9 +68,9 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* Z:3 — текст сверху */}
+      {/* Z:4 — текст сверху */}
       <motion.div
-        className="absolute z-[3] top-0 left-0 right-0 flex flex-col items-center text-center"
+        className="absolute z-[4] top-0 left-0 right-0 flex flex-col items-center text-center"
         style={{ paddingTop: 'clamp(24px, 4.5vh, 52px)' }}
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -90,9 +90,9 @@ export default function Hero() {
         </p>
       </motion.div>
 
-      {/* Z:3 — имя мастера снизу */}
+      {/* Z:4 — имя мастера снизу */}
       <motion.div
-        className="absolute z-[3] bottom-0 left-0 right-0 flex flex-col items-center text-center"
+        className="absolute z-[4] bottom-0 left-0 right-0 flex flex-col items-center text-center"
         style={{ paddingBottom: 'clamp(16px, 3.5vh, 36px)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
