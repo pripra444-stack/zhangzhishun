@@ -8,92 +8,101 @@ export default function Hero() {
   return (
     <section
       className="relative w-full overflow-hidden"
-      style={{ height: '100svh', minHeight: 600, background: '#050912' }}
+      style={{ height: '100svh', minHeight: 580, background: '#040810' }}
     >
-      {/* ── LAYER 0: mountains — full bleed background ── */}
+      {/* ─────────────────────────────────────────
+          Z:0  Фон — горы на весь экран
+      ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0">
         <img
           src="/images/bg-mountains.png"
           alt=""
           className="w-full h-full object-cover object-center"
-          style={{ filter: 'brightness(0.82)' }}
+          style={{ filter: 'brightness(0.78)' }}
         />
-        {/* dark top vignette so text stays readable */}
+        {/* тёмная вуаль сверху под текст */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom, #050912cc 0%, #05091266 18%, transparent 45%, transparent 75%, #050912aa 100%)',
+              'linear-gradient(to bottom, #04081099 0%, #04081055 22%, transparent 45%, transparent 80%, #04081099 100%)',
           }}
         />
       </div>
 
-      {/* ── LAYER 1: master PNG — large, centered ── */}
-      <motion.div
-        className="absolute z-[2] bottom-0 left-1/2 -translate-x-1/2"
-        style={{ width: 'min(680px, 92vw)', height: '88%' }}
+      {/* ─────────────────────────────────────────
+          Z:1  Мастер — крупно, строго по центру
+      ───────────────────────────────────────── */}
+      <motion.img
+        src="/images/master.png"
+        alt="张至顺"
+        className="absolute z-[1] bottom-0"
+        style={{
+          height: 'min(88vh, 820px)',
+          width: 'auto',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          objectFit: 'contain',
+          objectPosition: 'bottom center',
+          filter: 'drop-shadow(0 0 80px #d4a85322)',
+        }}
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.4, duration: 1.1 }}
+        transition={{ delay: 0.35, duration: 1.1, ease: 'easeOut' }}
+      />
+
+      {/* ─────────────────────────────────────────
+          Z:2  SVG заголовок — поверх мастера,
+               примерно на уровне груди/книги
+      ───────────────────────────────────────── */}
+      <motion.div
+        className="absolute z-[2] left-0 right-0 flex justify-center"
+        style={{ top: '26%' }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.55, duration: 0.95 }}
       >
         <img
-          src="/images/master.png"
-          alt="张至顺"
-          className="w-full h-full object-contain object-bottom"
+          src="/images/title.svg"
+          alt="炁體源流"
           style={{
-            filter: 'drop-shadow(0 0 80px #d4a85322) drop-shadow(0 20px 60px #000000aa)',
+            width: 'min(78vw, 640px)',
+            height: 'auto',
+            filter: 'drop-shadow(0 0 40px #d4a85566)',
           }}
         />
       </motion.div>
 
-      {/* ── LAYER 3: top text (above master) ── */}
+      {/* ─────────────────────────────────────────
+          Z:3  Текст сверху — ДАОССКИЕ ПРАКТИКИ
+      ───────────────────────────────────────── */}
       <motion.div
-        className="absolute z-[4] top-0 left-0 right-0 flex flex-col items-center pt-8 md:pt-10 px-4 text-center"
-        initial={{ opacity: 0, y: -14 }}
+        className="absolute z-[3] top-0 left-0 right-0 flex flex-col items-center text-center"
+        style={{ paddingTop: 'clamp(28px, 5vh, 56px)' }}
+        initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, duration: 0.85 }}
+        transition={{ delay: 0.12, duration: 0.8 }}
       >
-        {/* ДАОССКИЕ ПРАКТИКИ */}
         <p
-          className="font-sans font-bold text-white tracking-[0.45em] uppercase"
-          style={{ fontSize: 'clamp(0.85rem, 2.8vw, 1.4rem)' }}
+          className="font-sans font-bold text-white tracking-[0.5em] uppercase"
+          style={{ fontSize: 'clamp(0.85rem, 2.4vw, 1.35rem)', letterSpacing: '0.5em' }}
         >
           {t('hero.title')}
         </p>
-
-        {/* ЗДОРОВЬЕ И ДОЛГОЛЕТИЕ */}
         <p
-          className="font-sans text-[#aabbcc] tracking-[0.25em] uppercase mt-1"
-          style={{ fontSize: 'clamp(0.55rem, 1.6vw, 0.8rem)' }}
+          className="font-sans text-[#c8b98a] tracking-[0.28em] uppercase mt-2"
+          style={{ fontSize: 'clamp(0.55rem, 1.4vw, 0.75rem)' }}
         >
           {t('hero.subtitle')}
         </p>
-
-        {/* 炁體源流 — Chinese title, positioned in mid-hero */}
-        <motion.div
-          className="mt-[clamp(20px,5vh,56px)]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.9 }}
-        >
-          {/* Try SVG first (user will provide), fallback to text */}
-          <h1
-            className="text-gold leading-none"
-            style={{
-              fontFamily: '"KNYuanmo", "MFLiHei", "STKaiti", "KaiTi", serif',
-              fontSize: 'clamp(3.2rem, 12vw, 7rem)',
-              letterSpacing: '0.12em',
-              textShadow: '0 0 60px #d4a85577, 0 0 120px #d4a85333',
-            }}
-          >
-            炁體源流
-          </h1>
-        </motion.div>
       </motion.div>
 
-      {/* ── LAYER 4: master name at bottom ── */}
+      {/* ─────────────────────────────────────────
+          Z:3  Текст снизу — имя мастера
+      ───────────────────────────────────────── */}
       <motion.div
-        className="absolute z-[5] bottom-5 left-0 right-0 flex flex-col items-center text-center"
+        className="absolute z-[3] bottom-0 left-0 right-0 flex flex-col items-center text-center"
+        style={{ paddingBottom: 'clamp(18px, 4vh, 40px)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 0.8 }}
@@ -101,25 +110,23 @@ export default function Hero() {
         <div
           className="text-gold tracking-[0.22em]"
           style={{
-            fontFamily: '"MFLiHei", "STKaiti", serif',
-            fontSize: 'clamp(1.2rem, 3.5vw, 1.8rem)',
-            textShadow: '0 0 24px #d4a85599',
+            fontFamily: '"MFLiHei", "STKaiti", "KaiTi", serif',
+            fontSize: 'clamp(1.3rem, 3.5vw, 2rem)',
+            textShadow: '0 0 20px #d4a85588',
           }}
         >
           {t('hero.masterZh')}
         </div>
         <div
-          className="font-sans text-[#9aacbbcc] tracking-[0.3em] uppercase mt-1"
-          style={{ fontSize: 'clamp(0.55rem, 1.6vw, 0.72rem)' }}
+          className="font-sans text-[#99abbccc] tracking-[0.32em] uppercase mt-1"
+          style={{ fontSize: 'clamp(0.52rem, 1.5vw, 0.7rem)' }}
         >
           {t('hero.masterRu')}
         </div>
-
-        {/* scroll hint */}
         <motion.div
-          className="mt-3 font-sans text-[#4488cc55] tracking-[0.2em]"
-          style={{ fontSize: '0.58rem' }}
-          animate={{ opacity: [0.35, 0.9, 0.35] }}
+          className="font-sans text-[#4488cc44] tracking-[0.2em] mt-3"
+          style={{ fontSize: '0.55rem' }}
+          animate={{ opacity: [0.3, 0.9, 0.3] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         >
           {t('hero.scrollHint')}
