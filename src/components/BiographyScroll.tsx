@@ -7,7 +7,7 @@ const EASE = [0.25, 0.1, 0.25, 1] as const
 
 const S: React.CSSProperties = {
   fontSize: 'clamp(10px, 1.6vw, 13px)',
-  lineHeight: '2.38',
+  lineHeight: '2.28',
   color: '#2a1505',
   textAlign: 'justify' as const,
 }
@@ -16,7 +16,7 @@ const H: React.CSSProperties = {
   fontSize: 'clamp(10px, 1.6vw, 13px)',
   fontWeight: 700,
   color: '#4a1e04',
-  lineHeight: '2.38',
+  lineHeight: '2.28',
   marginTop: '0.3em',
   marginBottom: '0em',
 }
@@ -103,7 +103,7 @@ export default function BiographyScroll() {
                 transition={{ delay: open ? 0.45 : 0, duration: 0.4 }}
                 className="absolute flex flex-col font-sans"
                 style={{
-                  top: '12%',
+                  top: '15%',
                   bottom: '9%',
                   left: '18%',
                   right: '18%',
@@ -113,7 +113,7 @@ export default function BiographyScroll() {
               >
                 {/* Вступление */}
                 <p style={S}>
-                  Чжан Чжишун (1912–2015) — китайский даосский мастер школы Цюаньчжэнь Лунмэнь, известный под даосским именем Ми Цзинцзы (Mi Jingzi). Он считался «земным бессмертным» (地仙), прожил 104 года и был почитаем как хранитель традиции внутренней алхимии и цигун в XX веке.
+                  <strong>Чжан Чжишун</strong> (1912–2015) — китайский даосский мастер школы Цюаньчжэнь Лунмэнь, известный под даосским именем Ми Цзинцзы (Mi Jingzi). Он считался «земным бессмертным» (地仙), прожил 104 года и был почитаем как хранитель традиции внутренней алхимии и цигун в XX веке.
                 </p>
 
                 {/* Ключевые факты */}
