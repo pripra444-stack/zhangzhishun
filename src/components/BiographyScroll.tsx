@@ -7,7 +7,7 @@ const EASE = [0.25, 0.1, 0.25, 1] as const
 
 const S: React.CSSProperties = {
   fontSize: 'clamp(10px, 1.6vw, 13px)',
-  lineHeight: '2.52',
+  lineHeight: '2.38',
   color: '#2a1505',
   textAlign: 'justify' as const,
 }
@@ -16,7 +16,7 @@ const H: React.CSSProperties = {
   fontSize: 'clamp(10px, 1.6vw, 13px)',
   fontWeight: 700,
   color: '#4a1e04',
-  lineHeight: '2.52',
+  lineHeight: '2.38',
   marginTop: '0.3em',
   marginBottom: '0em',
 }
@@ -105,8 +105,8 @@ export default function BiographyScroll() {
                 style={{
                   top: '12%',
                   bottom: '9%',
-                  left: '14%',
-                  right: '14%',
+                  left: '18%',
+                  right: '18%',
                   overflow: 'hidden',
                   padding: '0 4px',
                 }}
