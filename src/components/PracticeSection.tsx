@@ -25,7 +25,7 @@ export default function PracticeSection({
   const exercises = getExercisesBySection(sectionKey)
 
   return (
-    <section className={`${bgClass} py-20 px-4 flex flex-col items-center gap-10 relative overflow-hidden`}>
+    <section className={`${bgClass} py-20 px-1 flex flex-col items-center gap-10 relative overflow-hidden`}>
 
       {/* Фоновое изображение (Феникс и т.д.) */}
       {bgImage && (
@@ -77,8 +77,8 @@ export default function PracticeSection({
 
         {/* Сетка кружков — 2 колонки */}
         <motion.div
-          className="grid grid-cols-4 gap-4"
-          style={{ maxWidth: 'min(880px, 96vw)', width: '100%' }}
+          className="grid grid-cols-4 gap-1"
+          style={{ maxWidth: '100%', width: '100%' }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-60px' }}

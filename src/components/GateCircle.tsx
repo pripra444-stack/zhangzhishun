@@ -8,7 +8,8 @@ interface Props {
   onClick: (exercise: Exercise) => void
 }
 
-const CARD_SIZE = 'clamp(80px, 22vw, 200px)'
+// Максимальный размер для 4 колонок — почти вся ширина экрана
+const CARD_SIZE = 'clamp(80px, 23.5vw, 450px)'
 
 export default function GateCircle({ exercise, onClick }: Props) {
   const { t } = useTranslation()
@@ -21,20 +22,12 @@ export default function GateCircle({ exercise, onClick }: Props) {
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       onClick={() => onClick(exercise)}
     >
-      {/* Номер упражнения */}
-      <div
-        className="font-sans mb-1"
-        style={{ fontSize: '0.78rem', letterSpacing: '0.14em', color: '#d4a853', opacity: 0.85 }}
-      >
-        {exercise.id}
-      </div>
-
       {/* Карточка — рамка + фото */}
       <div
         className="relative"
         style={{ width: CARD_SIZE, height: CARD_SIZE }}
       >
-        {/* Фото / заглушка внутри круга (78% карточки, центр) */}
+        {/* Фото внутри круга */}
         <div
           className="absolute rounded-full overflow-hidden"
           style={{
@@ -68,9 +61,9 @@ export default function GateCircle({ exercise, onClick }: Props) {
       <div
         className="mt-2 text-center font-sans"
         style={{
-          fontSize: '0.7rem',
+          fontSize: 'clamp(0.55rem, 1.1vw, 0.85rem)',
           color: '#d4a853',
-          letterSpacing: '0.08em',
+          letterSpacing: '0.06em',
           lineHeight: 1.3,
         }}
       >
@@ -79,14 +72,14 @@ export default function GateCircle({ exercise, onClick }: Props) {
 
       {/* Русский перевод — белым */}
       <div
-        className="text-center font-sans"
+        className="text-center font-sans px-1"
         style={{
-          fontSize: '0.58rem',
+          fontSize: 'clamp(0.42rem, 0.85vw, 0.65rem)',
           color: '#d8cfc4',
-          letterSpacing: '0.04em',
-          maxWidth: '95%',
-          marginTop: '2px',
+          letterSpacing: '0.03em',
           lineHeight: 1.3,
+          marginTop: '2px',
+          maxWidth: '110%',
         }}
       >
         {t(exercise.labelKey)}
