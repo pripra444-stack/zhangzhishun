@@ -32,7 +32,7 @@ export default function App() {
         <PracticeSection
           sectionKey="jingang"
           bgClass="bg-bg-section"
-          bgImage="/images/фон 3.png"
+          bgImage="/images/фон 33.png"
           bgImageOpacity={0.20}
         />
         <PracticeSection sectionKey="changshou" bgClass="bg-bg-darker" />

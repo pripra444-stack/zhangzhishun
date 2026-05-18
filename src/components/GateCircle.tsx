@@ -8,7 +8,7 @@ interface Props {
   onClick: (exercise: Exercise) => void
 }
 
-const CARD_SIZE = 'clamp(200px, 46vw, 420px)'
+const CARD_SIZE = 'clamp(80px, 22vw, 200px)'
 
 export default function GateCircle({ exercise, onClick }: Props) {
   const { t } = useTranslation()
