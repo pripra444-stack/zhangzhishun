@@ -6,19 +6,19 @@ import { useTranslation } from 'react-i18next'
 const EASE = [0.25, 0.1, 0.25, 1] as const
 
 const S: React.CSSProperties = {
-  fontSize: 'clamp(9px, 1.35vw, 11px)',
-  lineHeight: '1.8',
+  fontSize: 'clamp(10px, 1.6vw, 13px)',
+  lineHeight: '2.52',
   color: '#2a1505',
   textAlign: 'justify' as const,
 }
 
 const H: React.CSSProperties = {
-  fontSize: 'clamp(9px, 1.35vw, 11px)',
+  fontSize: 'clamp(10px, 1.6vw, 13px)',
   fontWeight: 700,
   color: '#4a1e04',
-  lineHeight: '1.4',
-  marginTop: '0.75em',
-  marginBottom: '0.15em',
+  lineHeight: '2.52',
+  marginTop: '0.3em',
+  marginBottom: '0em',
 }
 
 export default function BiographyScroll() {
@@ -103,8 +103,8 @@ export default function BiographyScroll() {
                 transition={{ delay: open ? 0.45 : 0, duration: 0.4 }}
                 className="absolute flex flex-col font-sans"
                 style={{
-                  top: '10%',
-                  bottom: '8%',
+                  top: '12%',
+                  bottom: '9%',
                   left: '14%',
                   right: '14%',
                   overflow: 'hidden',
