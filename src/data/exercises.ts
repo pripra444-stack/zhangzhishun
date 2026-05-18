@@ -16,6 +16,7 @@ export const JINGANG: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   nameKey: `exercises.jingang.${i + 1}.name`,
   labelKey: `exercises.jingang.${i + 1}.label`,
   descriptionKey: `exercises.jingang.${i + 1}.desc`,
+  image: '/images/exercise-placeholder.png',
 }))
 
 export const CHANGSHOU: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
@@ -24,6 +25,7 @@ export const CHANGSHOU: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   nameKey: `exercises.changshou.${i + 1}.name`,
   labelKey: `exercises.changshou.${i + 1}.label`,
   descriptionKey: `exercises.changshou.${i + 1}.desc`,
+  image: '/images/exercise-placeholder.png',
 }))
 
 export function getExercisesBySection(section: SectionKey): Exercise[] {

@@ -8,7 +8,6 @@ interface Props {
   onClick: (exercise: Exercise) => void
 }
 
-// Размер карточки — крупный, чтобы заполнять 2 колонки
 const CARD_SIZE = 'clamp(170px, 45vw, 320px)'
 
 export default function GateCircle({ exercise, onClick }: Props) {
@@ -24,18 +23,18 @@ export default function GateCircle({ exercise, onClick }: Props) {
     >
       {/* Номер упражнения */}
       <div
-        className="text-gold mb-1 font-sans"
-        style={{ fontSize: '0.8rem', letterSpacing: '0.14em', opacity: 0.85 }}
+        className="font-sans mb-1"
+        style={{ fontSize: '0.78rem', letterSpacing: '0.14em', color: '#d4a853', opacity: 0.85 }}
       >
         {exercise.id}
       </div>
 
-      {/* Квадратная карточка — рамка + фото */}
+      {/* Карточка — рамка + фото */}
       <div
         className="relative"
         style={{ width: CARD_SIZE, height: CARD_SIZE }}
       >
-        {/* Фото упражнения — круг 78% карточки, без синего фона */}
+        {/* Фото / заглушка внутри круга (78% карточки, центр) */}
         <div
           className="absolute rounded-full overflow-hidden"
           style={{
@@ -55,28 +54,39 @@ export default function GateCircle({ exercise, onClick }: Props) {
           )}
         </div>
 
-        {/* Золотая круглая рамка (circle-frame.png) — screen убирает чёрный фон */}
+        {/* Золотая рамка поверх */}
         <img
           src="/images/circle-frame.png"
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-          style={{
-            zIndex: 2,
-            mixBlendMode: 'screen',
-            filter: 'brightness(1.15)',
-          }}
+          style={{ zIndex: 2, mixBlendMode: 'screen', filter: 'brightness(1.15)' }}
         />
       </div>
 
-      {/* Подпись */}
+      {/* Китайское название — золотым */}
       <div
         className="mt-2 text-center font-sans"
         style={{
-          fontSize: '0.65rem',
-          color: '#a89060',
-          letterSpacing: '0.06em',
-          maxWidth: '90%',
+          fontSize: '0.7rem',
+          color: '#d4a853',
+          letterSpacing: '0.08em',
+          lineHeight: 1.3,
+        }}
+      >
+        {t(exercise.nameKey)}
+      </div>
+
+      {/* Русский перевод — белым */}
+      <div
+        className="text-center font-sans"
+        style={{
+          fontSize: '0.58rem',
+          color: '#d8cfc4',
+          letterSpacing: '0.04em',
+          maxWidth: '95%',
+          marginTop: '2px',
+          lineHeight: 1.3,
         }}
       >
         {t(exercise.labelKey)}
