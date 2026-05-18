@@ -33,7 +33,7 @@ export default function App() {
           sectionKey="jingang"
           bgClass="bg-bg-section"
           bgImage="/images/фон 3.png"
-          bgImageOpacity={0.65}
+          bgImageOpacity={0.20}
         />
         <PracticeSection sectionKey="changshou" bgClass="bg-bg-darker" />
       </main>

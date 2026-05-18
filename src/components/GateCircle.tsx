@@ -8,7 +8,7 @@ interface Props {
   onClick: (exercise: Exercise) => void
 }
 
-const CARD_SIZE = 'clamp(170px, 45vw, 320px)'
+const CARD_SIZE = 'clamp(200px, 46vw, 420px)'
 
 export default function GateCircle({ exercise, onClick }: Props) {
   const { t } = useTranslation()
@@ -38,10 +38,10 @@ export default function GateCircle({ exercise, onClick }: Props) {
         <div
           className="absolute rounded-full overflow-hidden"
           style={{
-            width: '78%',
-            height: '78%',
-            top: '11%',
-            left: '11%',
+            width: '60%',
+            height: '60%',
+            top: '20%',
+            left: '20%',
             zIndex: 1,
           }}
         >
