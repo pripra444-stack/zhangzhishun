@@ -8,24 +8,21 @@ interface Props {
   onClick: (exercise: Exercise) => void
 }
 
-// Максимальный размер для 4 колонок — почти вся ширина экрана
-const CARD_SIZE = 'clamp(80px, 23.5vw, 450px)'
-
 export default function GateCircle({ exercise, onClick }: Props) {
   const { t } = useTranslation()
 
   return (
     <motion.div
-      className="flex flex-col items-center cursor-pointer select-none"
+      className="flex flex-col items-center cursor-pointer select-none w-full"
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       onClick={() => onClick(exercise)}
     >
-      {/* Карточка — рамка + фото */}
+      {/* Карточка — рамка + фото, заполняет колонку */}
       <div
-        className="relative"
-        style={{ width: CARD_SIZE, height: CARD_SIZE }}
+        className="relative w-full"
+        style={{ aspectRatio: '1' }}
       >
         {/* Фото внутри круга */}
         <div
@@ -47,22 +44,27 @@ export default function GateCircle({ exercise, onClick }: Props) {
           )}
         </div>
 
-        {/* Золотая рамка поверх */}
+        {/* Синяя рамка поверх */}
         <img
-          src="/images/circle-frame.png"
+          src="/images/circle-frame-blue.png"
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-          style={{ zIndex: 2, mixBlendMode: 'screen', filter: 'brightness(1.15)' }}
+          style={{
+            zIndex: 2,
+            mixBlendMode: 'screen',
+            filter: 'invert(1) hue-rotate(195deg) brightness(1.4) saturate(2.5)',
+          }}
+          draggable={false}
         />
       </div>
 
-      {/* Китайское название — золотым */}
+      {/* Китайское название — близко к кругу */}
       <div
-        className="mt-2 text-center font-sans"
+        className="mt-0.5 text-center font-sans"
         style={{
           fontSize: 'clamp(0.55rem, 1.1vw, 0.85rem)',
-          color: '#d4a853',
+          color: '#7ec8f5',
           letterSpacing: '0.06em',
           lineHeight: 1.3,
         }}
@@ -70,7 +72,7 @@ export default function GateCircle({ exercise, onClick }: Props) {
         {t(exercise.nameKey)}
       </div>
 
-      {/* Русский перевод — белым */}
+      {/* Русский перевод */}
       <div
         className="text-center font-sans px-1"
         style={{
@@ -78,7 +80,7 @@ export default function GateCircle({ exercise, onClick }: Props) {
           color: '#d8cfc4',
           letterSpacing: '0.03em',
           lineHeight: 1.3,
-          marginTop: '2px',
+          marginTop: '1px',
           maxWidth: '110%',
         }}
       >

@@ -77,8 +77,8 @@ export default function PracticeSection({
 
         {/* Сетка кружков — 2 колонки */}
         <motion.div
-          className="grid grid-cols-4 gap-1"
-          style={{ maxWidth: '100%', width: '100%' }}
+          className="grid grid-cols-4"
+          style={{ maxWidth: '100%', width: '100%', gap: '9.09vw' }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-60px' }}
