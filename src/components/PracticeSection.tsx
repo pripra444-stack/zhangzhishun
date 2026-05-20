@@ -7,47 +7,6 @@ import ExerciseModal from './ExerciseModal'
 import { getExercisesBySection } from '../data/exercises'
 import type { Exercise, SectionKey } from '../data/exercises'
 
-// ── Детерминированный генератор (стабильные позиции без useMemo) ──
-function seededRand(seed: number) {
-  let s = seed
-  return () => {
-    s = (s * 16807) % 2147483647
-    return (s - 1) / 2147483646
-  }
-}
-
-interface Stream { id: number; x: number; w: number; dur: number; delay: number; opacity: number; blur: number }
-
-function makeStreams(count: number): Stream[] {
-  const r = seededRand(137)
-  return Array.from({ length: count }, (_, i) => ({
-    id: i,
-    x:       r() * 100,          // % по горизонтали внутри контейнера
-    w:       0.8 + r() * 3.2,    // ширина потока px
-    dur:     1.6 + r() * 3.8,    // скорость падения (сек)
-    delay:  -(r() * 8),          // стартовая фаза (отрицательный = уже в процессе)
-    opacity: 0.06 + r() * 0.18,  // прозрачность
-    blur:    r() > 0.7 ? 1 : 0,  // часть потоков слегка размыта
-  }))
-}
-
-const STREAMS = makeStreams(55)
-
-// ── Широкие мутные слои (фоновый водный туман) ──
-interface FogLayer { id: number; x: number; w: number; dur: number; delay: number; opacity: number }
-function makeFog(): FogLayer[] {
-  const r = seededRand(89)
-  return Array.from({ length: 6 }, (_, i) => ({
-    id: i,
-    x:       r() * 70,
-    w:       8 + r() * 18,
-    dur:     6 + r() * 8,
-    delay:  -(r() * 10),
-    opacity: 0.02 + r() * 0.05,
-  }))
-}
-const FOG_LAYERS = makeFog()
-
 interface Props {
   sectionKey: SectionKey
   bgClass?: string
@@ -66,35 +25,12 @@ export default function PracticeSection({
   const { t } = useTranslation()
   const [activeExercise, setActiveExercise] = useState<Exercise | null>(null)
   const exercises = getExercisesBySection(sectionKey)
-  const showWaterfall = sectionKey === 'jingang' && cols === 2
 
   return (
     <section
       className={`${bgClass} py-20 flex flex-col items-center gap-10 relative overflow-hidden`}
       style={{ paddingLeft: '7.69vw', paddingRight: '7.69vw' }}
     >
-
-      {/* CSS-анимации водопада */}
-      {showWaterfall && (
-        <style>{`
-          @keyframes stream-fall {
-            0%   { transform: translateY(-110%); opacity: 0; }
-            8%   { opacity: 1; }
-            92%  { opacity: 1; }
-            100% { transform: translateY(110%); opacity: 0; }
-          }
-          @keyframes fog-fall {
-            0%   { transform: translateY(-100%); opacity: 0; }
-            15%  { opacity: 1; }
-            85%  { opacity: 1; }
-            100% { transform: translateY(100%); opacity: 0; }
-          }
-          @keyframes water-shimmer {
-            0%, 100% { opacity: 0.3; }
-            50%       { opacity: 0.9; }
-          }
-        `}</style>
-      )}
 
       {/* Фоновое изображение */}
       {bgImage && (
@@ -108,85 +44,8 @@ export default function PracticeSection({
         />
       )}
 
-      {/* ── Водопад — за кружками, по ширине сетки ── */}
-      {showWaterfall && (
-        <div
-          aria-hidden
-          className="pointer-events-none select-none absolute overflow-hidden"
-          style={{
-            width: '38.5vw',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            top: 0,
-            bottom: 0,
-            zIndex: 2,
-          }}
-        >
-          {/* Фоновый туманный слой — едва уловимый синий дрейф */}
-          {FOG_LAYERS.map(f => (
-            <div
-              key={`fog-${f.id}`}
-              style={{
-                position: 'absolute',
-                left: `${f.x}%`,
-                top: 0,
-                width: `${f.w}%`,
-                height: '45%',
-                background: 'linear-gradient(180deg, transparent 0%, rgba(80,160,255,1) 45%, rgba(120,200,255,1) 55%, transparent 100%)',
-                opacity: f.opacity,
-                filter: 'blur(8px)',
-                animation: `fog-fall ${f.dur}s linear ${f.delay}s infinite`,
-              }}
-            />
-          ))}
-
-          {/* Тонкие потоки — основная нить водопада */}
-          {STREAMS.map(s => (
-            <div
-              key={`s-${s.id}`}
-              style={{
-                position: 'absolute',
-                left: `${s.x}%`,
-                top: 0,
-                width: `${s.w}px`,
-                height: '35%',
-                background: 'linear-gradient(180deg, transparent 0%, rgba(140,210,255,1) 30%, rgba(200,235,255,1) 50%, rgba(140,210,255,1) 70%, transparent 100%)',
-                opacity: s.opacity,
-                filter: s.blur ? 'blur(1px)' : 'none',
-                animation: `stream-fall ${s.dur}s linear ${s.delay}s infinite`,
-                borderRadius: '40%',
-              }}
-            />
-          ))}
-
-          {/* Блики — яркие короткие вспышки поверх потоков */}
-          {STREAMS.filter((_, i) => i % 4 === 0).map(s => (
-            <div
-              key={`gl-${s.id}`}
-              style={{
-                position: 'absolute',
-                left: `calc(${s.x}% - 1px)`,
-                top: 0,
-                width: `${Math.max(s.w * 0.4, 0.5)}px`,
-                height: '18%',
-                background: 'linear-gradient(180deg, transparent 0%, rgba(220,245,255,0.9) 50%, transparent 100%)',
-                opacity: s.opacity * 0.6,
-                animation: `stream-fall ${s.dur * 0.7}s linear ${s.delay - 0.3}s infinite`,
-              }}
-            />
-          ))}
-
-          {/* Лёгкий виньет по краям — чтобы водопад не обрезался резко */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(90deg, rgba(6,12,24,0.55) 0%, transparent 12%, transparent 88%, rgba(6,12,24,0.55) 100%)',
-            pointerEvents: 'none',
-          }} />
-        </div>
-      )}
-
-      {/* Весь контент поверх */}
-      <div className="relative flex flex-col items-center gap-10 w-full" style={{ zIndex: 3 }}>
+      {/* Весь контент */}
+      <div className="relative z-10 flex flex-col items-center gap-10 w-full">
 
         {/* Заголовок */}
         <motion.div
