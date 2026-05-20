@@ -24,14 +24,31 @@ export default function GateCircle({ exercise, onClick }: Props) {
         className="relative w-full"
         style={{ aspectRatio: '1' }}
       >
-        {/* Фото внутри круга */}
+        {/* Рамка — вставляется как есть, только тень для 3D */}
+        <img
+          src="/images/circle-frame-gold.png"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+          style={{
+            zIndex: 2,
+            filter: [
+              'drop-shadow(0 6px 18px rgba(0,4,18,0.98))',
+              'drop-shadow(0 14px 40px rgba(0,8,30,0.85))',
+              'drop-shadow(-4px -4px 10px rgba(0,2,12,0.7))',
+            ].join(' '),
+          }}
+          draggable={false}
+        />
+
+        {/* Фото — поверх рамки, круглое, центрировано в кольце */}
         <div
           className="absolute rounded-full overflow-hidden"
           style={{
-            width: '60%',
-            height: '60%',
-            top: '20%',
-            left: '20%',
+            width: '72%',
+            height: '72%',
+            top: '14%',
+            left: '14%',
             zIndex: 1,
           }}
         >
@@ -43,28 +60,14 @@ export default function GateCircle({ exercise, onClick }: Props) {
             />
           )}
         </div>
-
-        {/* Синяя рамка поверх */}
-        <img
-          src="/images/circle-frame-blue.png"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-          style={{
-            zIndex: 2,
-            mixBlendMode: 'screen',
-            filter: 'invert(1) hue-rotate(195deg) brightness(1.4) saturate(2.5)',
-          }}
-          draggable={false}
-        />
       </div>
 
-      {/* Китайское название — близко к кругу */}
+      {/* Китайское название */}
       <div
-        className="mt-0.5 text-center font-sans"
+        className="mt-1 text-center font-sans"
         style={{
-          fontSize: 'clamp(0.55rem, 1.1vw, 0.85rem)',
-          color: '#7ec8f5',
+          fontSize: 'clamp(1.65rem, 3.3vw, 2.55rem)',
+          color: '#d4a855',
           letterSpacing: '0.06em',
           lineHeight: 1.3,
         }}
@@ -76,12 +79,12 @@ export default function GateCircle({ exercise, onClick }: Props) {
       <div
         className="text-center font-sans px-1"
         style={{
-          fontSize: 'clamp(0.42rem, 0.85vw, 0.65rem)',
+          fontSize: 'clamp(1.26rem, 2.55vw, 1.95rem)',
           color: '#d8cfc4',
           letterSpacing: '0.03em',
           lineHeight: 1.3,
-          marginTop: '1px',
-          maxWidth: '110%',
+          marginTop: '4px',
+          maxWidth: '120%',
         }}
       >
         {t(exercise.labelKey)}

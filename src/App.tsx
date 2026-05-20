@@ -31,9 +31,8 @@ export default function App() {
         <BiographyScroll />
         <PracticeSection
           sectionKey="jingang"
-          bgClass="bg-bg-section"
-          bgImage="/images/фон 33.png"
-          bgImageOpacity={0.20}
+          bgClass="bg-bg-deep"
+          cols={2}
         />
         <PracticeSection sectionKey="changshou" bgClass="bg-bg-darker" />
       </main>

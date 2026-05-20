@@ -12,6 +12,7 @@ interface Props {
   bgClass?: string
   bgImage?: string        // путь к фоновой картинке (Феникс и т.д.)
   bgImageOpacity?: number // прозрачность фона (0-1), по умолчанию 0.35
+  cols?: 2 | 4           // количество колонок в сетке (по умолчанию 4)
 }
 
 export default function PracticeSection({
@@ -19,13 +20,17 @@ export default function PracticeSection({
   bgClass = 'bg-bg-section',
   bgImage,
   bgImageOpacity = 0.35,
+  cols = 4,
 }: Props) {
   const { t } = useTranslation()
   const [activeExercise, setActiveExercise] = useState<Exercise | null>(null)
   const exercises = getExercisesBySection(sectionKey)
 
   return (
-    <section className={`${bgClass} py-20 px-1 flex flex-col items-center gap-10 relative overflow-hidden`}>
+    <section
+      className={`${bgClass} py-20 flex flex-col items-center gap-10 relative overflow-hidden`}
+      style={{ paddingLeft: '7.69vw', paddingRight: '7.69vw' }}
+    >
 
       {/* Фоновое изображение (Феникс и т.д.) */}
       {bgImage && (
@@ -75,10 +80,14 @@ export default function PracticeSection({
           style={{ background: 'linear-gradient(90deg, transparent, #d4a85366, transparent)' }}
         />
 
-        {/* Сетка кружков — 2 колонки */}
+        {/* Сетка кружков */}
         <motion.div
-          className="grid grid-cols-4"
-          style={{ maxWidth: '100%', width: '100%', gap: '9.09vw' }}
+          className={`grid mx-auto ${cols === 2 ? 'grid-cols-2' : 'grid-cols-4'}`}
+          style={{
+            width: '100%',
+            maxWidth: cols === 2 ? '38.5vw' : '100%',
+            gap: '7.69vw',
+          }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-60px' }}
