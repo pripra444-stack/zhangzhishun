@@ -64,12 +64,13 @@ export default function GateCircle({ exercise, onClick }: Props) {
 
       {/* Китайское название */}
       <div
-        className="mt-1 text-center font-sans"
+        className="mt-1 text-center"
         style={{
+          fontFamily: '"STKaiti", "KaiTi", "AR PL UKai CN", "Noto Serif SC", serif',
           fontSize: 'clamp(1.65rem, 3.3vw, 2.55rem)',
           color: '#d4a855',
-          letterSpacing: '0.06em',
-          lineHeight: 1.3,
+          letterSpacing: '0.1em',
+          lineHeight: 1.2,
         }}
       >
         {t(exercise.nameKey)}
@@ -79,11 +80,11 @@ export default function GateCircle({ exercise, onClick }: Props) {
       <div
         className="text-center font-sans px-1"
         style={{
-          fontSize: 'clamp(1.26rem, 2.55vw, 1.95rem)',
-          color: '#d8cfc4',
-          letterSpacing: '0.03em',
-          lineHeight: 1.3,
-          marginTop: '4px',
+          fontSize: 'clamp(0.63rem, 1.28vw, 0.98rem)',
+          color: 'rgba(255,255,255,0.5)',
+          letterSpacing: '0.02em',
+          lineHeight: 1.35,
+          marginTop: '3px',
           maxWidth: '120%',
         }}
       >

@@ -86,7 +86,8 @@ export default function PracticeSection({
           style={{
             width: '100%',
             maxWidth: cols === 2 ? '38.5vw' : '100%',
-            gap: '7.69vw',
+            columnGap: '7.69vw',
+            rowGap: '2vw',
           }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

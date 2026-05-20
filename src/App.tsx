@@ -34,7 +34,7 @@ export default function App() {
           bgClass="bg-bg-deep"
           cols={2}
         />
-        <PracticeSection sectionKey="changshou" bgClass="bg-bg-darker" />
+        <PracticeSection sectionKey="changshou" bgClass="bg-bg-deep" cols={2} />
       </main>
       <Footer />
     </>

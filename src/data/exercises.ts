@@ -36,7 +36,7 @@ export const CHANGSHOU: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   nameKey: `exercises.changshou.${i + 1}.name`,
   labelKey: `exercises.changshou.${i + 1}.label`,
   descriptionKey: `exercises.changshou.${i + 1}.desc`,
-  image: '/images/exercise-placeholder.png',
+  image: JINGANG_IMAGES[i + 1] ?? '/images/exercise-placeholder.png',
 }))
 
 export function getExercisesBySection(section: SectionKey): Exercise[] {
