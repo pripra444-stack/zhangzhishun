@@ -7,6 +7,9 @@ import ExerciseModal from './ExerciseModal'
 import { getExercisesBySection } from '../data/exercises'
 import type { Exercise, SectionKey } from '../data/exercises'
 
+// Восемь меридианов — вертикальная надпись между столбцами
+const MERIDIANS = ['冲脉', '带脉', '阴跷脉', '阳跷脉', '阴俞脉', '阳俞脉', '任脉', '督脉']
+
 interface Props {
   sectionKey: SectionKey
   bgClass?: string
@@ -25,6 +28,7 @@ export default function PracticeSection({
   const { t } = useTranslation()
   const [activeExercise, setActiveExercise] = useState<Exercise | null>(null)
   const exercises = getExercisesBySection(sectionKey)
+  const isJingang = sectionKey === 'jingang' && cols === 2
 
   return (
     <section
@@ -44,7 +48,83 @@ export default function PracticeSection({
         />
       )}
 
-      {/* Весь контент */}
+      {/* ── Тело с меридианами — левый фланг ── */}
+      {isJingang && (
+        <img
+          src="/images/meridian-body.png"
+          aria-hidden draggable={false}
+          className="absolute pointer-events-none select-none"
+          style={{
+            top: '5%',
+            bottom: '5%',
+            height: '90%',
+            width: 'auto',
+            left: 0,
+            transform: 'translateX(-50%)',   // сдвигаем влево — видна только правая половина
+            opacity: 0.22,
+            zIndex: 1,
+            mixBlendMode: 'screen',
+          }}
+        />
+      )}
+
+      {/* ── Тело с меридианами — правый фланг (зеркало) ── */}
+      {isJingang && (
+        <img
+          src="/images/meridian-body.png"
+          aria-hidden draggable={false}
+          className="absolute pointer-events-none select-none"
+          style={{
+            top: '5%',
+            bottom: '5%',
+            height: '90%',
+            width: 'auto',
+            right: 0,
+            transform: 'translateX(50%) scaleX(-1)',  // сдвигаем вправо + зеркало
+            opacity: 0.22,
+            zIndex: 1,
+            mixBlendMode: 'screen',
+          }}
+        />
+      )}
+
+      {/* ── Меридианы — вертикальный текст по центру между столбцами ── */}
+      {isJingang && (
+        <div
+          aria-hidden
+          className="absolute pointer-events-none select-none flex flex-col justify-between items-center"
+          style={{
+            // ровно в центре секции, по ширине gap между столбцами (7.69vw)
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '7.69vw',
+            top: '5%',
+            bottom: '5%',
+            zIndex: 2,
+          }}
+        >
+          {MERIDIANS.map((m, i) => (
+            <div
+              key={i}
+              style={{
+                fontFamily: '"STKaiti","KaiTi","Noto Serif SC","PingFang SC",serif',
+                fontSize: 'clamp(0.55rem, 1.05vw, 0.9rem)',
+                color: '#d4b87a',
+                opacity: 0.2,
+                letterSpacing: '0.05em',
+                lineHeight: 1.1,
+                writingMode: 'vertical-rl',
+                textOrientation: 'mixed',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {m}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Весь контент поверх */}
       <div className="relative z-10 flex flex-col items-center gap-10 w-full">
 
         {/* Заголовок */}
