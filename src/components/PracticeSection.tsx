@@ -80,7 +80,7 @@ export default function PracticeSection({
             height: '90%',
             width: 'auto',
             right: 0,
-            transform: 'translateX(50%) scaleX(-1)',  // сдвигаем вправо + зеркало
+            transform: 'translateX(50%)',  // сдвигаем вправо — лицо смотрит влево
             opacity: 0.22,
             zIndex: 1,
             mixBlendMode: 'screen',
@@ -107,18 +107,30 @@ export default function PracticeSection({
             <div
               key={i}
               style={{
-                fontFamily: '"STKaiti","KaiTi","Noto Serif SC","PingFang SC",serif',
-                fontSize: 'clamp(0.55rem, 1.05vw, 0.9rem)',
-                color: '#d4b87a',
+                border: '1px solid rgba(212,168,83,0.55)',
+                borderRadius: '8px',
+                padding: '8px 5px',
+                background: 'rgba(6,12,24,0.45)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 opacity: 0.2,
-                letterSpacing: '0.05em',
-                lineHeight: 1.1,
-                writingMode: 'vertical-rl',
-                textOrientation: 'mixed',
-                whiteSpace: 'nowrap',
               }}
             >
-              {m}
+              <span
+                style={{
+                  fontFamily: '"STKaiti","KaiTi","Noto Serif SC","PingFang SC",serif',
+                  fontSize: 'clamp(1.1rem, 2.1vw, 1.8rem)',
+                  color: '#d4b87a',
+                  letterSpacing: '0.05em',
+                  lineHeight: 1.1,
+                  writingMode: 'vertical-rl',
+                  textOrientation: 'mixed',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {m}
+              </span>
             </div>
           ))}
         </div>
