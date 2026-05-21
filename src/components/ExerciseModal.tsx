@@ -244,12 +244,24 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                   <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
 
                   {exercise.video ? (
-                    <iframe
-                      src={exercise.video}
-                      className="w-full h-full"
-                      allowFullScreen
-                      title={t(exercise.nameKey)}
-                    />
+                    exercise.video.endsWith('.mp4') ? (
+                      <video
+                        src={exercise.video}
+                        className="w-full h-full object-cover"
+                        controls
+                        autoPlay
+                        loop
+                        playsInline
+                        title={t(exercise.nameKey)}
+                      />
+                    ) : (
+                      <iframe
+                        src={exercise.video}
+                        className="w-full h-full"
+                        allowFullScreen
+                        title={t(exercise.nameKey)}
+                      />
+                    )
                   ) : exercise.image ? (
                     <img
                       src={exercise.image}
