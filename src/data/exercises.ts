@@ -21,6 +21,10 @@ const JINGANG_IMAGES: Record<number, string> = {
   8: '/images/exercise-08.png',
 }
 
+const JINGANG_VIDEOS: Record<number, string> = {
+  1: '/images/exercise-01.mp4',
+}
+
 export const JINGANG: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   id: i + 1,
   sectionKey: 'jingang',
@@ -28,7 +32,19 @@ export const JINGANG: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   labelKey: `exercises.jingang.${i + 1}.label`,
   descriptionKey: `exercises.jingang.${i + 1}.desc`,
   image: JINGANG_IMAGES[i + 1] ?? '/images/exercise-placeholder.png',
+  video: JINGANG_VIDEOS[i + 1],
 }))
+
+const CHANGSHOU_IMAGES: Record<number, string> = {
+  1: '/images/changshou-01.png',
+  2: '/images/changshou-02.png',
+  3: '/images/changshou-03.png',
+  4: '/images/changshou-04.png',
+  5: '/images/changshou-05.png',
+  6: '/images/changshou-06.png',
+  7: '/images/changshou-07.png',
+  8: '/images/changshou-08.png',
+}
 
 export const CHANGSHOU: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   id: i + 1,
@@ -36,7 +52,7 @@ export const CHANGSHOU: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   nameKey: `exercises.changshou.${i + 1}.name`,
   labelKey: `exercises.changshou.${i + 1}.label`,
   descriptionKey: `exercises.changshou.${i + 1}.desc`,
-  image: JINGANG_IMAGES[i + 1] ?? '/images/exercise-placeholder.png',
+  image: CHANGSHOU_IMAGES[i + 1] ?? '/images/exercise-placeholder.png',
 }))
 
 export function getExercisesBySection(section: SectionKey): Exercise[] {
