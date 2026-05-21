@@ -48,42 +48,35 @@ export default function PracticeSection({
         />
       )}
 
-      {/* ── Тело с меридианами — левый фланг ── */}
+      {/* ── Облака — левый фланг ── */}
       {isJingang && (
         <img
-          src="/images/meridian-body.png"
+          src="/images/clouds-side.png"
           aria-hidden draggable={false}
           className="absolute pointer-events-none select-none"
           style={{
-            top: '5%',
-            bottom: '5%',
-            height: '90%',
+            top: 0,
+            height: '100%',
             width: 'auto',
             left: 0,
-            transform: 'translateX(-50%)',   // сдвигаем влево — видна только правая половина
-            opacity: 0.22,
             zIndex: 1,
-            mixBlendMode: 'screen',
           }}
         />
       )}
 
-      {/* ── Тело с меридианами — правый фланг (зеркало) ── */}
+      {/* ── Облака — правый фланг (зеркало) ── */}
       {isJingang && (
         <img
-          src="/images/meridian-body.png"
+          src="/images/clouds-side.png"
           aria-hidden draggable={false}
           className="absolute pointer-events-none select-none"
           style={{
-            top: '5%',
-            bottom: '5%',
-            height: '90%',
+            top: 0,
+            height: '100%',
             width: 'auto',
             right: 0,
-            transform: 'translateX(50%)',  // сдвигаем вправо — лицо смотрит влево
-            opacity: 0.22,
+            transform: 'scaleX(-1)',
             zIndex: 1,
-            mixBlendMode: 'screen',
           }}
         />
       )}
