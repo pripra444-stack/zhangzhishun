@@ -109,6 +109,44 @@ function Photo({ src, style }: { src?: string; style?: React.CSSProperties }) {
   return <img src={src} alt="" className="object-cover" style={{ display: 'block', ...style }} />
 }
 
+// Золотые орнаментальные полосы слева и справа от блока
+function OrnamentStrip({ side }: { side: 'left' | 'right' }) {
+  const GOLDEN = 'brightness(0) saturate(100%) invert(76%) sepia(45%) saturate(1200%) hue-rotate(5deg) brightness(92%)'
+  return (
+    <>
+      {/* Полоса с иконкой-паттерном */}
+      <div
+        aria-hidden
+        className="absolute top-0 bottom-0 pointer-events-none"
+        style={{
+          [side]: 0,
+          width: 22,
+          backgroundImage: 'url(/images/icon-bullet.svg)',
+          backgroundRepeat: 'repeat-y',
+          backgroundSize: '22px 22px',
+          backgroundPosition: 'center top',
+          filter: GOLDEN,
+          opacity: 0.38,
+          zIndex: 3,
+        }}
+      />
+      {/* Тонкая золотая линия — внутренний край полосы */}
+      <div
+        aria-hidden
+        className="absolute pointer-events-none"
+        style={{
+          [side]: 22,
+          top: '6%',
+          bottom: '6%',
+          width: 1,
+          background: 'linear-gradient(to bottom, transparent, rgba(212,168,83,0.4) 18%, rgba(212,168,83,0.4) 82%, transparent)',
+          zIndex: 3,
+        }}
+      />
+    </>
+  )
+}
+
 // ══════════════════════════════════════════════════════════
 // ДИЗАЙН 1 — Вертикальный, облака по бокам (текущий стиль)
 // ══════════════════════════════════════════════════════════
@@ -121,9 +159,12 @@ function D1({ p }: { p: any }) {
         <img src="/images/modal-bg.png" aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'right center', opacity: 0.85 }} />
       </div>
       <div className="flex items-center justify-center flex-shrink-0 py-4" style={{ width: 'min(800px, 90vw)' }} onClick={p.onClose}>
-        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#000000', boxShadow: '0 50px 140px rgba(0,2,18,0.98)' }}
+        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#000000', position: 'relative', boxShadow: '0 50px 140px rgba(0,2,18,0.98)' }}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 28 }} onClick={e => e.stopPropagation()}>
+          {/* Орнаментальные полосы */}
+          <OrnamentStrip side="left" />
+          <OrnamentStrip side="right" />
           {/* Шапка */}
           <div className="flex items-center justify-between px-7 pt-4 pb-2">
             <div className="flex items-center gap-3">
