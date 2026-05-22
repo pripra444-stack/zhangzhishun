@@ -83,13 +83,13 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
           transition={{ duration: 0.3 }}
           onClick={onClose}
         >
-          {/* ── Облако слева — правый край всегда вплотную к модалке ── */}
-          <div className="flex-1 overflow-hidden flex items-center justify-end">
+          {/* ── Облако слева — заполняет всё пространство до модалки ── */}
+          <div className="flex-1 overflow-hidden relative">
             <img
               src="/images/modal-bg.png"
               aria-hidden draggable={false}
-              className="pointer-events-none select-none h-full w-auto object-cover object-right"
-              style={{ opacity: 0.85 }}
+              className="pointer-events-none select-none absolute inset-0 w-full h-full"
+              style={{ opacity: 0.85, objectFit: 'cover', objectPosition: 'right center' }}
             />
           </div>
 
@@ -328,13 +328,13 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
           </motion.div>
           </div>{/* /центр */}
 
-          {/* ── Облако справа — левый край вплотную к модалке ── */}
-          <div className="flex-1 overflow-hidden flex items-center justify-start">
+          {/* ── Облако справа — заполняет всё пространство от модалки до края ── */}
+          <div className="flex-1 overflow-hidden relative">
             <img
               src="/images/modal-bg.png"
               aria-hidden draggable={false}
-              className="pointer-events-none select-none h-full w-auto object-cover object-left"
-              style={{ opacity: 0.85, transform: 'scaleX(-1)' }}
+              className="pointer-events-none select-none absolute inset-0 w-full h-full"
+              style={{ opacity: 0.85, objectFit: 'cover', objectPosition: 'left center', transform: 'scaleX(-1)' }}
             />
           </div>
 
