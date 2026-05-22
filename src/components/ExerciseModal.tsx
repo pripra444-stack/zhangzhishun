@@ -26,17 +26,27 @@ function Desc({ text, hc = '#d4a853', size = '0.82rem' }: {
         if (!line.trim()) return <div key={i} style={{ height: 4 }} />
         const isHeader = line.startsWith('步骤')
         const isStep = /^[①②③④⑤⑥⑦⑧]/.test(line)
-        // Заменяем кружки на китайский маркер ◆
-        const displayLine = isStep ? '◆ ' + line.replace(/^[①②③④⑤⑥⑦⑧]\s*/, '') : line
+        const cleanLine = isStep ? line.replace(/^[①②③④⑤⑥⑦⑧]\s*/, '') : line
         return (
           <p key={i} style={{
             fontSize: size, lineHeight: 1.72,
             color: isHeader ? hc : 'rgba(255,255,255,0.82)',
             letterSpacing: isHeader ? '0.1em' : '0.025em',
             fontWeight: isHeader ? 600 : 400,
-            paddingLeft: isStep ? '0.4em' : 0,
             fontFamily: 'sans-serif',
-          }}>{displayLine}</p>
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: isStep ? 6 : 0,
+          }}>
+            {isStep && (
+              <img
+                src="/images/icon-bullet.svg"
+                aria-hidden
+                style={{ width: 13, height: 13, flexShrink: 0, marginTop: '0.22em', opacity: 0.75 }}
+              />
+            )}
+            <span>{cleanLine}</span>
+          </p>
         )
       })}
     </div>
@@ -66,7 +76,31 @@ function Dots({ exercises, exercise, onNavigate, color = 'rgba(212,168,83,0.75)'
 }
 
 function Video() {
-  return <video src={DEMO_VIDEO} className="w-full block" style={{ display: 'block' }} controls autoPlay loop playsInline />
+  return (
+    <div className="relative w-full" style={{ background: '#000' }}>
+      {/* Мозаичный фон из иконки */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden
+        style={{
+          backgroundImage: 'url(/images/icon-pattern.svg)',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '52px 52px',
+          opacity: 0.06,
+          zIndex: 0,
+        }}
+      />
+      <video
+        src={DEMO_VIDEO}
+        className="w-full block relative"
+        style={{ display: 'block', zIndex: 1 }}
+        controls
+        autoPlay
+        loop
+        playsInline
+      />
+    </div>
+  )
 }
 
 function Photo({ src, style }: { src?: string; style?: React.CSSProperties }) {
