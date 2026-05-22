@@ -42,7 +42,7 @@ function Desc({ text, hc = '#d4a853', size = '0.82rem' }: {
               <img
                 src="/images/icon-bullet.svg"
                 aria-hidden
-                style={{ width: 13, height: 13, flexShrink: 0, marginTop: '0.22em', opacity: 0.75 }}
+                style={{ width: 13, height: 13, flexShrink: 0, marginTop: '0.22em', opacity: 0.75, filter: 'sepia(1) saturate(5) hue-rotate(2deg) brightness(1.05)' }}
               />
             )}
             <span>{cleanLine}</span>
@@ -87,6 +87,7 @@ function Video() {
           backgroundRepeat: 'repeat',
           backgroundSize: '52px 52px',
           opacity: 0.06,
+          filter: 'sepia(1) saturate(4) hue-rotate(2deg) brightness(1.1)',
           zIndex: 0,
         }}
       />
