@@ -70,13 +70,12 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
     <AnimatePresence>
       {exercise && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center"
+          className="fixed inset-0 flex items-stretch justify-center"
           style={{
             zIndex: 300,
-            background: 'rgba(1,4,12,0.94)',
+            background: '#06091B',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
-            padding: 'clamp(10px, 2.5vw, 32px)',
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -84,41 +83,29 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
           transition={{ duration: 0.3 }}
           onClick={onClose}
         >
-          {/* ── Облака слева ── */}
-          <img
-            src="/images/modal-bg.png"
-            aria-hidden draggable={false}
-            className="absolute pointer-events-none select-none"
-            style={{
-              top: 0, left: 0,
-              height: '100%', width: 'auto',
-              opacity: 0.7,
-              zIndex: 0,
-            }}
-          />
-          {/* ── Облака справа (зеркало) ── */}
-          <img
-            src="/images/modal-bg.png"
-            aria-hidden draggable={false}
-            className="absolute pointer-events-none select-none"
-            style={{
-              top: 0, right: 0,
-              height: '100%', width: 'auto',
-              opacity: 0.7,
-              transform: 'scaleX(-1)',
-              zIndex: 0,
-            }}
-          />
+          {/* ── Облако слева — правый край всегда вплотную к модалке ── */}
+          <div className="flex-1 overflow-hidden flex items-center justify-end">
+            <img
+              src="/images/modal-bg.png"
+              aria-hidden draggable={false}
+              className="pointer-events-none select-none h-full w-auto object-cover object-right"
+              style={{ opacity: 0.85 }}
+            />
+          </div>
 
+          {/* ── Модальное окно ── */}
+          <div
+            className="flex items-center justify-center flex-shrink-0 py-4"
+            style={{ width: 'min(820px, 90vw)' }}
+            onClick={onClose}
+          >
           <motion.div
             className="relative w-full overflow-hidden flex flex-col"
             style={{
-              maxWidth: 820,
               maxHeight: '94vh',
               borderRadius: 6,
               background: '#06091B',
               boxShadow: '0 50px 140px rgba(0,2,18,0.98)',
-              zIndex: 1,
             }}
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -339,6 +326,18 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
 
             </div>{/* /контент */}
           </motion.div>
+          </div>{/* /центр */}
+
+          {/* ── Облако справа — левый край вплотную к модалке ── */}
+          <div className="flex-1 overflow-hidden flex items-center justify-start">
+            <img
+              src="/images/modal-bg.png"
+              aria-hidden draggable={false}
+              className="pointer-events-none select-none h-full w-auto object-cover object-left"
+              style={{ opacity: 0.85, transform: 'scaleX(-1)' }}
+            />
+          </div>
+
         </motion.div>
       )}
     </AnimatePresence>
