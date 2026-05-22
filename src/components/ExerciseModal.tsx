@@ -116,13 +116,8 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
               maxWidth: 820,
               maxHeight: '94vh',
               borderRadius: 6,
-              background: 'linear-gradient(160deg, #0b1726 0%, #060e1c 55%, #040910 100%)',
-              border: '1px solid rgba(212,168,83,0.35)',
-              boxShadow: [
-                '0 0 0 1px rgba(212,168,83,0.07)',
-                '0 0 60px rgba(212,168,83,0.1)',
-                '0 50px 140px rgba(0,2,18,0.98)',
-              ].join(', '),
+              background: '#06091B',
+              boxShadow: '0 50px 140px rgba(0,2,18,0.98)',
               zIndex: 1,
             }}
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
