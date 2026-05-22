@@ -84,13 +84,46 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
           transition={{ duration: 0.3 }}
           onClick={onClose}
         >
+          {/* ── Облака слева ── */}
+          <img
+            src="/images/modal-bg.png"
+            aria-hidden draggable={false}
+            className="absolute pointer-events-none select-none"
+            style={{
+              top: 0, left: 0,
+              height: '100%', width: 'auto',
+              opacity: 0.7,
+              zIndex: 0,
+            }}
+          />
+          {/* ── Облака справа (зеркало) ── */}
+          <img
+            src="/images/modal-bg.png"
+            aria-hidden draggable={false}
+            className="absolute pointer-events-none select-none"
+            style={{
+              top: 0, right: 0,
+              height: '100%', width: 'auto',
+              opacity: 0.7,
+              transform: 'scaleX(-1)',
+              zIndex: 0,
+            }}
+          />
+
           <motion.div
             className="relative w-full overflow-hidden flex flex-col"
             style={{
               maxWidth: 820,
               maxHeight: '94vh',
               borderRadius: 6,
-              boxShadow: '0 50px 140px rgba(0,2,18,0.98)',
+              background: 'linear-gradient(160deg, #0b1726 0%, #060e1c 55%, #040910 100%)',
+              border: '1px solid rgba(212,168,83,0.35)',
+              boxShadow: [
+                '0 0 0 1px rgba(212,168,83,0.07)',
+                '0 0 60px rgba(212,168,83,0.1)',
+                '0 50px 140px rgba(0,2,18,0.98)',
+              ].join(', '),
+              zIndex: 1,
             }}
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -99,22 +132,6 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
             onClick={e => e.stopPropagation()}
           >
 
-            {/* ── Фоновое изображение — облака ── */}
-            <img
-              src="/images/modal-bg.png"
-              aria-hidden
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-              style={{ opacity: 0.55, zIndex: 0 }}
-              draggable={false}
-            />
-            {/* Тёмный оверлей поверх фона */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                zIndex: 0,
-                background: 'linear-gradient(180deg, rgba(3,8,20,0.72) 0%, rgba(3,8,20,0.60) 40%, rgba(3,8,20,0.82) 100%)',
-              }}
-            />
 
             {/* ── Весь контент выше фона ── */}
             <div className="relative flex flex-col" style={{ zIndex: 1, minHeight: 0 }}>
