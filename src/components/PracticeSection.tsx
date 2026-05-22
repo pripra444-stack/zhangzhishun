@@ -29,6 +29,7 @@ export default function PracticeSection({
   const [activeExercise, setActiveExercise] = useState<Exercise | null>(null)
   const exercises = getExercisesBySection(sectionKey)
   const isJingang = sectionKey === 'jingang' && cols === 2
+  const isChangshou = sectionKey === 'changshou' && cols === 2
 
   return (
     <section
@@ -68,6 +69,39 @@ export default function PracticeSection({
       {isJingang && (
         <img
           src="/images/clouds-side.png"
+          aria-hidden draggable={false}
+          className="absolute pointer-events-none select-none"
+          style={{
+            top: 0,
+            height: '100%',
+            width: 'auto',
+            right: 0,
+            transform: 'scaleX(-1)',
+            zIndex: 1,
+          }}
+        />
+      )}
+
+      {/* ── Рыбы — левый фланг (Долголетие) ── */}
+      {isChangshou && (
+        <img
+          src="/images/changshou-side.png"
+          aria-hidden draggable={false}
+          className="absolute pointer-events-none select-none"
+          style={{
+            top: 0,
+            height: '100%',
+            width: 'auto',
+            left: 0,
+            zIndex: 1,
+          }}
+        />
+      )}
+
+      {/* ── Рыбы — правый фланг (зеркало) ── */}
+      {isChangshou && (
+        <img
+          src="/images/changshou-side.png"
           aria-hidden draggable={false}
           className="absolute pointer-events-none select-none"
           style={{
