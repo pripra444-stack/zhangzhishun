@@ -86,7 +86,7 @@ function D1({ p }: { p: any }) {
         <img src="/images/modal-bg.png" aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'right center', opacity: 0.85 }} />
       </div>
       <div className="flex items-center justify-center flex-shrink-0 py-4" style={{ width: 'min(800px, 90vw)' }} onClick={p.onClose}>
-        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#06091B', boxShadow: '0 50px 140px rgba(0,2,18,0.98)' }}
+        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#000000', boxShadow: '0 50px 140px rgba(0,2,18,0.98)' }}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 28 }} onClick={e => e.stopPropagation()}>
           {/* Шапка */}
@@ -133,13 +133,13 @@ function D2({ p }: { p: any }) {
   return (
     <motion.div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 300, background: 'rgba(2,6,20,0.97)', backdropFilter: 'blur(12px)' }}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
-      <motion.div className="w-full flex overflow-hidden" style={{ maxWidth: 940, maxHeight: '92vh', background: '#050D1A', borderRadius: 4, boxShadow: '0 0 0 1px rgba(212,168,83,0.2), 0 60px 120px rgba(0,0,0,0.98)' }}
+      <motion.div className="w-full flex overflow-hidden" style={{ maxWidth: 940, maxHeight: '92vh', background: '#000000', borderRadius: 4, boxShadow: '0 0 0 1px rgba(212,168,83,0.2), 0 60px 120px rgba(0,0,0,0.98)' }}
         initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }}
         transition={{ type: 'spring', stiffness: 260, damping: 28 }} onClick={e => e.stopPropagation()}>
         {/* Левая колонка — фото упражнения */}
         <div className="flex-shrink-0 relative overflow-hidden" style={{ width: 220 }}>
           <Photo src={p.ex.image} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.75 }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 60%, #050D1A)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 60%, #000000)' }} />
           <div className="absolute bottom-0 left-0 right-0 p-5" style={{ background: 'linear-gradient(to top, rgba(5,13,26,0.95), transparent)' }}>
             <div style={{ fontFamily: '"STKaiti",serif', writingMode: 'vertical-rl', fontSize: 'clamp(1.2rem,2vw,1.8rem)', color: '#d4a853', letterSpacing: '0.15em', textShadow: '0 0 20px rgba(212,168,83,0.4)' }}>{p.t(p.ex.nameKey)}</div>
           </div>
@@ -173,7 +173,7 @@ function D3({ p }: { p: any }) {
   return (
     <motion.div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 300, background: 'rgba(0,4,12,0.97)', backdropFilter: 'blur(14px)' }}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
-      <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxWidth: 980, maxHeight: '92vh', background: '#020810', borderRadius: 2, boxShadow: '0 0 0 1px rgba(212,168,83,0.15), 0 60px 140px rgba(0,0,0,0.99)' }}
+      <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxWidth: 980, maxHeight: '92vh', background: '#000000', borderRadius: 2, boxShadow: '0 0 0 1px rgba(212,168,83,0.15), 0 60px 140px rgba(0,0,0,0.99)' }}
         initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }}
         transition={{ type: 'spring', stiffness: 280, damping: 28 }} onClick={e => e.stopPropagation()}>
         {/* Шапка */}
@@ -221,7 +221,7 @@ function D4({ p }: { p: any }) {
   return (
     <motion.div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 300, background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(16px)' }}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
-      <motion.div className="w-full flex flex-col overflow-hidden relative" style={{ maxWidth: 820, maxHeight: '94vh', borderRadius: 4, background: '#08060E', boxShadow: '0 0 0 1px rgba(180,100,255,0.2), 0 60px 120px rgba(0,0,0,0.99)' }}
+      <motion.div className="w-full flex flex-col overflow-hidden relative" style={{ maxWidth: 820, maxHeight: '94vh', borderRadius: 4, background: '#000000', boxShadow: '0 0 0 1px rgba(180,100,255,0.2), 0 60px 120px rgba(0,0,0,0.99)' }}
         initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }}
         transition={{ type: 'spring', stiffness: 260, damping: 28 }} onClick={e => e.stopPropagation()}>
         {/* Фото — фон верхней части */}
@@ -264,7 +264,7 @@ function D5({ p }: { p: any }) {
   return (
     <motion.div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 300, background: 'rgba(8,4,0,0.97)', backdropFilter: 'blur(8px)' }}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
-      <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxWidth: 760, maxHeight: '94vh', background: 'linear-gradient(160deg,#100C04,#0C0801)', borderRadius: 3, boxShadow: '0 0 0 1px rgba(180,130,60,0.35), 0 0 0 5px rgba(180,130,60,0.06), 0 60px 120px rgba(0,0,0,0.99)' }}
+      <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxWidth: 760, maxHeight: '94vh', background: '#000000', borderRadius: 3, boxShadow: '0 0 0 1px rgba(180,130,60,0.35), 0 0 0 5px rgba(180,130,60,0.06), 0 60px 120px rgba(0,0,0,0.99)' }}
         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
         transition={{ type: 'spring', stiffness: 250, damping: 28 }} onClick={e => e.stopPropagation()}>
         <div style={{ height: 3, background: 'linear-gradient(90deg,transparent,#b47830,#d4a853,#b47830,transparent)', flexShrink: 0 }} />
@@ -308,7 +308,7 @@ function D6({ p }: { p: any }) {
   return (
     <motion.div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 300, background: 'rgba(0,0,2,0.98)', backdropFilter: 'blur(8px)' }}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
-      <motion.div className="w-full flex overflow-hidden" style={{ maxWidth: 960, maxHeight: '92vh', background: '#000002', borderRadius: 0, boxShadow: '0 0 0 1px rgba(212,168,83,0.5), 0 60px 120px rgba(0,0,0,0.99)' }}
+      <motion.div className="w-full flex overflow-hidden" style={{ maxWidth: 960, maxHeight: '92vh', background: '#000000', borderRadius: 0, boxShadow: '0 0 0 1px rgba(212,168,83,0.5), 0 60px 120px rgba(0,0,0,0.99)' }}
         initial={{ opacity: 0, scale: 1.03 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.03 }}
         transition={{ duration: 0.3 }} onClick={e => e.stopPropagation()}>
         {/* Левая — текст */}
@@ -350,7 +350,7 @@ function D7({ p }: { p: any }) {
   return (
     <motion.div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 300, background: 'rgba(1,8,4,0.97)', backdropFilter: 'blur(10px)' }}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
-      <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxWidth: 840, maxHeight: '94vh', background: 'linear-gradient(160deg,#041008,#020A04)', borderRadius: 3, boxShadow: '0 0 0 1px rgba(60,160,80,0.25), 0 60px 120px rgba(0,0,0,0.99)' }}
+      <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxWidth: 840, maxHeight: '94vh', background: '#000000', borderRadius: 3, boxShadow: '0 0 0 1px rgba(60,160,80,0.25), 0 60px 120px rgba(0,0,0,0.99)' }}
         initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }}
         transition={{ type: 'spring', stiffness: 270, damping: 28 }} onClick={e => e.stopPropagation()}>
         {/* Шапка */}
