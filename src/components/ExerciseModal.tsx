@@ -110,40 +110,31 @@ function Photo({ src, style }: { src?: string; style?: React.CSSProperties }) {
 }
 
 // Золотые орнаментальные полосы слева и справа от блока
+// Структура: [золотая линия 1px | иконки 46px | золотая линия 1px] = 48px
 function OrnamentStrip({ side }: { side: 'left' | 'right' }) {
   const GOLDEN = 'brightness(0) saturate(100%) invert(76%) sepia(45%) saturate(1200%) hue-rotate(5deg) brightness(92%)'
+  const LINE_GRAD = 'linear-gradient(to bottom, transparent, rgba(212,168,83,0.65) 10%, rgba(212,168,83,0.65) 90%, transparent)'
   return (
-    <>
-      {/* Полоса с иконкой-паттерном */}
-      <div
-        aria-hidden
-        className="absolute top-0 bottom-0 pointer-events-none"
-        style={{
-          [side]: 0,
-          width: 22,
-          backgroundImage: 'url(/images/icon-bullet.svg)',
-          backgroundRepeat: 'repeat-y',
-          backgroundSize: '22px 22px',
-          backgroundPosition: 'center top',
-          filter: GOLDEN,
-          opacity: 0.38,
-          zIndex: 3,
-        }}
-      />
-      {/* Тонкая золотая линия — внутренний край полосы */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none"
-        style={{
-          [side]: 22,
-          top: '6%',
-          bottom: '6%',
-          width: 1,
-          background: 'linear-gradient(to bottom, transparent, rgba(212,168,83,0.4) 18%, rgba(212,168,83,0.4) 82%, transparent)',
-          zIndex: 3,
-        }}
-      />
-    </>
+    <div
+      aria-hidden
+      className="absolute top-0 bottom-0 pointer-events-none"
+      style={{ [side]: 0, width: 48, zIndex: 3, display: 'flex', alignItems: 'stretch' }}
+    >
+      {/* Левая золотая линия */}
+      <div style={{ width: 1, flexShrink: 0, background: LINE_GRAD }} />
+      {/* Иконки (иконка 02 — фонарь) */}
+      <div style={{
+        flex: 1,
+        backgroundImage: 'url(/images/icon-pattern.svg)',
+        backgroundRepeat: 'repeat-y',
+        backgroundSize: '46px 46px',
+        backgroundPosition: 'center top',
+        filter: GOLDEN,
+        opacity: 0.5,
+      }} />
+      {/* Правая золотая линия */}
+      <div style={{ width: 1, flexShrink: 0, background: LINE_GRAD }} />
+    </div>
   )
 }
 
