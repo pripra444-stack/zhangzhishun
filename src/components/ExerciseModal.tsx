@@ -14,8 +14,6 @@ interface Props {
 
 const ZH_NUM = ['一','二','三','四','五','六','七','八']
 
-// Всегда используем видео первого упражнения для превью всех 8 дизайнов
-const DEMO_VIDEO = '/images/exercise-01.mp4'
 
 function Desc({ text, hc = '#d4a853', size = '0.82rem' }: {
   text: string; hc?: string; size?: string
@@ -75,7 +73,7 @@ function Dots({ exercises, exercise, onNavigate, color = 'rgba(212,168,83,0.75)'
   )
 }
 
-function Video() {
+function Video({ src }: { src?: string }) {
   return (
     <div className="relative w-full" style={{ background: '#000' }}>
       {/* Мозаичный фон из иконки */}
@@ -92,7 +90,7 @@ function Video() {
         }}
       />
       <video
-        src={DEMO_VIDEO}
+        src={src}
         className="w-full block relative"
         style={{ display: 'block', zIndex: 1 }}
         controls
@@ -175,7 +173,7 @@ function D1({ p }: { p: any }) {
           </div>
           <div className="mx-7 mb-3" style={{ height: 1, background: 'linear-gradient(90deg,transparent,rgba(212,168,83,0.3) 25%,rgba(212,168,83,0.3) 75%,transparent)' }} />
           {/* Видео */}
-          <div className="px-7 mb-3 flex-shrink-0"><Video /></div>
+          <div className="px-7 mb-3 flex-shrink-0"><Video src={p.ex.video} /></div>
           {/* Текст */}
           <div className="px-7 pb-2 overflow-y-auto flex-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(212,168,83,0.15) transparent', minHeight: 0 }}>
             <Desc text={p.t(p.ex.descriptionKey)} />
@@ -222,7 +220,7 @@ function D2({ p }: { p: any }) {
             <div style={{ fontSize: '0.7rem', color: 'rgba(212,168,83,0.45)', letterSpacing: '0.25em', fontFamily: 'sans-serif' }}>第{p.zhNum}部 · {p.sectionZh}</div>
             <CloseBtn onClose={p.onClose} />
           </div>
-          <div className="px-6 pt-3 flex-shrink-0"><Video /></div>
+          <div className="px-6 pt-3 flex-shrink-0"><Video src={p.ex.video} /></div>
           <div style={{ fontSize: '0.65rem', color: 'rgba(160,190,220,0.4)', padding: '8px 24px 4px', fontFamily: 'sans-serif' }}>{p.t(p.ex.labelKey)}</div>
           <div className="px-6 pb-3 overflow-y-auto flex-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(212,168,83,0.12) transparent', minHeight: 0 }}>
             <Desc text={p.t(p.ex.descriptionKey)} size="0.78rem" />
@@ -257,7 +255,7 @@ function D3({ p }: { p: any }) {
         <div className="flex flex-1 overflow-hidden" style={{ minHeight: 0 }}>
           {/* Видео — левые 60% */}
           <div className="flex flex-col flex-shrink-0" style={{ width: '60%' }}>
-            <Video />
+            <Video src={p.ex.video} />
             <div className="flex-1 px-6 pt-3 pb-2">
               <div style={{ fontFamily: '"STKaiti","KaiTi",serif', fontSize: 'clamp(1.2rem,2.5vw,1.9rem)', color: '#e8d090', letterSpacing: '0.18em' }}>{p.t(p.ex.nameKey)}</div>
               <div style={{ fontSize: '0.65rem', color: 'rgba(160,190,220,0.38)', marginTop: 6, fontFamily: 'sans-serif' }}>{p.t(p.ex.labelKey)}</div>
@@ -313,7 +311,7 @@ function D4({ p }: { p: any }) {
             <CloseBtn onClose={p.onClose} color="rgba(180,80,240,0.4)" />
           </div>
           <div style={{ height: 1, margin: '4px 28px 12px', background: 'linear-gradient(90deg, rgba(160,60,220,0.5), transparent)' }} />
-          <div className="px-7 flex-shrink-0"><Video /></div>
+          <div className="px-7 flex-shrink-0"><Video src={p.ex.video} /></div>
           <div style={{ fontSize: '0.65rem', color: 'rgba(160,80,220,0.38)', padding: '8px 28px 4px', fontFamily: 'sans-serif' }}>{p.t(p.ex.labelKey)}</div>
         </div>
         <div className="px-7 pb-3 overflow-y-auto flex-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(160,60,220,0.15) transparent', minHeight: 0, position: 'relative', zIndex: 1 }}>
@@ -352,7 +350,7 @@ function D5({ p }: { p: any }) {
         </div>
         {/* Видео + фото рядом */}
         <div className="flex gap-3 px-8 mb-3 flex-shrink-0">
-          <div className="flex-1"><Video /></div>
+          <div className="flex-1"><Video src={p.ex.video} /></div>
           {p.ex.image && (
             <div className="flex-shrink-0" style={{ width: 130 }}>
               <Photo src={p.ex.image} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 2, opacity: 0.7 }} />
@@ -408,7 +406,7 @@ function D6({ p }: { p: any }) {
         </div>
         {/* Правая — видео */}
         <div className="flex-1 flex items-center" style={{ background: '#000' }}>
-          <Video />
+          <Video src={p.ex.video} />
         </div>
       </motion.div>
     </motion.div>
@@ -435,7 +433,7 @@ function D7({ p }: { p: any }) {
           <CloseBtn onClose={p.onClose} color="rgba(60,160,80,0.35)" />
         </div>
         {/* Видео полная ширина */}
-        <div className="px-0 flex-shrink-0"><Video /></div>
+        <div className="px-0 flex-shrink-0"><Video src={p.ex.video} /></div>
         {/* Нижняя часть: фото + текст */}
         <div className="flex flex-1 overflow-hidden" style={{ minHeight: 0 }}>
           {p.ex.image && (
@@ -483,7 +481,7 @@ function D8({ p }: { p: any }) {
           <CloseBtn onClose={p.onClose} color="rgba(212,168,83,0.28)" />
         </div>
         {/* Видео без фона */}
-        <div style={{ borderRadius: 3, overflow: 'hidden', flexShrink: 0 }}><Video /></div>
+        <div style={{ borderRadius: 3, overflow: 'hidden', flexShrink: 0 }}><Video src={p.ex.video} /></div>
         {/* Название + лейбл */}
         <div className="flex items-end justify-between px-1 pt-4 pb-2 flex-shrink-0">
           <div>
@@ -537,7 +535,7 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
   return (
     <AnimatePresence>
       {exercise && Design && (
-        <Design p={{ exercise: { ...exercise, video: DEMO_VIDEO }, exercises, prev, next, onClose, onNavigate, t, zhNum, sectionZh, ex: { ...exercise, video: DEMO_VIDEO } }} />
+        <Design p={{ exercise, exercises, prev, next, onClose, onNavigate, t, zhNum, sectionZh, ex: exercise }} />
       )}
     </AnimatePresence>
   )

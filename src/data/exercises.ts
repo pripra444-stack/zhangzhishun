@@ -23,6 +23,13 @@ const JINGANG_IMAGES: Record<number, string> = {
 
 const JINGANG_VIDEOS: Record<number, string> = {
   1: '/images/exercise-01.mp4',
+  2: '/images/exercise-02.mp4',
+  3: '/images/exercise-03.mp4',
+  4: '/images/exercise-04.mp4',
+  5: '/images/exercise-05.mp4',
+  6: '/images/exercise-06.mp4',
+  7: '/images/exercise-07.mp4',
+  8: '/images/exercise-08.mp4',
 }
 
 export const JINGANG: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
