@@ -530,7 +530,7 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
   const zhNum = exercise ? (ZH_NUM[exercise.id - 1] ?? exercise.id) : ''
   const sectionZh = sectionKey ? t(`sections.${sectionKey}.zh`) : ''
 
-  const Design = exercise ? DESIGNS[(exercise.id - 1) % 8] : null
+  const Design = exercise ? D1 : null
 
   return (
     <AnimatePresence>
