@@ -109,29 +109,33 @@ function Photo({ src, style }: { src?: string; style?: React.CSSProperties }) {
   return <img src={src} alt="" className="object-cover" style={{ display: 'block', ...style }} />
 }
 
-// Золотые орнаментальные полосы слева и справа от блока
-// Структура: [золотая линия 1px | иконки 46px | золотая линия 1px] = 48px
-function OrnamentStrip({ side }: { side: 'left' | 'right' }) {
+// Золотые орнаментальные полосы — flex-элемент вне модального блока
+// Структура: [линия 1px | просвет 5px | иконки 36px | просвет 5px | линия 1px] = 48px
+function OrnamentStrip() {
   const GOLDEN = 'brightness(0) saturate(100%) invert(76%) sepia(45%) saturate(1200%) hue-rotate(5deg) brightness(92%)'
-  const LINE_GRAD = 'linear-gradient(to bottom, transparent, rgba(212,168,83,0.65) 10%, rgba(212,168,83,0.65) 90%, transparent)'
+  const LINE_GRAD = 'linear-gradient(to bottom, transparent, rgba(212,168,83,0.6) 8%, rgba(212,168,83,0.6) 92%, transparent)'
   return (
     <div
       aria-hidden
-      className="absolute top-0 bottom-0 pointer-events-none"
-      style={{ [side]: 0, width: 48, zIndex: 3, display: 'flex', alignItems: 'stretch' }}
+      className="flex-shrink-0 self-stretch pointer-events-none flex"
+      style={{ width: 48 }}
     >
       {/* Левая золотая линия */}
       <div style={{ width: 1, flexShrink: 0, background: LINE_GRAD }} />
-      {/* Иконки (иконка 02 — фонарь) */}
+      {/* Просвет */}
+      <div style={{ width: 5, flexShrink: 0 }} />
+      {/* Иконки (иконка 02) — уже и с просветом */}
       <div style={{
         flex: 1,
         backgroundImage: 'url(/images/icon-pattern.svg)',
         backgroundRepeat: 'repeat-y',
-        backgroundSize: '46px 46px',
+        backgroundSize: '36px 36px',
         backgroundPosition: 'center top',
         filter: GOLDEN,
-        opacity: 0.5,
+        opacity: 0.25,
       }} />
+      {/* Просвет */}
+      <div style={{ width: 5, flexShrink: 0 }} />
       {/* Правая золотая линия */}
       <div style={{ width: 1, flexShrink: 0, background: LINE_GRAD }} />
     </div>
@@ -149,13 +153,12 @@ function D1({ p }: { p: any }) {
       <div className="flex-1 overflow-hidden relative pointer-events-none">
         <img src="/images/modal-bg.png" aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'right center', opacity: 0.85 }} />
       </div>
+      {/* Левая орнаментальная полоса — снаружи блока */}
+      <OrnamentStrip />
       <div className="flex items-center justify-center flex-shrink-0 py-4" style={{ width: 'min(800px, 90vw)' }} onClick={p.onClose}>
-        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#000000', position: 'relative', boxShadow: '0 50px 140px rgba(0,2,18,0.98)' }}
+        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#000000', boxShadow: '0 50px 140px rgba(0,2,18,0.98)' }}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 28 }} onClick={e => e.stopPropagation()}>
-          {/* Орнаментальные полосы */}
-          <OrnamentStrip side="left" />
-          <OrnamentStrip side="right" />
           {/* Шапка */}
           <div className="flex items-center justify-between px-7 pt-4 pb-2">
             <div className="flex items-center gap-3">
@@ -185,6 +188,8 @@ function D1({ p }: { p: any }) {
           </div>
         </motion.div>
       </div>
+      {/* Правая орнаментальная полоса — снаружи блока */}
+      <OrnamentStrip />
       {/* Правое облако */}
       <div className="flex-1 overflow-hidden relative pointer-events-none">
         <img src="/images/modal-bg.png" aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'left center', transform: 'scaleX(-1)', opacity: 0.85 }} />
