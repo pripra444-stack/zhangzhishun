@@ -201,17 +201,14 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
               <div className="px-7 mb-4 flex-shrink-0">
                 <div
                   className="relative overflow-hidden w-full"
-                  style={{
-                    aspectRatio: '16/9',
-                    background: '#010306',
-                    borderRadius: 4,
-                  }}
+                  style={{ borderRadius: 4 }}
                 >
                   {exercise.video ? (
                     exercise.video.endsWith('.mp4') ? (
                       <video
                         src={exercise.video}
-                        className="w-full h-full object-cover"
+                        className="w-full block"
+                        style={{ display: 'block', maxHeight: '55vh' }}
                         controls
                         autoPlay
                         loop
@@ -241,11 +238,6 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                       </div>
                     </div>
                   )}
-                  {/* виньетка */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ boxShadow: 'inset 0 0 50px rgba(1,3,12,0.55)', borderRadius: 4 }}
-                  />
                 </div>
               </div>
 
