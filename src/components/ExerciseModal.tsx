@@ -12,46 +12,27 @@ interface Props {
   onNavigate: (exercise: Exercise) => void
 }
 
-// Угловые декоративные уголки
-function Corner({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
-  const size = 22
-  const t = pos.includes('t') ? 0 : 'auto'
-  const b = pos.includes('b') ? 0 : 'auto'
-  const l = pos.includes('l') ? 0 : 'auto'
-  const r = pos.includes('r') ? 0 : 'auto'
-  return (
-    <div style={{
-      position: 'absolute', top: t, bottom: b, left: l, right: r,
-      width: size, height: size,
-      borderTop:    pos.includes('t') ? '1.5px solid #d4a853' : undefined,
-      borderBottom: pos.includes('b') ? '1.5px solid #d4a853' : undefined,
-      borderLeft:   pos.includes('l') ? '1.5px solid #d4a853' : undefined,
-      borderRight:  pos.includes('r') ? '1.5px solid #d4a853' : undefined,
-      pointerEvents: 'none',
-    }} />
-  )
-}
-
 // Разбиваем описание на параграфы по \n
 function DescriptionText({ text }: { text: string }) {
   const lines = text.split('\n')
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1.5">
       {lines.map((line, i) => {
-        if (!line.trim()) return <div key={i} style={{ height: 6 }} />
+        if (!line.trim()) return <div key={i} style={{ height: 4 }} />
         const isStep = /^[①②③④⑤⑥⑦⑧]/.test(line)
         const isHeader = line.startsWith('步骤')
+        const isChinese = /^[生长化收藏]/.test(line)
         return (
           <p
             key={i}
             className="font-sans"
             style={{
-              fontSize: 'clamp(0.72rem, 1.1vw, 0.85rem)',
-              color: isHeader ? '#d4a853' : isStep ? '#c8bfb0' : '#9aaabb',
-              lineHeight: 1.75,
-              letterSpacing: isHeader ? '0.12em' : '0.02em',
+              fontSize: 'clamp(0.72rem, 1.05vw, 0.84rem)',
+              color: isHeader ? '#d4a853' : isChinese ? '#c8a96e' : isStep ? '#c8bfb0' : '#8fa0b4',
+              lineHeight: 1.7,
+              letterSpacing: isHeader ? '0.1em' : '0.02em',
               fontWeight: isHeader ? 600 : 400,
-              paddingLeft: isStep ? '0.5em' : 0,
+              paddingLeft: isStep ? '0.75em' : 0,
             }}
           >
             {line}
@@ -93,9 +74,9 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
           className="fixed inset-0 flex items-center justify-center"
           style={{
             zIndex: 300,
-            background: 'rgba(2,5,14,0.88)',
-            backdropFilter: 'blur(6px)',
-            WebkitBackdropFilter: 'blur(6px)',
+            background: 'rgba(2,5,14,0.92)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
             padding: 'clamp(12px, 3vw, 40px)',
           }}
           initial={{ opacity: 0 }}
@@ -107,16 +88,11 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
           <motion.div
             className="relative w-full overflow-hidden"
             style={{
-              maxWidth: 880,
+              maxWidth: 900,
               maxHeight: '92vh',
-              background: 'linear-gradient(160deg, #0c1828 0%, #060e1c 60%, #04091a 100%)',
-              border: '1px solid rgba(212,168,83,0.35)',
-              boxShadow: [
-                '0 0 0 1px rgba(212,168,83,0.08)',
-                '0 0 60px rgba(212,168,83,0.08)',
-                '0 30px 100px rgba(0,8,30,0.9)',
-              ].join(', '),
-              borderRadius: 4,
+              background: 'linear-gradient(160deg, #0b1726 0%, #060e1c 55%, #040910 100%)',
+              boxShadow: '0 40px 120px rgba(0,4,20,0.97)',
+              borderRadius: 6,
             }}
             initial={{ opacity: 0, scale: 0.96, y: 18 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -124,35 +100,28 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
             transition={{ type: 'spring', stiffness: 320, damping: 28 }}
             onClick={e => e.stopPropagation()}
           >
-            {/* Угловые уголки */}
-            <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
 
             {/* ── Шапка ── */}
-            <div
-              className="flex items-center justify-between px-6 pt-5 pb-3"
-              style={{ borderBottom: '1px solid rgba(212,168,83,0.15)' }}
-            >
+            <div className="flex items-center justify-between px-7 pt-5 pb-3">
               <div className="flex items-center gap-3">
-                {/* Номер упражнения по-китайски */}
+                {/* Номер упражнения */}
                 <div
                   style={{
                     fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
                     fontSize: 'clamp(1.4rem, 3vw, 2rem)',
                     color: '#d4a853',
                     lineHeight: 1,
-                    textShadow: '0 0 20px rgba(212,168,83,0.5)',
+                    textShadow: '0 0 24px rgba(212,168,83,0.45)',
                   }}
                 >
                   第{zhNum}式
                 </div>
-                {/* Разделитель */}
-                <div style={{ width: 1, height: 28, background: 'rgba(212,168,83,0.25)' }} />
-                {/* Название секции */}
+                <div style={{ width: 1, height: 24, background: 'rgba(212,168,83,0.2)' }} />
                 <div
                   style={{
                     fontFamily: '"STKaiti","KaiTi",serif',
-                    fontSize: 'clamp(0.75rem, 1.3vw, 0.95rem)',
-                    color: 'rgba(212,168,83,0.6)',
+                    fontSize: 'clamp(0.75rem, 1.3vw, 0.9rem)',
+                    color: 'rgba(212,168,83,0.5)',
                     letterSpacing: '0.18em',
                   }}
                 >
@@ -165,9 +134,9 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                 type="button"
                 onClick={onClose}
                 style={{
-                  fontSize: '0.7rem',
-                  color: 'rgba(212,168,83,0.45)',
-                  letterSpacing: '0.25em',
+                  fontSize: '0.68rem',
+                  color: 'rgba(212,168,83,0.4)',
+                  letterSpacing: '0.22em',
                   fontFamily: 'sans-serif',
                   background: 'none',
                   border: 'none',
@@ -175,23 +144,23 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                   padding: '4px 8px',
                   transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'rgba(212,168,83,0.9)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(212,168,83,0.45)')}
+                onMouseEnter={e => (e.currentTarget.style.color = 'rgba(212,168,83,0.85)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(212,168,83,0.4)')}
               >
                 ✕ закрыть
               </button>
             </div>
 
             {/* ── Название упражнения ── */}
-            <div className="px-6 pt-4 pb-3">
+            <div className="px-7 pb-3">
               <div
                 style={{
                   fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
-                  fontSize: 'clamp(1.3rem, 2.8vw, 2rem)',
+                  fontSize: 'clamp(1.3rem, 2.6vw, 1.9rem)',
                   color: '#e8d090',
                   letterSpacing: '0.14em',
                   lineHeight: 1.2,
-                  textShadow: '0 0 30px rgba(212,168,83,0.3)',
+                  textShadow: '0 0 28px rgba(212,168,83,0.25)',
                 }}
               >
                 {t(exercise.nameKey)}
@@ -199,8 +168,8 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
               <div
                 className="font-sans mt-1"
                 style={{
-                  fontSize: 'clamp(0.65rem, 1.1vw, 0.8rem)',
-                  color: 'rgba(180,200,220,0.55)',
+                  fontSize: 'clamp(0.62rem, 1vw, 0.78rem)',
+                  color: 'rgba(160,185,210,0.45)',
                   letterSpacing: '0.04em',
                 }}
               >
@@ -208,41 +177,29 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
               </div>
             </div>
 
-            {/* ── Горизонтальный разделитель ── */}
-            <div className="mx-6 mb-4" style={{
+            {/* ── Тонкий разделитель ── */}
+            <div className="mx-7 mb-4" style={{
               height: 1,
-              background: 'linear-gradient(90deg, transparent, rgba(212,168,83,0.4) 30%, rgba(212,168,83,0.4) 70%, transparent)',
+              background: 'linear-gradient(90deg, transparent, rgba(212,168,83,0.25) 30%, rgba(212,168,83,0.25) 70%, transparent)',
             }} />
 
             {/* ── Основное тело: видео + описание ── */}
             <div
-              className="flex gap-5 px-6 pb-4"
-              style={{ maxHeight: 'calc(92vh - 230px)', overflow: 'hidden' }}
+              className="flex gap-6 px-7 pb-4"
+              style={{ maxHeight: 'calc(92vh - 210px)', overflow: 'hidden' }}
             >
               {/* ─ Левая колонка: видео / изображение ─ */}
-              <div className="flex-shrink-0" style={{ width: '46%' }}>
-                {/* Заголовок блока */}
-                <div
-                  className="flex items-center gap-2 mb-2"
-                  style={{ fontSize: '0.6rem', color: 'rgba(212,168,83,0.5)', letterSpacing: '0.2em' }}
-                >
-                  <span>▸</span>
-                  <span>ВИДЕО · ДЕМОНСТРАЦИЯ</span>
-                </div>
+              <div className="flex-shrink-0" style={{ width: '45%' }}>
 
-                {/* Видео / фото блок */}
+                {/* Видео / фото — без рамки, тёмный фон с виньеткой */}
                 <div
-                  className="relative flex items-center justify-center overflow-hidden"
+                  className="relative overflow-hidden"
                   style={{
                     aspectRatio: '4/3',
-                    background: 'radial-gradient(ellipse at 50% 40%, #0d2040 0%, #04091a 70%)',
-                    border: '1px solid rgba(212,168,83,0.25)',
-                    borderRadius: 3,
+                    background: '#020608',
+                    borderRadius: 4,
                   }}
                 >
-                  {/* Угловые уголки внутри видео-блока */}
-                  <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
-
                   {exercise.video ? (
                     exercise.video.endsWith('.mp4') ? (
                       <video
@@ -252,7 +209,6 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                         autoPlay
                         loop
                         playsInline
-                        title={t(exercise.nameKey)}
                       />
                     ) : (
                       <iframe
@@ -269,50 +225,55 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="flex flex-col items-center gap-3">
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-3">
                       <div
                         style={{
                           fontFamily: '"STKaiti",serif',
                           fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                          color: 'rgba(212,168,83,0.15)',
+                          color: 'rgba(212,168,83,0.12)',
                           lineHeight: 1,
                         }}
                       >
                         ☯
                       </div>
-                      <div style={{ fontSize: '0.58rem', color: 'rgba(212,168,83,0.3)', letterSpacing: '0.2em' }}>
+                      <div style={{ fontSize: '0.55rem', color: 'rgba(212,168,83,0.25)', letterSpacing: '0.2em' }}>
                         ВИДЕО БУДЕТ ДОБАВЛЕНО
                       </div>
                     </div>
                   )}
+
+                  {/* Мягкая виньетка по краям */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      boxShadow: 'inset 0 0 40px rgba(2,6,14,0.6)',
+                      borderRadius: 4,
+                    }}
+                  />
                 </div>
 
                 {/* Подпись под видео */}
                 <div
                   className="mt-2 text-center font-sans"
-                  style={{ fontSize: '0.58rem', color: 'rgba(180,190,210,0.3)', letterSpacing: '0.15em' }}
+                  style={{ fontSize: '0.55rem', color: 'rgba(160,180,200,0.25)', letterSpacing: '0.18em' }}
                 >
                   {sectionZh} · 第{zhNum}式 · {exercise.id}/8
                 </div>
               </div>
 
               {/* ─ Правая колонка: описание ─ */}
-              <div className="flex-1 overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(212,168,83,0.2) transparent' }}>
-                <div
-                  className="flex items-center gap-2 mb-3"
-                  style={{ fontSize: '0.6rem', color: 'rgba(212,168,83,0.5)', letterSpacing: '0.2em' }}
-                >
-                  <span>▸</span>
-                  <span>ОПИСАНИЕ · ТЕХНИКА</span>
-                </div>
+              <div
+                className="flex-1 overflow-y-auto pr-1"
+                style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(212,168,83,0.15) transparent' }}
+              >
                 <DescriptionText text={t(exercise.descriptionKey)} />
               </div>
             </div>
 
             {/* ── Нижняя навигация ── */}
             <div
-              className="flex items-center justify-between px-6 py-3"
-              style={{ borderTop: '1px solid rgba(212,168,83,0.12)' }}
+              className="flex items-center justify-between px-7 py-3"
+              style={{ borderTop: '1px solid rgba(212,168,83,0.08)' }}
             >
               <button
                 type="button"
@@ -322,16 +283,15 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                 style={{
                   fontSize: '0.65rem',
                   letterSpacing: '0.18em',
-                  color: prev ? 'rgba(212,168,83,0.6)' : 'rgba(212,168,83,0.2)',
+                  color: prev ? 'rgba(212,168,83,0.55)' : 'rgba(212,168,83,0.15)',
                   background: 'none',
                   border: 'none',
                   cursor: prev ? 'pointer' : 'default',
-                  padding: '6px 12px',
-                  borderLeft: `1px solid ${prev ? 'rgba(212,168,83,0.3)' : 'rgba(212,168,83,0.1)'}`,
+                  padding: '6px 0',
                   transition: 'color 0.2s',
                 }}
                 onMouseEnter={e => { if (prev) e.currentTarget.style.color = 'rgba(212,168,83,0.95)' }}
-                onMouseLeave={e => { if (prev) e.currentTarget.style.color = 'rgba(212,168,83,0.6)' }}
+                onMouseLeave={e => { if (prev) e.currentTarget.style.color = 'rgba(212,168,83,0.55)' }}
               >
                 ← 上一式
               </button>
@@ -343,10 +303,10 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                     key={ex.id}
                     onClick={() => onNavigate(ex)}
                     style={{
-                      width: ex.id === exercise.id ? 14 : 5,
+                      width: ex.id === exercise.id ? 16 : 5,
                       height: 5,
                       borderRadius: 3,
-                      background: ex.id === exercise.id ? 'rgba(212,168,83,0.8)' : 'rgba(212,168,83,0.2)',
+                      background: ex.id === exercise.id ? 'rgba(212,168,83,0.75)' : 'rgba(212,168,83,0.18)',
                       cursor: 'pointer',
                       transition: 'all 0.3s',
                     }}
@@ -362,20 +322,20 @@ export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigat
                 style={{
                   fontSize: '0.65rem',
                   letterSpacing: '0.18em',
-                  color: next ? 'rgba(212,168,83,0.6)' : 'rgba(212,168,83,0.2)',
+                  color: next ? 'rgba(212,168,83,0.55)' : 'rgba(212,168,83,0.15)',
                   background: 'none',
                   border: 'none',
                   cursor: next ? 'pointer' : 'default',
-                  padding: '6px 12px',
-                  borderRight: `1px solid ${next ? 'rgba(212,168,83,0.3)' : 'rgba(212,168,83,0.1)'}`,
+                  padding: '6px 0',
                   transition: 'color 0.2s',
                 }}
                 onMouseEnter={e => { if (next) e.currentTarget.style.color = 'rgba(212,168,83,0.95)' }}
-                onMouseLeave={e => { if (next) e.currentTarget.style.color = 'rgba(212,168,83,0.6)' }}
+                onMouseLeave={e => { if (next) e.currentTarget.style.color = 'rgba(212,168,83,0.55)' }}
               >
                 下一式 →
               </button>
             </div>
+
           </motion.div>
         </motion.div>
       )}
