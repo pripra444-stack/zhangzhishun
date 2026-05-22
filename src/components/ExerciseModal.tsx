@@ -129,7 +129,7 @@ function OrnamentStrip() {
         flex: 1,
         backgroundImage: 'url(/images/icon-pattern.svg)',
         backgroundRepeat: 'repeat-y',
-        backgroundSize: '36px 36px',
+        backgroundSize: '36px 54px',
         backgroundPosition: 'center top',
         filter: GOLDEN,
         opacity: 0.25,
