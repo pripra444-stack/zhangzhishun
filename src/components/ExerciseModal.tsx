@@ -17,36 +17,37 @@ const ZH_NUM = ['一','二','三','四','五','六','七','八']
 // Всегда используем видео первого упражнения для превью всех 8 дизайнов
 const DEMO_VIDEO = '/images/exercise-01.mp4'
 
-function Desc({ text, color = '#8fa0b4', hc = '#d4a853', sc = '#c8bfb0', size = '0.82rem' }: {
-  text: string; color?: string; hc?: string; sc?: string; size?: string
+function Desc({ text, hc = '#d4a853', size = '0.82rem' }: {
+  text: string; hc?: string; size?: string
 }) {
   return (
     <div className="flex flex-col gap-1">
       {text.split('\n').map((line, i) => {
-        if (!line.trim()) return <div key={i} style={{ height: 3 }} />
+        if (!line.trim()) return <div key={i} style={{ height: 4 }} />
         const isHeader = line.startsWith('步骤')
         const isStep = /^[①②③④⑤⑥⑦⑧]/.test(line)
-        const isChinese = /^[生长化收藏]/.test(line)
+        // Заменяем кружки на китайский маркер ◆
+        const displayLine = isStep ? '◆ ' + line.replace(/^[①②③④⑤⑥⑦⑧]\s*/, '') : line
         return (
           <p key={i} style={{
-            fontSize: size, lineHeight: 1.68,
-            color: isHeader ? hc : isChinese ? '#c8a050' : isStep ? sc : color,
-            letterSpacing: isHeader ? '0.1em' : '0.02em',
+            fontSize: size, lineHeight: 1.72,
+            color: isHeader ? hc : 'rgba(255,255,255,0.82)',
+            letterSpacing: isHeader ? '0.1em' : '0.025em',
             fontWeight: isHeader ? 600 : 400,
-            paddingLeft: isStep ? '0.7em' : 0,
+            paddingLeft: isStep ? '0.4em' : 0,
             fontFamily: 'sans-serif',
-          }}>{line}</p>
+          }}>{displayLine}</p>
         )
       })}
     </div>
   )
 }
 
-function CloseBtn({ onClose, color = 'rgba(212,168,83,0.38)' }: { onClose: () => void; color?: string }) {
+function CloseBtn({ onClose, color = 'rgba(212,168,83,0.75)' }: { onClose: () => void; color?: string }) {
   return (
-    <button type="button" onClick={onClose} style={{ fontSize: '0.62rem', color, letterSpacing: '0.22em', fontFamily: 'sans-serif', background: 'none', border: 'none', cursor: 'pointer', transition: 'color 0.2s', flexShrink: 0 }}
-      onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-      onMouseLeave={e => (e.currentTarget.style.opacity = '0.7')}>✕ закрыть</button>
+    <button type="button" onClick={onClose} style={{ fontSize: '0.78rem', color, letterSpacing: '0.18em', fontFamily: 'sans-serif', background: 'none', border: 'none', cursor: 'pointer', transition: 'color 0.2s', flexShrink: 0, fontWeight: 500 }}
+      onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+      onMouseLeave={e => (e.currentTarget.style.color = color)}>✕ закрыть</button>
   )
 }
 
@@ -91,7 +92,7 @@ function D1({ p }: { p: any }) {
           {/* Шапка */}
           <div className="flex items-center justify-between px-7 pt-4 pb-2">
             <div className="flex items-center gap-3">
-              <span style={{ fontFamily: '"STKaiti",serif', fontSize: '1.5rem', color: '#d4a853', textShadow: '0 0 20px rgba(212,168,83,0.5)' }}>第{p.zhNum}式</span>
+              <span style={{ fontFamily: '"STKaiti",serif', fontSize: '1.5rem', color: '#d4a853', textShadow: '0 0 20px rgba(212,168,83,0.5)' }}>第{p.zhNum}部</span>
               <div style={{ width: 1, height: 20, background: 'rgba(212,168,83,0.2)' }} />
               <span style={{ fontFamily: '"STKaiti",serif', fontSize: '0.8rem', color: 'rgba(212,168,83,0.48)', letterSpacing: '0.2em' }}>{p.sectionZh}</span>
             </div>
@@ -100,7 +101,7 @@ function D1({ p }: { p: any }) {
           {/* Название по центру */}
           <div className="text-center px-7 pb-3">
             <div style={{ fontFamily: '"STKaiti","KaiTi",serif', fontSize: 'clamp(1.5rem,3vw,2.2rem)', color: '#e8d090', letterSpacing: '0.18em', textShadow: '0 0 30px rgba(212,168,83,0.3)' }}>{p.t(p.ex.nameKey)}</div>
-            <div style={{ fontSize: '0.68rem', color: 'rgba(160,188,215,0.4)', marginTop: 6, fontFamily: 'sans-serif' }}>{p.t(p.ex.labelKey)}</div>
+            <div style={{ fontSize: 'clamp(0.85rem,1.4vw,1.05rem)', color: 'rgba(180,210,240,0.65)', marginTop: 8, fontFamily: 'sans-serif', letterSpacing: '0.03em' }}>{p.t(p.ex.labelKey)}</div>
           </div>
           <div className="mx-7 mb-3" style={{ height: 1, background: 'linear-gradient(90deg,transparent,rgba(212,168,83,0.3) 25%,rgba(212,168,83,0.3) 75%,transparent)' }} />
           {/* Видео */}
@@ -111,9 +112,9 @@ function D1({ p }: { p: any }) {
           </div>
           {/* Нав */}
           <div className="flex items-center justify-between px-7 py-3" style={{ borderTop: '1px solid rgba(212,168,83,0.08)' }}>
-            <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.62rem', letterSpacing: '0.18em', color: p.prev ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.12)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+            <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.62rem', letterSpacing: '0.18em', color: p.prev ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.12)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
             <Dots {...p} />
-            <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.62rem', letterSpacing: '0.18em', color: p.next ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.12)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+            <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.62rem', letterSpacing: '0.18em', color: p.next ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.12)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
           </div>
         </motion.div>
       </div>
@@ -146,7 +147,7 @@ function D2({ p }: { p: any }) {
         {/* Правая колонка */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="flex items-center justify-between px-6 pt-4 pb-2" style={{ borderBottom: '1px solid rgba(212,168,83,0.1)' }}>
-            <div style={{ fontSize: '0.7rem', color: 'rgba(212,168,83,0.45)', letterSpacing: '0.25em', fontFamily: 'sans-serif' }}>第{p.zhNum}式 · {p.sectionZh}</div>
+            <div style={{ fontSize: '0.7rem', color: 'rgba(212,168,83,0.45)', letterSpacing: '0.25em', fontFamily: 'sans-serif' }}>第{p.zhNum}部 · {p.sectionZh}</div>
             <CloseBtn onClose={p.onClose} />
           </div>
           <div className="px-6 pt-3 flex-shrink-0"><Video /></div>
@@ -155,9 +156,9 @@ function D2({ p }: { p: any }) {
             <Desc text={p.t(p.ex.descriptionKey)} size="0.78rem" />
           </div>
           <div className="flex items-center justify-between px-6 py-3" style={{ borderTop: '1px solid rgba(212,168,83,0.08)' }}>
-            <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+            <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
             <Dots {...p} />
-            <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+            <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
           </div>
         </div>
       </motion.div>
@@ -177,7 +178,7 @@ function D3({ p }: { p: any }) {
         transition={{ type: 'spring', stiffness: 280, damping: 28 }} onClick={e => e.stopPropagation()}>
         {/* Шапка */}
         <div className="flex items-center justify-between px-6 pt-3 pb-2" style={{ borderBottom: '1px solid rgba(212,168,83,0.08)' }}>
-          <div style={{ fontFamily: '"STKaiti",serif', fontSize: 'clamp(1rem,2vw,1.4rem)', color: '#d4a853', textShadow: '0 0 16px rgba(212,168,83,0.4)' }}>第{p.zhNum}式 · {p.sectionZh}</div>
+          <div style={{ fontFamily: '"STKaiti",serif', fontSize: 'clamp(1rem,2vw,1.4rem)', color: '#d4a853', textShadow: '0 0 16px rgba(212,168,83,0.4)' }}>第{p.zhNum}部 · {p.sectionZh}</div>
           <CloseBtn onClose={p.onClose} />
         </div>
         {/* Тело */}
@@ -204,9 +205,9 @@ function D3({ p }: { p: any }) {
         </div>
         {/* Нав */}
         <div className="flex items-center justify-between px-6 py-3" style={{ borderTop: '1px solid rgba(212,168,83,0.07)' }}>
-          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
           <Dots {...p} />
-          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
         </div>
       </motion.div>
     </motion.div>
@@ -235,7 +236,7 @@ function D4({ p }: { p: any }) {
           <div className="flex items-start justify-between px-7 pt-4 pb-2">
             <div>
               <div style={{ fontFamily: '"STKaiti",serif', fontSize: 'clamp(1.5rem,3vw,2.2rem)', color: '#C880F0', letterSpacing: '0.2em', textShadow: '0 0 30px rgba(160,60,220,0.5)' }}>{p.t(p.ex.nameKey)}</div>
-              <div style={{ fontFamily: '"STKaiti",serif', fontSize: '0.75rem', color: 'rgba(160,80,220,0.45)', letterSpacing: '0.22em', marginTop: 4 }}>第{p.zhNum}式 · {p.sectionZh}</div>
+              <div style={{ fontFamily: '"STKaiti",serif', fontSize: '0.75rem', color: 'rgba(160,80,220,0.45)', letterSpacing: '0.22em', marginTop: 4 }}>第{p.zhNum}部 · {p.sectionZh}</div>
             </div>
             <CloseBtn onClose={p.onClose} color="rgba(180,80,240,0.4)" />
           </div>
@@ -247,9 +248,9 @@ function D4({ p }: { p: any }) {
           <Desc text={p.t(p.ex.descriptionKey)} color="#7a6090" hc="#C880F0" sc="#a078c0" />
         </div>
         <div className="flex items-center justify-between px-7 py-3" style={{ borderTop: '1px solid rgba(160,60,220,0.1)', position: 'relative', zIndex: 1 }}>
-          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(180,80,240,0.5)' : 'rgba(180,80,240,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(180,80,240,0.5)' : 'rgba(180,80,240,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
           <Dots {...p} color="rgba(180,80,240,0.75)" />
-          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(180,80,240,0.5)' : 'rgba(180,80,240,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(180,80,240,0.5)' : 'rgba(180,80,240,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
         </div>
       </motion.div>
     </motion.div>
@@ -268,7 +269,7 @@ function D5({ p }: { p: any }) {
         transition={{ type: 'spring', stiffness: 250, damping: 28 }} onClick={e => e.stopPropagation()}>
         <div style={{ height: 3, background: 'linear-gradient(90deg,transparent,#b47830,#d4a853,#b47830,transparent)', flexShrink: 0 }} />
         <div className="flex items-center justify-between px-8 pt-3 pb-2">
-          <div style={{ fontFamily: '"STKaiti",serif', fontSize: '0.7rem', color: 'rgba(180,130,60,0.5)', letterSpacing: '0.3em' }}>{p.sectionZh} · 第{p.zhNum}式</div>
+          <div style={{ fontFamily: '"STKaiti",serif', fontSize: '0.7rem', color: 'rgba(180,130,60,0.5)', letterSpacing: '0.3em' }}>{p.sectionZh} · 第{p.zhNum}部</div>
           <CloseBtn onClose={p.onClose} color="rgba(180,130,60,0.35)" />
         </div>
         {/* Название центр */}
@@ -291,9 +292,9 @@ function D5({ p }: { p: any }) {
         </div>
         <div style={{ height: 3, background: 'linear-gradient(90deg,transparent,#b47830,#d4a853,#b47830,transparent)', flexShrink: 0 }} />
         <div className="flex items-center justify-between px-8 py-3">
-          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(180,130,60,0.5)' : 'rgba(180,130,60,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(180,130,60,0.5)' : 'rgba(180,130,60,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
           <Dots {...p} color="rgba(180,130,60,0.75)" />
-          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(180,130,60,0.5)' : 'rgba(180,130,60,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(180,130,60,0.5)' : 'rgba(180,130,60,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
         </div>
       </motion.div>
     </motion.div>
@@ -314,7 +315,7 @@ function D6({ p }: { p: any }) {
         <div className="flex flex-col flex-shrink-0 overflow-hidden" style={{ width: '42%', borderRight: '4px solid #D4A853' }}>
           <div style={{ height: 4, background: '#D4A853', flexShrink: 0 }} />
           <div className="px-6 pt-5 flex-shrink-0">
-            <div style={{ fontSize: '0.52rem', color: 'rgba(212,168,83,0.45)', letterSpacing: '0.4em', fontFamily: 'sans-serif', marginBottom: 6 }}>第{p.zhNum}式 · {p.sectionZh}</div>
+            <div style={{ fontSize: '0.52rem', color: 'rgba(212,168,83,0.45)', letterSpacing: '0.4em', fontFamily: 'sans-serif', marginBottom: 6 }}>第{p.zhNum}部 · {p.sectionZh}</div>
             <div style={{ fontFamily: '"STKaiti","KaiTi",serif', fontSize: 'clamp(1.3rem,2.5vw,1.9rem)', color: '#D4A853', letterSpacing: '0.12em', lineHeight: 1.2, textShadow: '0 0 30px rgba(212,168,83,0.25)' }}>{p.t(p.ex.nameKey)}</div>
             <div style={{ width: 40, height: 3, background: '#D4A853', margin: '12px 0 8px' }} />
             <div style={{ fontSize: '0.62rem', color: 'rgba(212,168,83,0.38)', fontFamily: 'sans-serif', marginBottom: 14 }}>{p.t(p.ex.labelKey)}</div>
@@ -328,9 +329,9 @@ function D6({ p }: { p: any }) {
             </div>
           )}
           <div className="flex items-center justify-between px-6 pb-4 flex-shrink-0">
-            <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? '#D4A853' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+            <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? '#D4A853' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
             <CloseBtn onClose={p.onClose} color="rgba(212,168,83,0.3)" />
-            <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? '#D4A853' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+            <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? '#D4A853' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
           </div>
         </div>
         {/* Правая — видео */}
@@ -355,7 +356,7 @@ function D7({ p }: { p: any }) {
         {/* Шапка */}
         <div className="flex items-center justify-between px-7 pt-3 pb-2">
           <div className="flex items-center gap-3">
-            <div style={{ fontFamily: '"STKaiti",serif', fontSize: '1.4rem', color: '#6EC87A', textShadow: '0 0 20px rgba(60,180,80,0.5)' }}>第{p.zhNum}式</div>
+            <div style={{ fontFamily: '"STKaiti",serif', fontSize: '1.4rem', color: '#6EC87A', textShadow: '0 0 20px rgba(60,180,80,0.5)' }}>第{p.zhNum}部</div>
             <div style={{ width: 1, height: 18, background: 'rgba(60,160,80,0.3)' }} />
             <div style={{ fontSize: '0.72rem', color: 'rgba(60,160,80,0.48)', letterSpacing: '0.22em', fontFamily: 'sans-serif' }}>{p.sectionZh}</div>
           </div>
@@ -385,9 +386,9 @@ function D7({ p }: { p: any }) {
           </div>
         </div>
         <div className="flex items-center justify-between px-7 py-3" style={{ borderTop: '1px solid rgba(60,160,80,0.1)' }}>
-          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(60,160,80,0.5)' : 'rgba(60,160,80,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(60,160,80,0.5)' : 'rgba(60,160,80,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
           <Dots {...p} color="rgba(60,180,80,0.75)" />
-          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(60,160,80,0.5)' : 'rgba(60,160,80,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(60,160,80,0.5)' : 'rgba(60,160,80,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
         </div>
       </motion.div>
     </motion.div>
@@ -406,7 +407,7 @@ function D8({ p }: { p: any }) {
         transition={{ duration: 0.35, ease: 'easeOut' }} onClick={e => e.stopPropagation()}>
         {/* Мета-строка */}
         <div className="flex items-center justify-between pb-3 px-1">
-          <div style={{ fontSize: '0.6rem', color: 'rgba(212,168,83,0.35)', letterSpacing: '0.3em', fontFamily: 'sans-serif' }}>第{p.zhNum}式 · {p.sectionZh}</div>
+          <div style={{ fontSize: '0.6rem', color: 'rgba(212,168,83,0.35)', letterSpacing: '0.3em', fontFamily: 'sans-serif' }}>第{p.zhNum}部 · {p.sectionZh}</div>
           <CloseBtn onClose={p.onClose} color="rgba(212,168,83,0.28)" />
         </div>
         {/* Видео без фона */}
@@ -426,9 +427,9 @@ function D8({ p }: { p: any }) {
         </div>
         {/* Нав */}
         <div className="flex items-center justify-between pt-3 pb-1 px-1" style={{ borderTop: '1px solid rgba(212,168,83,0.08)', marginTop: 8 }}>
-          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(212,168,83,0.45)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一式</button>
+          <button type="button" onClick={() => p.prev && p.onNavigate(p.prev)} disabled={!p.prev} style={{ fontSize: '0.6rem', color: p.prev ? 'rgba(212,168,83,0.45)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.prev ? 'pointer' : 'default' }}>← 上一部</button>
           <Dots {...p} />
-          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(212,168,83,0.45)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一式 →</button>
+          <button type="button" onClick={() => p.next && p.onNavigate(p.next)} disabled={!p.next} style={{ fontSize: '0.6rem', color: p.next ? 'rgba(212,168,83,0.45)' : 'rgba(212,168,83,0.1)', background: 'none', border: 'none', cursor: p.next ? 'pointer' : 'default' }}>下一部 →</button>
         </div>
       </motion.div>
     </motion.div>
