@@ -119,7 +119,7 @@ const VARIANTS: Variant[] = [
 ]
 
 export default function CircleVariantsDemo() {
-  const { t } = useTranslation()
+  useTranslation()
 
   return (
     <section

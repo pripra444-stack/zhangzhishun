@@ -16,7 +16,7 @@ const ZH_NUM = ['一','二','三','四','五','六','七','八']
 
 
 function Desc({ text, hc = '#d4a853', size = '0.82rem' }: {
-  text: string; hc?: string; size?: string
+  text: string; hc?: string; size?: string; color?: string; sc?: string
 }) {
   return (
     <div className="flex flex-col gap-1">
@@ -197,6 +197,9 @@ function D1({ p }: { p: any }) {
 }
 
 // ══════════════════════════════════════════════════════════
+// Резервные дизайны D2-D8 (не используются, сохранены для будущего)
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-nocheck — D2-D8 reserved for future use
 // ДИЗАЙН 2 — Горизонтальный: фото слева, видео+текст справа
 // ══════════════════════════════════════════════════════════
 function D2({ p }: { p: any }) {
@@ -506,7 +509,7 @@ function D8({ p }: { p: any }) {
   )
 }
 
-const DESIGNS = [D1, D2, D3, D4, D5, D6, D7, D8]
+
 
 // ══════════════════════════════════════════════════════════
 export default function ExerciseModal({ exercise, sectionKey, onClose, onNavigate }: Props) {
