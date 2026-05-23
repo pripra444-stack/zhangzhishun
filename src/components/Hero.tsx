@@ -1,6 +1,7 @@
 // src/components/Hero.tsx
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { img } from '../utils/assets'
 
 // ── Детерминированный генератор (стабильные позиции без useMemo) ──
 function seededRand(seed: number) {
@@ -59,7 +60,7 @@ export default function Hero() {
       {/* Z:0 — горы */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/bg-mountains.png"
+          src={img('/images/bg-mountains.png')}
           alt=""
           className="w-full h-full object-cover"
           style={{ filter: 'brightness(0.78)', objectPosition: 'center center' }}
@@ -85,7 +86,7 @@ export default function Hero() {
 
         {/* ── Туман слева — из центра чуть влево ── */}
         <img
-          src="/images/fog1.png"
+          src={img('/images/fog1.png')}
           alt="" aria-hidden draggable={false}
           style={{
             position: 'absolute',
@@ -99,7 +100,7 @@ export default function Hero() {
 
         {/* ── Туман справа — зеркало, из центра чуть вправо ── */}
         <img
-          src="/images/fog1.png"
+          src={img('/images/fog1.png')}
           alt="" aria-hidden draggable={false}
           style={{
             position: 'absolute',
@@ -158,7 +159,7 @@ export default function Hero() {
           transition={{ delay: 0.55, duration: 0.9 }}
         >
           <img
-            src="/images/title.svg"
+            src={img('/images/title.svg')}
             alt="炁體源流"
             style={{
               width: 'min(70vw, 700px)',
@@ -172,7 +173,7 @@ export default function Hero() {
 
       {/* Z:2 — мастер */}
       <motion.img
-        src="/images/master.png"
+        src={img('/images/master.png')}
         alt="张至顺"
         className="absolute z-[2] inset-0 w-full h-full"
         style={{

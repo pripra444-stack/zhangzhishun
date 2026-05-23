@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { img, cssUrl } from '../utils/assets'
 
 const EASE = [0.25, 0.1, 0.25, 1] as const
 
@@ -34,7 +35,7 @@ export default function BiographyScroll() {
 
       {/* ── Фон закрытого свитка (широкий горный пейзаж) ── */}
       <motion.img
-        src="/images/scroll-bg-closed.png"
+        src={img('/images/scroll-bg-closed.png')}
         aria-hidden draggable={false}
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         style={{ zIndex: 0, objectPosition: 'center center' }}
@@ -45,7 +46,7 @@ export default function BiographyScroll() {
 
       {/* ── Фон открытого свитка (горы с монахом) ── */}
       <motion.img
-        src="/images/scroll-bg-open.png"
+        src={img('/images/scroll-bg-open.png')}
         aria-hidden draggable={false}
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         style={{ zIndex: 0, objectPosition: 'center top' }}
@@ -113,7 +114,7 @@ export default function BiographyScroll() {
             onClick={() => setOpen(true)}
           >
             <img
-              src="/images/scroll.png"
+              src={img('/images/scroll.png')}
               alt="Биография мастера"
               className="w-full h-auto"
               draggable={false}
@@ -123,8 +124,8 @@ export default function BiographyScroll() {
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                maskImage: 'url(/images/scroll.png)',
-                WebkitMaskImage: 'url(/images/scroll.png)',
+                maskImage: cssUrl('/images/scroll.png'),
+                WebkitMaskImage: cssUrl('/images/scroll.png'),
                 maskSize: '100% 100%',
                 WebkitMaskSize: '100% 100%',
                 maskPosition: 'center',
@@ -186,7 +187,7 @@ export default function BiographyScroll() {
               title="нажми чтобы свернуть"
             >
               <img
-                src="/images/scroll-open-v.png.png"
+                src={img('/images/scroll-open-v.png.png')}
                 alt="Свиток открыт"
                 className="w-full h-auto"
                 style={{ filter: 'drop-shadow(0 12px 48px #00000077)' }}

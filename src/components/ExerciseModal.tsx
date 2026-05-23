@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import type { Exercise, SectionKey } from '../data/exercises'
 import { getExercisesBySection } from '../data/exercises'
+import { img, cssUrl } from '../utils/assets'
 
 interface Props {
   exercise: Exercise | null
@@ -38,7 +39,7 @@ function Desc({ text, hc = '#d4a853', size = '0.82rem' }: {
           }}>
             {isStep && (
               <img
-                src="/images/icon-bullet.svg"
+                src={img('/images/icon-bullet.svg')}
                 aria-hidden
                 style={{ width: 16, height: 16, flexShrink: 0, marginTop: '0.18em', opacity: 1, filter: 'brightness(0) saturate(100%) invert(76%) sepia(45%) saturate(1200%) hue-rotate(5deg) brightness(92%)' }}
               />
@@ -81,7 +82,7 @@ function Video({ src }: { src?: string }) {
         className="absolute inset-0 pointer-events-none"
         aria-hidden
         style={{
-          backgroundImage: 'url(/images/icon-pattern.svg)',
+          backgroundImage: cssUrl('/images/icon-pattern.svg'),
           backgroundRepeat: 'repeat',
           backgroundSize: '52px 52px',
           opacity: 0.09,
@@ -125,7 +126,7 @@ function OrnamentStrip() {
       {/* Иконки (иконка 02) — уже и с просветом */}
       <div style={{
         flex: 1,
-        backgroundImage: 'url(/images/icon-pattern.svg)',
+        backgroundImage: cssUrl('/images/icon-pattern.svg'),
         backgroundRepeat: 'repeat-y',
         backgroundSize: '36px 54px',
         backgroundPosition: 'center top',
@@ -149,7 +150,7 @@ function D1({ p }: { p: any }) {
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
       {/* Левое облако */}
       <div className="flex-1 overflow-hidden relative pointer-events-none">
-        <img src="/images/modal-bg.png" aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'right center', opacity: 0.85 }} />
+        <img src={img('/images/modal-bg.png')} aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'right center', opacity: 0.85 }} />
       </div>
       {/* Левая орнаментальная полоса — снаружи блока */}
       <OrnamentStrip />
@@ -190,7 +191,7 @@ function D1({ p }: { p: any }) {
       <OrnamentStrip />
       {/* Правое облако */}
       <div className="flex-1 overflow-hidden relative pointer-events-none">
-        <img src="/images/modal-bg.png" aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'left center', transform: 'scaleX(-1)', opacity: 0.85 }} />
+        <img src={img('/images/modal-bg.png')} aria-hidden className="absolute inset-0 w-full h-full select-none" style={{ objectFit: 'cover', objectPosition: 'left center', transform: 'scaleX(-1)', opacity: 0.85 }} />
       </div>
     </motion.div>
   )

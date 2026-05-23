@@ -1,5 +1,6 @@
 // src/components/CircleVariantsDemo.tsx — временный демо-экран для выбора стиля кольца
 import { useTranslation } from 'react-i18next'
+import { img } from '../utils/assets'
 
 const DONUT_SVG = encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
@@ -160,7 +161,7 @@ export default function CircleVariantsDemo() {
                 }}
               >
                 <img
-                  src="/images/exercise-placeholder.png"
+                  src={img('/images/exercise-placeholder.png')}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
@@ -186,7 +187,7 @@ export default function CircleVariantsDemo() {
                   }}
                 />
                 <img
-                  src="/images/circle-frame-blue.png"
+                  src={img('/images/circle-frame-blue.png')}
                   style={{
                     position: 'absolute', inset: 0,
                     width: '100%', height: '100%',

@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import type { Exercise } from '../data/exercises'
+import { img } from '../utils/assets'
 
 interface Props {
   exercise: Exercise
@@ -26,7 +27,7 @@ export default function GateCircle({ exercise, onClick }: Props) {
       >
         {/* Рамка — вставляется как есть, только тень для 3D */}
         <img
-          src="/images/circle-frame-gold.png"
+          src={img('/images/circle-frame-gold.png')}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"

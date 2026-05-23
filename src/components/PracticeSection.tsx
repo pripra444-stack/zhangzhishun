@@ -6,6 +6,7 @@ import GateCircle from './GateCircle'
 import ExerciseModal from './ExerciseModal'
 import { getExercisesBySection } from '../data/exercises'
 import type { Exercise, SectionKey } from '../data/exercises'
+import { img } from '../utils/assets'
 
 // Восемь меридианов — вертикальная надпись между столбцами
 const MERIDIANS = ['冲脉', '带脉', '阴跷脉', '阳跷脉', '阴俞脉', '阳俞脉', '任脉', '督脉']
@@ -52,7 +53,7 @@ export default function PracticeSection({
       {/* ── Облака — левый фланг ── */}
       {isJingang && (
         <img
-          src="/images/clouds-side.png"
+          src={img('/images/clouds-side.png')}
           aria-hidden draggable={false}
           className="absolute pointer-events-none select-none"
           style={{
@@ -68,7 +69,7 @@ export default function PracticeSection({
       {/* ── Облака — правый фланг (зеркало) ── */}
       {isJingang && (
         <img
-          src="/images/clouds-side.png"
+          src={img('/images/clouds-side.png')}
           aria-hidden draggable={false}
           className="absolute pointer-events-none select-none"
           style={{
@@ -85,7 +86,7 @@ export default function PracticeSection({
       {/* ── Рыбы — левый фланг (Долголетие) ── */}
       {isChangshou && (
         <img
-          src="/images/changshou-side.png"
+          src={img('/images/changshou-side.png')}
           aria-hidden draggable={false}
           className="absolute pointer-events-none select-none"
           style={{
@@ -101,7 +102,7 @@ export default function PracticeSection({
       {/* ── Рыбы — правый фланг (зеркало) ── */}
       {isChangshou && (
         <img
-          src="/images/changshou-side.png"
+          src={img('/images/changshou-side.png')}
           aria-hidden draggable={false}
           className="absolute pointer-events-none select-none"
           style={{
