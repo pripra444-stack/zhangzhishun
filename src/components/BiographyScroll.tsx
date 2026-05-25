@@ -204,8 +204,10 @@ export default function BiographyScroll() {
                   bottom: '9%',
                   left: '18%',
                   right: '18%',
-                  overflow: 'hidden',
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
                   padding: '0 4px',
+                  scrollbarWidth: 'none',
                 }}
               >
                 {/* Вступление */}

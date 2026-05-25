@@ -55,6 +55,9 @@ export default function Hero() {
           0%   { transform: translateX(-4%) translateY(0); opacity: 0.65; }
           100% { transform: translateX( 6%) translateY(-3%); opacity: 0.95; }
         }
+        @media (max-width: 640px) {
+          .hero-star { font-size: 0.18rem !important; text-shadow: 0 0 2px #d4a85344 !important; }
+        }
       `}</style>
 
       {/* Z:0 — горы */}
@@ -118,6 +121,7 @@ export default function Hero() {
         {STARS_L.map(s => (
           <span
             key={`sl-${s.id}`}
+            className="hero-star"
             style={{
               position: 'absolute',
               left: `${s.x}%`,
@@ -136,6 +140,7 @@ export default function Hero() {
         {STARS_R.map(s => (
           <span
             key={`sr-${s.id}`}
+            className="hero-star"
             style={{
               position: 'absolute',
               left: `${s.x}%`,
