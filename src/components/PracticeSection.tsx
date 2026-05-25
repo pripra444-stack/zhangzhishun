@@ -1,6 +1,6 @@
 // src/components/PracticeSection.tsx
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import GateCircle from './GateCircle'
 import ExerciseModal from './ExerciseModal'
@@ -20,94 +20,123 @@ interface Props {
   cols?: 2 | 4
 }
 
-// ── Мобильная карусель: один кружок + стрелки + точки ──
+// Китайские числительные для номера упражнения
+const ZH_ORD = ['一','二','三','四','五','六','七','八','九','十']
+
+// ── Мобильная карусель: peek (видны соседи), свайп, номер ──
 function MobileCarousel({ exercises, onOpen }: { exercises: Exercise[]; onOpen: (ex: Exercise) => void }) {
   const { t } = useTranslation()
   const [idx, setIdx] = useState(0)
-  const [dir, setDir] = useState(0) // -1 назад, +1 вперёд
+  const touchX = useRef(0)
+
+  // Ширина карточки = 68vw, пик соседей = ~16vw с каждой стороны
+  const CARD_VW = 68
+  const GAP_VW  = 4
+  // left offset карточки 0 = (100 - CARD_VW) / 2 = 16vw
+  const PEEK_VW = (100 - CARD_VW) / 2
+  const translateVw = PEEK_VW - idx * (CARD_VW + GAP_VW)
 
   const go = (delta: number) => {
     const next = Math.max(0, Math.min(exercises.length - 1, idx + delta))
-    if (next === idx) return
-    setDir(delta)
     setIdx(next)
   }
 
-  const ex = exercises[idx]
+  // Свайп жестом
+  const onTouchStart = (e: React.TouchEvent) => { touchX.current = e.touches[0].clientX }
+  const onTouchEnd   = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchX.current
+    if (dx < -48) go(1)
+    else if (dx > 48) go(-1)
+  }
 
   return (
-    <div className="flex flex-col items-center w-full gap-6">
-      {/* Карточка — с анимацией слайда */}
-      <div className="relative w-full flex items-center justify-center" style={{ minHeight: 320 }}>
-        {/* Стрелка назад */}
-        <button
-          onClick={() => go(-1)}
-          disabled={idx === 0}
-          aria-label="Предыдущее"
-          style={{
-            position: 'absolute', left: 0, zIndex: 10,
-            background: 'none', border: 'none', cursor: idx === 0 ? 'default' : 'pointer',
-            color: idx === 0 ? 'rgba(212,168,83,0.2)' : 'rgba(212,168,83,0.85)',
-            fontSize: '2rem', padding: '0 8px',
-            transition: 'color 0.2s',
-          }}
-        >‹</button>
+    <div className="flex flex-col items-center w-full gap-5">
 
-        {/* Кружок — анимация */}
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={ex.id}
-            initial={{ x: dir * 60, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -dir * 60, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 30 }}
-            style={{ width: '72vw', maxWidth: 280 }}
-          >
-            <GateCircle exercise={ex} onClick={onOpen} />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Стрелка вперёд */}
-        <button
-          onClick={() => go(1)}
-          disabled={idx === exercises.length - 1}
-          aria-label="Следующее"
-          style={{
-            position: 'absolute', right: 0, zIndex: 10,
-            background: 'none', border: 'none', cursor: idx === exercises.length - 1 ? 'default' : 'pointer',
-            color: idx === exercises.length - 1 ? 'rgba(212,168,83,0.2)' : 'rgba(212,168,83,0.85)',
-            fontSize: '2rem', padding: '0 8px',
-            transition: 'color 0.2s',
-          }}
-        >›</button>
+      {/* Номер упражнения */}
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+        <span style={{
+          fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
+          fontSize: '1.6rem',
+          color: 'rgba(212,168,83,0.9)',
+          letterSpacing: '0.08em',
+          lineHeight: 1,
+        }}>
+          第{ZH_ORD[idx] ?? idx + 1}
+        </span>
+        <span style={{
+          fontFamily: 'sans-serif',
+          fontSize: '0.72rem',
+          color: 'rgba(212,168,83,0.4)',
+          letterSpacing: '0.22em',
+        }}>
+          упражнение · {idx + 1} / {exercises.length}
+        </span>
       </div>
 
-      {/* Счётчик и точки */}
-      <div className="flex flex-col items-center gap-2">
-        <div className="flex gap-2 items-center">
-          {exercises.map((_, i) => (
+      {/* Полоса карточек — overflow hidden создаёт peek */}
+      <div
+        style={{ width: '100vw', marginLeft: 'calc(-5vw)', overflow: 'hidden' }}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        <motion.div
+          style={{ display: 'flex', gap: `${GAP_VW}vw` }}
+          animate={{ x: `${translateVw}vw` }}
+          transition={{ type: 'spring', stiffness: 300, damping: 32 }}
+        >
+          {exercises.map((ex, i) => (
             <div
-              key={i}
-              onClick={() => { setDir(i > idx ? 1 : -1); setIdx(i) }}
+              key={ex.id}
               style={{
-                width: i === idx ? 20 : 6,
-                height: 6,
-                borderRadius: 3,
-                background: i === idx ? 'rgba(212,168,83,0.9)' : 'rgba(212,168,83,0.22)',
+                width: `${CARD_VW}vw`,
+                flexShrink: 0,
+                opacity: i === idx ? 1 : 0.55,
+                transform: i === idx ? 'scale(1)' : 'scale(0.86)',
+                transition: 'opacity 0.35s, transform 0.35s',
                 cursor: 'pointer',
-                transition: 'all 0.3s',
               }}
-            />
+              onClick={() => i === idx ? onOpen(ex) : go(i > idx ? 1 : -1)}
+            >
+              <GateCircle exercise={ex} onClick={() => {}} />
+            </div>
           ))}
-        </div>
-        <div style={{ color: 'rgba(212,168,83,0.45)', fontSize: '0.68rem', letterSpacing: '0.18em', fontFamily: 'sans-serif' }}>
-          {idx + 1} / {exercises.length}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Кнопка открыть */}
+      {/* Точки-индикаторы */}
+      <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+        {exercises.map((_, i) => (
+          <div
+            key={i}
+            onClick={() => setIdx(i)}
+            style={{
+              width: i === idx ? 22 : 6,
+              height: 6,
+              borderRadius: 3,
+              background: i === idx ? 'rgba(212,168,83,0.9)' : 'rgba(212,168,83,0.22)',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Подсказка свайп — только при первом показе */}
+      <div style={{
+        color: 'rgba(212,168,83,0.3)',
+        fontSize: '0.62rem',
+        letterSpacing: '0.15em',
+        fontFamily: 'sans-serif',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+      }}>
+        ‹ листайте влево-вправо ›
+      </div>
+
+      {/* Кнопка «подробнее» */}
       <button
-        onClick={() => onOpen(ex)}
+        onClick={() => onOpen(exercises[idx])}
         style={{
           background: 'none',
           border: '1px solid rgba(212,168,83,0.4)',
@@ -115,7 +144,7 @@ function MobileCarousel({ exercises, onOpen }: { exercises: Exercise[]; onOpen: 
           color: 'rgba(212,168,83,0.8)',
           fontSize: '0.75rem',
           letterSpacing: '0.18em',
-          padding: '8px 24px',
+          padding: '9px 28px',
           cursor: 'pointer',
           fontFamily: 'sans-serif',
           transition: 'all 0.2s',
