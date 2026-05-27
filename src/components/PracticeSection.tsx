@@ -53,7 +53,7 @@ function MobileCarousel({ exercises, onOpen }: { exercises: Exercise[]; onOpen: 
     <div className="flex flex-col items-center w-full gap-5">
 
       {/* Номер упражнения */}
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, paddingLeft: '5vw', paddingRight: '5vw', alignSelf: 'flex-start' }}>
         <span style={{
           fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
           fontSize: '1.6rem',
@@ -75,7 +75,7 @@ function MobileCarousel({ exercises, onOpen }: { exercises: Exercise[]; onOpen: 
 
       {/* Полоса карточек — overflow hidden создаёт peek */}
       <div
-        style={{ width: '100vw', marginLeft: 'calc(-5vw)', overflow: 'hidden' }}
+        style={{ width: '100%', overflow: 'hidden' }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
@@ -104,7 +104,7 @@ function MobileCarousel({ exercises, onOpen }: { exercises: Exercise[]; onOpen: 
       </div>
 
       {/* Точки-индикаторы */}
-      <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: 6, alignItems: 'center', paddingLeft: '5vw', paddingRight: '5vw' }}>
         {exercises.map((_, i) => (
           <div
             key={i}
@@ -175,7 +175,7 @@ export default function PracticeSection({
   return (
     <section
       className={`${bgClass} py-20 flex flex-col items-center gap-10 relative overflow-hidden`}
-      style={{ paddingLeft: isMobile ? '5vw' : '7.69vw', paddingRight: isMobile ? '5vw' : '7.69vw' }}
+      style={{ paddingLeft: isMobile ? 0 : '7.69vw', paddingRight: isMobile ? 0 : '7.69vw' }}
     >
 
       {/* Фоновое изображение */}
@@ -249,6 +249,7 @@ export default function PracticeSection({
         {/* Заголовок */}
         <motion.div
           className="text-center"
+          style={isMobile ? { paddingLeft: '5vw', paddingRight: '5vw' } : {}}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
