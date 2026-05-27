@@ -40,20 +40,20 @@ export default function Hero() {
       {/* ─── CSS-анимации ─── */}
       <style>{`
         @keyframes fog-left {
-          0%, 100% { transform: translateX(0%)   translateY(0%)  scale(1.00); opacity: 0.38; }
-          50%       { transform: translateX(-5%)  translateY(-2%) scale(1.05); opacity: 0.65; }
+          0%, 100% { transform: translateX(0%)  scale(1.00); opacity: 0.38; }
+          50%       { transform: translateX(-5%) scale(1.05); opacity: 0.65; }
         }
         @keyframes fog-right {
-          0%, 100% { transform: translateX(0%)   translateY(0%)  scale(1.00); opacity: 0.44; }
-          50%       { transform: translateX(5%)   translateY(-2%) scale(1.06); opacity: 0.70; }
+          0%, 100% { transform: translateX(0%)  scale(1.00); opacity: 0.44; }
+          50%       { transform: translateX(5%)  scale(1.06); opacity: 0.70; }
         }
         @keyframes star-twinkle {
           0%, 100% { opacity: 0; }
           50%       { opacity: 1; }
         }
         @keyframes bg-fog-drift {
-          0%   { transform: translateX(-4%) translateY(0); opacity: 0.65; }
-          100% { transform: translateX( 6%) translateY(-3%); opacity: 0.95; }
+          0%   { transform: translateX(-4%); opacity: 0.65; }
+          100% { transform: translateX( 6%); opacity: 0.95; }
         }
         @media (max-width: 640px) {
           .hero-star { font-size: 0.18rem !important; text-shadow: 0 0 2px #d4a85344 !important; }
@@ -197,6 +197,13 @@ export default function Hero() {
         <div className="mist-layer mist-2" />
         <div className="mist-layer mist-3" />
       </div>
+
+      {/* Z:5 — жёсткий запечатыватель нижнего края (убирает щель между секциями) */}
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{ height: '18%', zIndex: 5, background: 'linear-gradient(to bottom, transparent 0%, #060c18 100%)' }}
+      />
 
       {/* Z:4 — текст сверху */}
       <motion.div
