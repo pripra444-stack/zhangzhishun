@@ -256,6 +256,7 @@ export default function PracticeSection({
           transition={{ duration: 0.7 }}
         >
           <div
+            className={isChangshou ? '' : 'text-gold'}
             style={{
               fontFamily: '"KNYuanmo", "MFLiHei", serif',
               fontSize: 'clamp(2rem, 8vw, 3.5rem)',
@@ -263,9 +264,8 @@ export default function PracticeSection({
               color: isChangshou ? '#00D8FF' : undefined,
               textShadow: isChangshou
                 ? '0 0 40px rgba(0,216,255,0.45), 0 0 80px rgba(0,216,255,0.18)'
-                : undefined,
+                : '0 0 40px rgba(212,168,83,0.75), 0 0 80px rgba(212,168,83,0.35)',
             }}
-            className={isChangshou ? '' : 'text-gold gold-glow'}
           >
             {t(`sections.${sectionKey}.zh`)}
           </div>
