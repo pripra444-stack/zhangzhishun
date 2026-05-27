@@ -256,8 +256,16 @@ export default function PracticeSection({
           transition={{ duration: 0.7 }}
         >
           <div
-            className="text-gold gold-glow"
-            style={{ fontFamily: '"KNYuanmo", "MFLiHei", serif', fontSize: 'clamp(2rem, 8vw, 3.5rem)', letterSpacing: '0.12em' }}
+            style={{
+              fontFamily: '"KNYuanmo", "MFLiHei", serif',
+              fontSize: 'clamp(2rem, 8vw, 3.5rem)',
+              letterSpacing: '0.12em',
+              color: isChangshou ? '#00D8FF' : undefined,
+              textShadow: isChangshou
+                ? '0 0 40px rgba(0,216,255,0.45), 0 0 80px rgba(0,216,255,0.18)'
+                : undefined,
+            }}
+            className={isChangshou ? '' : 'text-gold gold-glow'}
           >
             {t(`sections.${sectionKey}.zh`)}
           </div>
