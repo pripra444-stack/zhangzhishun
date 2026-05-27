@@ -44,6 +44,17 @@ export const JINGANG: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   video: JINGANG_VIDEOS[i + 1],
 }))
 
+const CHANGSHOU_VIDEOS: Record<number, string> = {
+  1: img('/images/changshou-01.mp4'),
+  2: img('/images/changshou-02.mp4'),
+  3: img('/images/changshou-03.mp4'),
+  4: img('/images/changshou-04.mp4'),
+  5: img('/images/changshou-05.mp4'),
+  6: img('/images/changshou-06.mp4'),
+  7: img('/images/changshou-07.mp4'),
+  8: img('/images/changshou-08.mp4'),
+}
+
 const CHANGSHOU_IMAGES: Record<number, string> = {
   1: img('/images/changshou-01.png'),
   2: img('/images/changshou-02.png'),
@@ -62,6 +73,7 @@ export const CHANGSHOU: Exercise[] = Array.from({ length: 8 }, (_, i) => ({
   labelKey: `exercises.changshou.${i + 1}.label`,
   descriptionKey: `exercises.changshou.${i + 1}.desc`,
   image: CHANGSHOU_IMAGES[i + 1] ?? img('/images/exercise-placeholder.png'),
+  video: CHANGSHOU_VIDEOS[i + 1],
 }))
 
 export function getExercisesBySection(section: SectionKey): Exercise[] {

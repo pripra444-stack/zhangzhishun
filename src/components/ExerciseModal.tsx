@@ -76,24 +76,11 @@ function Dots({ exercises, exercise, onNavigate, color = 'rgba(212,168,83,0.75)'
 
 function Video({ src }: { src?: string }) {
   return (
-    <div className="relative w-full" style={{ background: '#000' }}>
-      {/* Мозаичный фон из иконки */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden
-        style={{
-          backgroundImage: cssUrl('/images/icon-pattern.svg'),
-          backgroundRepeat: 'repeat',
-          backgroundSize: '52px 52px',
-          opacity: 0.09,
-          filter: 'brightness(0) saturate(100%) invert(76%) sepia(45%) saturate(1200%) hue-rotate(5deg) brightness(92%)',
-          zIndex: 0,
-        }}
-      />
+    <div style={{ background: '#000000', width: '100%' }}>
       <video
         src={src}
-        className="w-full block relative"
-        style={{ display: 'block', zIndex: 1 }}
+        className="w-full block"
+        style={{ display: 'block' }}
         controls
         autoPlay
         loop
@@ -146,7 +133,7 @@ function OrnamentStrip() {
 // ══════════════════════════════════════════════════════════
 function D1({ p }: { p: any }) {
   return (
-    <motion.div className="fixed inset-0 flex items-stretch justify-center" style={{ zIndex: 300, background: '#06091B', backdropFilter: 'blur(10px)' }}
+    <motion.div className="fixed inset-0 flex items-stretch justify-center" style={{ zIndex: 300, background: '#000000', backdropFilter: 'blur(10px)' }}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={p.onClose}>
       {/* Левое облако */}
       <div className="flex-1 overflow-hidden relative pointer-events-none">
@@ -155,7 +142,7 @@ function D1({ p }: { p: any }) {
       {/* Левая орнаментальная полоса — снаружи блока */}
       <OrnamentStrip />
       <div className="flex items-center justify-center flex-shrink-0 py-4" style={{ width: 'min(800px, 90vw)' }} onClick={p.onClose}>
-        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#000000', boxShadow: '0 50px 140px rgba(0,2,18,0.98)' }}
+        <motion.div className="w-full flex flex-col overflow-hidden" style={{ maxHeight: '94vh', borderRadius: 6, background: '#000000', boxShadow: '0 50px 140px rgba(0,0,0,0.98)' }}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 28 }} onClick={e => e.stopPropagation()}>
           {/* Шапка */}

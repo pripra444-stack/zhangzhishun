@@ -17,6 +17,9 @@ dist-ssr
 .env.local
 .env.*.local
 
+# Changshou videos — too large for GitHub (150–360 MB), host externally or compress
+public/images/changshou-*.mp4
+
 # Editor
 .vscode/*
 !.vscode/extensions.json
