@@ -16,17 +16,11 @@ export default function GateCircle({ exercise, onClick, sectionKey }: Props) {
 
   const frameImg  = isChangshou ? img('/images/circle-frame-blue.png') : img('/images/circle-frame-gold.png')
   const nameColor = isChangshou ? '#00D8FF' : '#d4a855'
-  const frameShadow = isChangshou
-    ? [
-        'drop-shadow(0 6px 18px rgba(0,30,50,0.98))',
-        'drop-shadow(0 14px 40px rgba(0,60,80,0.75))',
-        'drop-shadow(-4px -4px 10px rgba(0,20,40,0.6))',
-      ].join(' ')
-    : [
-        'drop-shadow(0 6px 18px rgba(0,4,18,0.98))',
-        'drop-shadow(0 14px 40px rgba(0,8,30,0.85))',
-        'drop-shadow(-4px -4px 10px rgba(0,2,12,0.7))',
-      ].join(' ')
+  const frameShadow = [
+    'drop-shadow(0 6px 18px rgba(0,4,18,0.98))',
+    'drop-shadow(0 14px 40px rgba(0,8,30,0.85))',
+    'drop-shadow(-4px -4px 10px rgba(0,2,12,0.7))',
+  ].join(' ')
 
   return (
     <motion.div
