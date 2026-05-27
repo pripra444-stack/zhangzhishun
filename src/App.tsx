@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import BiographyScroll from './components/BiographyScroll'
 import PracticeSection from './components/PracticeSection'
+import DaoTheorySection from './components/DaoTheorySection'
 
 function Footer() {
   const { t } = useTranslation()
@@ -35,6 +36,7 @@ export default function App() {
           cols={2}
         />
         <PracticeSection sectionKey="changshou" bgClass="bg-bg-deep" cols={2} />
+        <DaoTheorySection />
       </main>
       <Footer />
     </>
