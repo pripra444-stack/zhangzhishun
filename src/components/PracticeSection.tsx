@@ -24,7 +24,7 @@ interface Props {
 const ZH_ORD = ['一','二','三','四','五','六','七','八','九','十']
 
 // ── Мобильная карусель: peek (видны соседи), свайп, номер ──
-function MobileCarousel({ exercises, onOpen }: { exercises: Exercise[]; onOpen: (ex: Exercise) => void }) {
+function MobileCarousel({ exercises, onOpen, sectionKey }: { exercises: Exercise[]; onOpen: (ex: Exercise) => void; sectionKey: string }) {
   const { t } = useTranslation()
   const [idx, setIdx] = useState(0)
   const touchX = useRef(0)
@@ -97,7 +97,7 @@ function MobileCarousel({ exercises, onOpen }: { exercises: Exercise[]; onOpen: 
               }}
               onClick={() => i === idx ? onOpen(ex) : go(i > idx ? 1 : -1)}
             >
-              <GateCircle exercise={ex} onClick={() => {}} />
+              <GateCircle exercise={ex} onClick={() => {}} sectionKey={sectionKey} />
             </div>
           ))}
         </motion.div>
@@ -271,7 +271,7 @@ export default function PracticeSection({
 
         {/* ── МОБИЛЕ: карусель ── */}
         {isMobile ? (
-          <MobileCarousel exercises={exercises} onOpen={setActiveExercise} />
+          <MobileCarousel exercises={exercises} onOpen={setActiveExercise} sectionKey={sectionKey} />
         ) : (
           /* ── ДЕСКТОП: сетка ── */
           <motion.div
@@ -283,7 +283,7 @@ export default function PracticeSection({
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             {exercises.map(exercise => (
-              <GateCircle key={exercise.id} exercise={exercise} onClick={setActiveExercise} />
+              <GateCircle key={exercise.id} exercise={exercise} onClick={setActiveExercise} sectionKey={sectionKey} />
             ))}
           </motion.div>
         )}
