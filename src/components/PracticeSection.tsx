@@ -234,7 +234,7 @@ export default function PracticeSection({
         <div
           aria-hidden
           className="absolute pointer-events-none select-none flex flex-col justify-between items-center"
-          style={{ left: '50%', transform: 'translateX(-50%)', width: '7.69vw', top: '5%', bottom: '5%', zIndex: 2 }}
+          style={{ left: '50%', transform: 'translateX(-50%)', width: '7.69vw', top: '28%', bottom: '4%', zIndex: 2 }}
         >
           {MERIDIANS.map((m, i) => (
             <div key={i} style={{ border: '1px solid rgba(212,168,83,0.55)', borderRadius: '8px', padding: '8px 5px', background: 'rgba(6,12,24,0.45)', display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: 0.2 }}>
@@ -251,7 +251,7 @@ export default function PracticeSection({
         <div
           aria-hidden
           className="absolute pointer-events-none select-none flex flex-col justify-between items-center"
-          style={{ left: '50%', transform: 'translateX(-50%)', width: '7.69vw', top: '5%', bottom: '5%', zIndex: 2 }}
+          style={{ left: '50%', transform: 'translateX(-50%)', width: '7.69vw', top: '28%', bottom: '4%', zIndex: 2 }}
         >
           {CHANGSHOU_SYMBOLS.map((s, i) => (
             <div key={i} style={{ border: '1px solid rgba(0,216,255,0.45)', borderRadius: '8px', padding: '8px 5px', background: 'rgba(0,20,40,0.45)', display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: 0.22 }}>
