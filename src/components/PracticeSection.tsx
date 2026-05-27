@@ -9,8 +9,11 @@ import type { Exercise, SectionKey } from '../data/exercises'
 import { img } from '../utils/assets'
 import { useIsMobile } from '../utils/useIsMobile'
 
-// Восемь меридианов — вертикальная надпись между столбцами
+// Восемь меридианов — вертикальная надпись между столбцами (金刚功)
 const MERIDIANS = ['冲脉', '带脉', '阴跷脉', '阳跷脉', '阴俞脉', '阳俞脉', '任脉', '督脉']
+
+// Восемь образов — вертикальная надпись между столбцами (长寿功)
+const CHANGSHOU_SYMBOLS = ['昆仑山', '日月', '八卦', '太阳', '大雁', '浪海', '白鹤', '鱼长寿']
 
 interface Props {
   sectionKey: SectionKey
@@ -226,7 +229,7 @@ export default function PracticeSection({
         />
       )}
 
-      {/* ── Меридианы (только десктоп) ── */}
+      {/* ── Меридианы (только десктоп, 金刚功) ── */}
       {isJingang && !isMobile && (
         <div
           aria-hidden
@@ -237,6 +240,23 @@ export default function PracticeSection({
             <div key={i} style={{ border: '1px solid rgba(212,168,83,0.55)', borderRadius: '8px', padding: '8px 5px', background: 'rgba(6,12,24,0.45)', display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: 0.2 }}>
               <span style={{ fontFamily: '"STKaiti","KaiTi","Noto Serif SC","PingFang SC",serif', fontSize: 'clamp(1.1rem, 2.1vw, 1.8rem)', color: '#d4b87a', letterSpacing: '0.05em', lineHeight: 1.1, writingMode: 'vertical-rl', textOrientation: 'mixed', whiteSpace: 'nowrap' }}>
                 {m}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ── Восемь образов (только десктоп, 长寿功) ── */}
+      {isChangshou && !isMobile && (
+        <div
+          aria-hidden
+          className="absolute pointer-events-none select-none flex flex-col justify-between items-center"
+          style={{ left: '50%', transform: 'translateX(-50%)', width: '7.69vw', top: '5%', bottom: '5%', zIndex: 2 }}
+        >
+          {CHANGSHOU_SYMBOLS.map((s, i) => (
+            <div key={i} style={{ border: '1px solid rgba(0,216,255,0.45)', borderRadius: '8px', padding: '8px 5px', background: 'rgba(0,20,40,0.45)', display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: 0.22 }}>
+              <span style={{ fontFamily: '"STKaiti","KaiTi","Noto Serif SC","PingFang SC",serif', fontSize: 'clamp(1.1rem, 2.1vw, 1.8rem)', color: '#00D8FF', letterSpacing: '0.05em', lineHeight: 1.1, writingMode: 'vertical-rl', textOrientation: 'mixed', whiteSpace: 'nowrap' }}>
+                {s}
               </span>
             </div>
           ))}
