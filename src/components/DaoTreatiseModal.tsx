@@ -10,15 +10,26 @@ interface Props {
   onClose: () => void
 }
 
-// Один круг меридиана — золотая рамка + фото или пустое кольцо
-function MeridianCircle({ zhName, ruName, image }: { zhName: string; ruName: string; image: string }) {
+// isBlue: true для нижнего ряда (каналы 5-8)
+function MeridianCircle({ zhName, ruName, image, isBlue }: {
+  zhName: string; ruName: string; image: string; isBlue: boolean
+}) {
+  const frameImg  = isBlue ? img('/images/circle-frame-blue.png') : img('/images/circle-frame-gold.png')
+  const nameColor = isBlue ? '#00D8FF' : '#d4a855'
+  const nameShadow = isBlue ? '0 0 18px rgba(0,216,255,0.4)' : '0 0 18px rgba(212,168,83,0.4)'
+
   return (
-    <div className="flex flex-col items-center select-none" style={{ width: '100%' }}>
+    <motion.div
+      className="flex flex-col items-center select-none"
+      style={{ width: '100%', opacity: 0.75 }}
+      whileHover={{ opacity: 1, scale: 1.08 }}
+      transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+    >
       {/* Рамка + фото */}
       <div className="relative w-full" style={{ aspectRatio: '1' }}>
         {/* Круглая рамка */}
         <img
-          src={img('/images/circle-frame-gold.png')}
+          src={frameImg}
           alt=""
           aria-hidden
           draggable={false}
@@ -58,9 +69,9 @@ function MeridianCircle({ zhName, ruName, image }: { zhName: string; ruName: str
         marginTop: 6,
         fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
         fontSize: 'clamp(1.1rem,2vw,1.8rem)',
-        color: image ? '#d4a855' : 'rgba(212,168,83,0.25)',
+        color: nameColor,
         letterSpacing: '0.12em',
-        textShadow: image ? '0 0 18px rgba(212,168,83,0.4)' : 'none',
+        textShadow: nameShadow,
         lineHeight: 1,
         textAlign: 'center',
       }}>
@@ -72,7 +83,7 @@ function MeridianCircle({ zhName, ruName, image }: { zhName: string; ruName: str
         marginTop: 4,
         fontFamily: 'sans-serif',
         fontSize: 'clamp(0.5rem,0.95vw,0.7rem)',
-        color: image ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.18)',
+        color: isBlue ? 'rgba(0,216,255,0.5)' : 'rgba(212,168,83,0.5)',
         textAlign: 'center',
         lineHeight: 1.35,
         letterSpacing: '0.02em',
@@ -80,7 +91,7 @@ function MeridianCircle({ zhName, ruName, image }: { zhName: string; ruName: str
       }}>
         {ruName}
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -153,10 +164,10 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
             </button>
           </div>
 
-          {/* ── Тело: прокручиваемый центр с драконом/тигром за сеткой ── */}
+          {/* ── Тело ── */}
           <div className="flex-1 overflow-y-auto relative" style={{ padding: 'clamp(32px,4vw,56px) 7.69vw' }}>
 
-            {/* Дракон — левый фланг, позади сетки */}
+            {/* Дракон — левый фланг */}
             <img
               src={img('/images/dao-dragon.png')}
               alt="" aria-hidden draggable={false}
@@ -172,7 +183,7 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
               }}
             />
 
-            {/* Тигр — правый фланг, позади сетки */}
+            {/* Тигр — правый фланг */}
             <img
               src={img('/images/dao-tiger.png')}
               alt="" aria-hidden draggable={false}
@@ -194,7 +205,7 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
               {/* Заголовок */}
               <div className="text-center">
                 <div style={{
-                  fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
+                  fontFamily: '"KNYuanmo","MFLiHei",serif',
                   fontSize: 'clamp(2rem,4.5vw,3.5rem)',
                   color: '#d4a855',
                   letterSpacing: '0.18em',
@@ -228,12 +239,13 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                 width: '100%',
                 maxWidth: '72vw',
               }}>
-                {MERIDIAN_DIAGRAMS.map(m => (
+                {MERIDIAN_DIAGRAMS.map((m, i) => (
                   <MeridianCircle
                     key={m.id}
                     zhName={m.zhName}
                     ruName={m.ruName}
                     image={m.image}
+                    isBlue={i >= 4}
                   />
                 ))}
               </div>

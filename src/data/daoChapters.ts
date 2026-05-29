@@ -30,8 +30,8 @@ export const MERIDIAN_DIAGRAMS: MeridianDiagram[] = [
   { id: 2, zhName: '任脉', ruName: 'Жэнь-май — Передний срединный',      image: 'meridian-renmai.png'   },
   { id: 3, zhName: '督脉', ruName: 'Ду-май — Задний срединный',           image: 'meridian-dumai.png'    },
   { id: 4, zhName: '带脉', ruName: 'Дай-май — Поясной канал',             image: 'meridian-daimai.png'   },
-  { id: 5, zhName: '阴跷脉', ruName: 'Инь-цяо-май — Канал Инь-подъёма', image: ''                       },
-  { id: 6, zhName: '阳跷脉', ruName: 'Ян-цяо-май — Канал Ян-подъёма',   image: ''                       },
-  { id: 7, zhName: '阴维脉', ruName: 'Инь-вэй-май — Канал Инь-связи',   image: ''                       },
-  { id: 8, zhName: '阳维脉', ruName: 'Ян-вэй-май — Канал Ян-связи',     image: ''                       },
+  { id: 5, zhName: '阴跷脉', ruName: 'Инь-цяо-май — Канал Инь-подъёма', image: 'meridian-c5.png'         },
+  { id: 6, zhName: '阳跷脉', ruName: 'Ян-цяо-май — Канал Ян-подъёма',   image: 'meridian-c6.png'         },
+  { id: 7, zhName: '阴维脉', ruName: 'Инь-вэй-май — Канал Инь-связи',   image: 'meridian-c7.png'         },
+  { id: 8, zhName: '阳维脉', ruName: 'Ян-вэй-май — Канал Ян-связи',     image: 'meridian-c8.png'         },
 ]
