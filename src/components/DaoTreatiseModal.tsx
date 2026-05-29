@@ -10,6 +10,80 @@ interface Props {
   onClose: () => void
 }
 
+// Один круг меридиана — золотая рамка + фото или пустое кольцо
+function MeridianCircle({ zhName, ruName, image }: { zhName: string; ruName: string; image: string }) {
+  return (
+    <div className="flex flex-col items-center select-none" style={{ width: '100%' }}>
+      {/* Рамка + фото */}
+      <div className="relative w-full" style={{ aspectRatio: '1' }}>
+        {/* Круглая рамка */}
+        <img
+          src={img('/images/circle-frame-gold.png')}
+          alt=""
+          aria-hidden
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+          style={{
+            zIndex: 2,
+            filter: [
+              'drop-shadow(0 6px 18px rgba(0,4,18,0.98))',
+              'drop-shadow(0 14px 40px rgba(0,8,30,0.85))',
+            ].join(' '),
+          }}
+        />
+        {/* Фото или пустое тёмное кольцо */}
+        <div
+          className="absolute rounded-full overflow-hidden"
+          style={{
+            width: '72%', height: '72%',
+            top: '14%', left: '14%',
+            zIndex: 1,
+            background: image ? 'transparent' : 'rgba(4,8,16,0.7)',
+            border: image ? 'none' : '1px dashed rgba(212,168,83,0.12)',
+          }}
+        >
+          {image && (
+            <img
+              src={img(`/images/${image}`)}
+              alt={ruName}
+              draggable={false}
+              className="w-full h-full object-cover object-top"
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Китайское название */}
+      <div style={{
+        marginTop: 6,
+        fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
+        fontSize: 'clamp(1.1rem,2vw,1.8rem)',
+        color: image ? '#d4a855' : 'rgba(212,168,83,0.25)',
+        letterSpacing: '0.12em',
+        textShadow: image ? '0 0 18px rgba(212,168,83,0.4)' : 'none',
+        lineHeight: 1,
+        textAlign: 'center',
+      }}>
+        {zhName}
+      </div>
+
+      {/* Русское название */}
+      <div style={{
+        marginTop: 4,
+        fontFamily: 'sans-serif',
+        fontSize: 'clamp(0.5rem,0.95vw,0.7rem)',
+        color: image ? 'rgba(212,168,83,0.5)' : 'rgba(212,168,83,0.18)',
+        textAlign: 'center',
+        lineHeight: 1.35,
+        letterSpacing: '0.02em',
+        maxWidth: '110%',
+      }}>
+        {ruName}
+      </div>
+    </div>
+  )
+}
+
 export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
   const { t } = useTranslation()
 
@@ -23,9 +97,6 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
       document.body.style.overflow = ''
     }
   }, [isOpen, onClose])
-
-  const withImage    = MERIDIAN_DIAGRAMS.filter(m => m.image !== '')
-  const withoutImage = MERIDIAN_DIAGRAMS.filter(m => m.image === '')
 
   return (
     <AnimatePresence>
@@ -82,37 +153,46 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
             </button>
           </div>
 
-          {/* ── Тело: три колонки — Дракон | Контент | Тигр ── */}
-          <div
-            className="flex-1 overflow-hidden"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'clamp(180px,25vw,340px) 1fr clamp(180px,25vw,340px)',
-            }}
-          >
-            {/* Левый декор — Дракон (липкий) */}
-            <div style={{ overflow: 'hidden', position: 'relative' }}>
-              <img
-                src={img('/images/dao-dragon.png')}
-                alt=""
-                aria-hidden
-                draggable={false}
-                style={{
-                  width: '100%', height: '100%',
-                  objectFit: 'cover', objectPosition: 'center top',
-                  display: 'block',
-                  opacity: 0.75,
-                }}
-              />
-            </div>
+          {/* ── Тело: прокручиваемый центр с драконом/тигром за сеткой ── */}
+          <div className="flex-1 overflow-y-auto relative" style={{ padding: 'clamp(32px,4vw,56px) 7.69vw' }}>
 
-            {/* Центральный контент — прокручивается */}
-            <div
-              className="overflow-y-auto"
-              style={{ padding: 'clamp(32px,5vw,64px) clamp(16px,4vw,48px)' }}
-            >
+            {/* Дракон — левый фланг, позади сетки */}
+            <img
+              src={img('/images/dao-dragon.png')}
+              alt="" aria-hidden draggable={false}
+              className="absolute pointer-events-none select-none"
+              style={{
+                top: 0, left: 0,
+                height: '100%', width: 'auto',
+                maxWidth: '28vw',
+                objectFit: 'contain',
+                objectPosition: 'top left',
+                opacity: 0.65,
+                zIndex: 1,
+              }}
+            />
+
+            {/* Тигр — правый фланг, позади сетки */}
+            <img
+              src={img('/images/dao-tiger.png')}
+              alt="" aria-hidden draggable={false}
+              className="absolute pointer-events-none select-none"
+              style={{
+                top: 0, right: 0,
+                height: '100%', width: 'auto',
+                maxWidth: '28vw',
+                objectFit: 'contain',
+                objectPosition: 'top right',
+                opacity: 0.55,
+                zIndex: 1,
+              }}
+            />
+
+            {/* Контент поверх */}
+            <div className="relative flex flex-col items-center gap-10" style={{ zIndex: 10 }}>
+
               {/* Заголовок */}
-              <div className="text-center" style={{ marginBottom: 'clamp(32px,5vw,56px)' }}>
+              <div className="text-center">
                 <div style={{
                   fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
                   fontSize: 'clamp(2rem,4.5vw,3.5rem)',
@@ -140,106 +220,24 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                 </div>
               </div>
 
-              {/* 4 канала с фото — в ряд */}
+              {/* 8 кругов — 4 колонки × 2 ряда */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 'clamp(10px,2vw,24px)',
-                marginBottom: 'clamp(32px,5vw,56px)',
+                gap: 'clamp(16px,3vw,40px)',
+                width: '100%',
+                maxWidth: '72vw',
               }}>
-                {withImage.map(m => (
-                  <div key={m.id} style={{
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
-                  }}>
-                    <img
-                      src={img(`/images/${m.image}`)}
-                      alt={m.ruName}
-                      draggable={false}
-                      style={{ width: '100%', display: 'block' }}
-                    />
-                    <div style={{
-                      fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
-                      fontSize: 'clamp(1.1rem,2vw,1.8rem)',
-                      color: '#d4a855',
-                      letterSpacing: '0.12em',
-                      textShadow: '0 0 18px rgba(212,168,83,0.4)',
-                      lineHeight: 1,
-                      textAlign: 'center',
-                    }}>
-                      {m.zhName}
-                    </div>
-                    <div style={{
-                      fontFamily: 'sans-serif',
-                      fontSize: 'clamp(0.55rem,1vw,0.72rem)',
-                      color: 'rgba(212,168,83,0.5)',
-                      textAlign: 'center',
-                      lineHeight: 1.35,
-                      letterSpacing: '0.03em',
-                    }}>
-                      {m.ruName}
-                    </div>
-                  </div>
+                {MERIDIAN_DIAGRAMS.map(m => (
+                  <MeridianCircle
+                    key={m.id}
+                    zhName={m.zhName}
+                    ruName={m.ruName}
+                    image={m.image}
+                  />
                 ))}
               </div>
 
-              {/* 4 плейсхолдера */}
-              {withoutImage.length > 0 && (
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(4, 1fr)',
-                  gap: 'clamp(10px,2vw,24px)',
-                }}>
-                  {withoutImage.map(m => (
-                    <div key={m.id} style={{
-                      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
-                    }}>
-                      <div style={{
-                        width: '100%',
-                        aspectRatio: '3 / 4',
-                        border: '1px dashed rgba(212,168,83,0.1)',
-                        background: 'rgba(4,8,16,0.5)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: 'rgba(212,168,83,0.15)',
-                        fontSize: '0.55rem', letterSpacing: '0.2em', fontFamily: 'sans-serif',
-                      }}>
-                        {t('dao.meridianPlaceholder')}
-                      </div>
-                      <div style={{
-                        fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
-                        fontSize: 'clamp(1.1rem,2vw,1.8rem)',
-                        color: 'rgba(212,168,83,0.22)',
-                        letterSpacing: '0.12em', lineHeight: 1, textAlign: 'center',
-                      }}>
-                        {m.zhName}
-                      </div>
-                      <div style={{
-                        fontFamily: 'sans-serif',
-                        fontSize: 'clamp(0.55rem,1vw,0.72rem)',
-                        color: 'rgba(212,168,83,0.18)',
-                        textAlign: 'center', lineHeight: 1.35, letterSpacing: '0.03em',
-                      }}>
-                        {m.ruName}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Правый декор — Тигр */}
-            <div style={{ overflow: 'hidden', position: 'relative' }}>
-              <img
-                src={img('/images/dao-tiger.png')}
-                alt=""
-                aria-hidden
-                draggable={false}
-                style={{
-                  width: '100%', height: '100%',
-                  objectFit: 'cover', objectPosition: 'center top',
-                  display: 'block',
-                  opacity: 0.6,
-                }}
-              />
             </div>
           </div>
         </motion.div>
