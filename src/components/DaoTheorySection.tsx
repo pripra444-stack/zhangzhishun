@@ -58,18 +58,21 @@ export default function DaoTheorySection() {
                 position: 'relative',
                 width: 'clamp(220px, 26vw, 310px)',
                 minHeight: 'clamp(290px, 34vw, 415px)',
+                borderRadius: 18,
+                background: 'transparent',
               }}
             >
               {/* ── Лицо: 道学 + подпись — без рамки, невидимая карточка ── */}
               <div
                 style={{
                   backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
+                  background: 'transparent',
                   position: 'absolute', inset: 0,
                   display: 'flex', flexDirection: 'column',
                   alignItems: 'center', justifyContent: 'center',
                   textAlign: 'center',
                   padding: '32px 28px',
-                  /* border и background убраны — карточка невидима до hover */
                 }}
               >
                 <div
@@ -107,6 +110,7 @@ export default function DaoTheorySection() {
               <div
                 style={{
                   backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)',
                   position: 'absolute', inset: 0,
                   borderRadius: 18,

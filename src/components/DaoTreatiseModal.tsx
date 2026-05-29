@@ -87,7 +87,7 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
             className="flex-1 overflow-hidden"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'clamp(130px,18vw,260px) 1fr clamp(130px,18vw,260px)',
+              gridTemplateColumns: 'clamp(180px,25vw,340px) 1fr clamp(180px,25vw,340px)',
             }}
           >
             {/* Левый декор — Дракон (липкий) */}
@@ -122,7 +122,7 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                   lineHeight: 1,
                   marginBottom: 14,
                 }}>
-                  八大动脉
+                  奇经八脉
                 </div>
                 <div style={{
                   width: 'clamp(50px,8vw,120px)', height: 1,
@@ -153,9 +153,8 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                   }}>
                     <div style={{
                       width: '100%',
-                      maxHeight: 'clamp(110px,14vw,180px)',
+                      maxHeight: 'clamp(80px,10vw,120px)',
                       overflow: 'hidden',
-                      borderRadius: 4,
                     }}>
                       <img
                         src={img(`/images/${m.image}`)}
