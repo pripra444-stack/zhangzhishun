@@ -151,22 +151,12 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                   <div key={m.id} style={{
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
                   }}>
-                    <div style={{
-                      width: '100%',
-                      maxHeight: 'clamp(80px,10vw,120px)',
-                      overflow: 'hidden',
-                    }}>
-                      <img
-                        src={img(`/images/${m.image}`)}
-                        alt={m.ruName}
-                        draggable={false}
-                        style={{
-                          width: '100%', height: '100%',
-                          objectFit: 'cover', objectPosition: 'top center',
-                          display: 'block',
-                        }}
-                      />
-                    </div>
+                    <img
+                      src={img(`/images/${m.image}`)}
+                      alt={m.ruName}
+                      draggable={false}
+                      style={{ width: '100%', display: 'block' }}
+                    />
                     <div style={{
                       fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
                       fontSize: 'clamp(1.1rem,2vw,1.8rem)',
@@ -204,8 +194,8 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
                     }}>
                       <div style={{
-                        width: '100%', maxHeight: 'clamp(110px,14vw,180px)',
-                        aspectRatio: '3 / 4', borderRadius: 4,
+                        width: '100%',
+                        aspectRatio: '3 / 4',
                         border: '1px dashed rgba(212,168,83,0.1)',
                         background: 'rgba(4,8,16,0.5)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
