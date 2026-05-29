@@ -87,7 +87,7 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
             className="flex-1 overflow-hidden"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'clamp(70px,10vw,150px) 1fr clamp(70px,10vw,150px)',
+              gridTemplateColumns: 'clamp(130px,18vw,260px) 1fr clamp(130px,18vw,260px)',
             }}
           >
             {/* Левый декор — Дракон (липкий) */}
@@ -122,7 +122,7 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                   lineHeight: 1,
                   marginBottom: 14,
                 }}>
-                  奇经八脉
+                  八大动脉
                 </div>
                 <div style={{
                   width: 'clamp(50px,8vw,120px)', height: 1,
@@ -152,15 +152,20 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
                   }}>
                     <div style={{
-                      width: '100%', borderRadius: 6, overflow: 'hidden',
-                      border: '1px solid rgba(212,168,83,0.18)',
-                      boxShadow: '0 6px 32px rgba(0,0,0,0.6)',
+                      width: '100%',
+                      maxHeight: 'clamp(110px,14vw,180px)',
+                      overflow: 'hidden',
+                      borderRadius: 4,
                     }}>
                       <img
                         src={img(`/images/${m.image}`)}
                         alt={m.ruName}
                         draggable={false}
-                        style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+                        style={{
+                          width: '100%', height: '100%',
+                          objectFit: 'cover', objectPosition: 'top center',
+                          display: 'block',
+                        }}
                       />
                     </div>
                     <div style={{
@@ -200,8 +205,9 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
                     }}>
                       <div style={{
-                        width: '100%', aspectRatio: '3 / 4', borderRadius: 6,
-                        border: '1px dashed rgba(212,168,83,0.12)',
+                        width: '100%', maxHeight: 'clamp(110px,14vw,180px)',
+                        aspectRatio: '3 / 4', borderRadius: 4,
+                        border: '1px dashed rgba(212,168,83,0.1)',
                         background: 'rgba(4,8,16,0.5)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         color: 'rgba(212,168,83,0.15)',
