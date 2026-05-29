@@ -13,7 +13,6 @@ interface Props {
 export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
   const { t } = useTranslation()
 
-  // Close on Escape, lock body scroll
   useEffect(() => {
     if (!isOpen) return
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
@@ -83,142 +82,170 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
             </button>
           </div>
 
-          {/* ── Прокручиваемый контент ── */}
+          {/* ── Тело: три колонки — Дракон | Контент | Тигр ── */}
           <div
-            className="flex-1 overflow-y-auto"
-            style={{ padding: 'clamp(40px,6vw,80px) clamp(20px,8vw,120px)' }}
-          >
-            {/* Заголовок раздела */}
-            <div className="text-center" style={{ marginBottom: 'clamp(40px,6vw,72px)' }}>
-              <div style={{
-                fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
-                fontSize: 'clamp(2.2rem,5vw,3.8rem)',
-                color: '#d4a855',
-                letterSpacing: '0.18em',
-                textShadow: '0 0 40px rgba(212,168,83,0.6), 0 0 80px rgba(212,168,83,0.25)',
-                lineHeight: 1,
-                marginBottom: 16,
-              }}>
-                奇经八脉
-              </div>
-              <div style={{
-                width: 'clamp(60px,10vw,140px)',
-                height: 1,
-                background: 'linear-gradient(90deg,transparent,#d4a85366,transparent)',
-                margin: '16px auto',
-              }} />
-              <div style={{
-                fontFamily: 'sans-serif',
-                fontSize: 'clamp(0.58rem,1.2vw,0.72rem)',
-                color: 'rgba(212,168,83,0.4)',
-                letterSpacing: '0.35em',
-                textTransform: 'uppercase',
-              }}>
-                {t('dao.meridianSection')}
-              </div>
-            </div>
-
-            {/* ── 4 канала с фотографиями ── */}
-            <div style={{
+            className="flex-1 overflow-hidden"
+            style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px,100%),1fr))',
-              gap: 'clamp(20px,3vw,40px)',
-              marginBottom: 'clamp(48px,7vw,96px)',
-            }}>
-              {withImage.map(m => (
-                <div key={m.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-                  {/* Фото */}
-                  <div style={{
-                    width: '100%',
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                    border: '1px solid rgba(212,168,83,0.18)',
-                    boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
-                  }}>
-                    <img
-                      src={img(`/images/${m.image}`)}
-                      alt={m.ruName}
-                      draggable={false}
-                      style={{ width: '100%', display: 'block', objectFit: 'cover' }}
-                    />
-                  </div>
-                  {/* Иероглифы */}
-                  <div style={{
-                    fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
-                    fontSize: 'clamp(1.6rem,3vw,2.4rem)',
-                    color: '#d4a855',
-                    letterSpacing: '0.12em',
-                    textShadow: '0 0 24px rgba(212,168,83,0.45)',
-                    lineHeight: 1,
-                  }}>
-                    {m.zhName}
-                  </div>
-                  {/* Русское название */}
-                  <div style={{
-                    fontFamily: 'sans-serif',
-                    fontSize: 'clamp(0.68rem,1.3vw,0.82rem)',
-                    color: 'rgba(212,168,83,0.55)',
-                    letterSpacing: '0.05em',
-                    textAlign: 'center',
-                    lineHeight: 1.4,
-                  }}>
-                    {m.ruName}
-                  </div>
-                </div>
-              ))}
+              gridTemplateColumns: 'clamp(70px,10vw,150px) 1fr clamp(70px,10vw,150px)',
+            }}
+          >
+            {/* Левый декор — Дракон (липкий) */}
+            <div style={{ overflow: 'hidden', position: 'relative' }}>
+              <img
+                src={img('/images/dao-dragon.png')}
+                alt=""
+                aria-hidden
+                draggable={false}
+                style={{
+                  width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: 'center top',
+                  display: 'block',
+                  opacity: 0.75,
+                }}
+              />
             </div>
 
-            {/* ── 4 канала — плейсхолдеры ── */}
-            {withoutImage.length > 0 && (
+            {/* Центральный контент — прокручивается */}
+            <div
+              className="overflow-y-auto"
+              style={{ padding: 'clamp(32px,5vw,64px) clamp(16px,4vw,48px)' }}
+            >
+              {/* Заголовок */}
+              <div className="text-center" style={{ marginBottom: 'clamp(32px,5vw,56px)' }}>
+                <div style={{
+                  fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
+                  fontSize: 'clamp(2rem,4.5vw,3.5rem)',
+                  color: '#d4a855',
+                  letterSpacing: '0.18em',
+                  textShadow: '0 0 40px rgba(212,168,83,0.6), 0 0 80px rgba(212,168,83,0.25)',
+                  lineHeight: 1,
+                  marginBottom: 14,
+                }}>
+                  奇经八脉
+                </div>
+                <div style={{
+                  width: 'clamp(50px,8vw,120px)', height: 1,
+                  background: 'linear-gradient(90deg,transparent,#d4a85566,transparent)',
+                  margin: '14px auto',
+                }} />
+                <div style={{
+                  fontFamily: 'sans-serif',
+                  fontSize: 'clamp(0.55rem,1.1vw,0.68rem)',
+                  color: 'rgba(212,168,83,0.4)',
+                  letterSpacing: '0.32em',
+                  textTransform: 'uppercase',
+                }}>
+                  {t('dao.meridianSection')}
+                </div>
+              </div>
+
+              {/* 4 канала с фото — в ряд */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px,100%),1fr))',
-                gap: 'clamp(20px,3vw,40px)',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: 'clamp(10px,2vw,24px)',
+                marginBottom: 'clamp(32px,5vw,56px)',
               }}>
-                {withoutImage.map(m => (
-                  <div key={m.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-                    {/* Плейсхолдер */}
+                {withImage.map(m => (
+                  <div key={m.id} style={{
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+                  }}>
                     <div style={{
-                      width: '100%',
-                      aspectRatio: '3 / 4',
-                      borderRadius: 8,
-                      border: '1px dashed rgba(212,168,83,0.12)',
-                      background: 'rgba(4,8,16,0.6)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'rgba(212,168,83,0.18)',
-                      fontSize: '0.58rem',
-                      letterSpacing: '0.22em',
-                      fontFamily: 'sans-serif',
+                      width: '100%', borderRadius: 6, overflow: 'hidden',
+                      border: '1px solid rgba(212,168,83,0.18)',
+                      boxShadow: '0 6px 32px rgba(0,0,0,0.6)',
                     }}>
-                      {t('dao.meridianPlaceholder')}
+                      <img
+                        src={img(`/images/${m.image}`)}
+                        alt={m.ruName}
+                        draggable={false}
+                        style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+                      />
                     </div>
-                    {/* Иероглифы */}
                     <div style={{
                       fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
-                      fontSize: 'clamp(1.6rem,3vw,2.4rem)',
-                      color: 'rgba(212,168,83,0.25)',
+                      fontSize: 'clamp(1.1rem,2vw,1.8rem)',
+                      color: '#d4a855',
                       letterSpacing: '0.12em',
+                      textShadow: '0 0 18px rgba(212,168,83,0.4)',
                       lineHeight: 1,
+                      textAlign: 'center',
                     }}>
                       {m.zhName}
                     </div>
-                    {/* Русское название */}
                     <div style={{
                       fontFamily: 'sans-serif',
-                      fontSize: 'clamp(0.68rem,1.3vw,0.82rem)',
-                      color: 'rgba(212,168,83,0.2)',
-                      letterSpacing: '0.05em',
+                      fontSize: 'clamp(0.55rem,1vw,0.72rem)',
+                      color: 'rgba(212,168,83,0.5)',
                       textAlign: 'center',
-                      lineHeight: 1.4,
+                      lineHeight: 1.35,
+                      letterSpacing: '0.03em',
                     }}>
                       {m.ruName}
                     </div>
                   </div>
                 ))}
               </div>
-            )}
+
+              {/* 4 плейсхолдера */}
+              {withoutImage.length > 0 && (
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4, 1fr)',
+                  gap: 'clamp(10px,2vw,24px)',
+                }}>
+                  {withoutImage.map(m => (
+                    <div key={m.id} style={{
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+                    }}>
+                      <div style={{
+                        width: '100%', aspectRatio: '3 / 4', borderRadius: 6,
+                        border: '1px dashed rgba(212,168,83,0.12)',
+                        background: 'rgba(4,8,16,0.5)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: 'rgba(212,168,83,0.15)',
+                        fontSize: '0.55rem', letterSpacing: '0.2em', fontFamily: 'sans-serif',
+                      }}>
+                        {t('dao.meridianPlaceholder')}
+                      </div>
+                      <div style={{
+                        fontFamily: '"STKaiti","KaiTi","Noto Serif SC",serif',
+                        fontSize: 'clamp(1.1rem,2vw,1.8rem)',
+                        color: 'rgba(212,168,83,0.22)',
+                        letterSpacing: '0.12em', lineHeight: 1, textAlign: 'center',
+                      }}>
+                        {m.zhName}
+                      </div>
+                      <div style={{
+                        fontFamily: 'sans-serif',
+                        fontSize: 'clamp(0.55rem,1vw,0.72rem)',
+                        color: 'rgba(212,168,83,0.18)',
+                        textAlign: 'center', lineHeight: 1.35, letterSpacing: '0.03em',
+                      }}>
+                        {m.ruName}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Правый декор — Тигр */}
+            <div style={{ overflow: 'hidden', position: 'relative' }}>
+              <img
+                src={img('/images/dao-tiger.png')}
+                alt=""
+                aria-hidden
+                draggable={false}
+                style={{
+                  width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: 'center top',
+                  display: 'block',
+                  opacity: 0.6,
+                }}
+              />
+            </div>
           </div>
         </motion.div>
       )}

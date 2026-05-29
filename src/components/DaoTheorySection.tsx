@@ -26,7 +26,7 @@ export default function DaoTheorySection() {
           style={{ opacity: 0.72, objectPosition: 'center center' }}
         />
 
-        {/* Затемнение сверху и снизу */}
+        {/* Затемнение сверху/снизу */}
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
@@ -38,13 +38,12 @@ export default function DaoTheorySection() {
 
         {/* Флип-карточка */}
         <motion.div
-          className="relative z-10 flex flex-col items-center"
+          className="relative z-10"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8 }}
         >
-          {/* Perspective-обёртка: hover переворачивает, click открывает */}
           <div
             style={{ perspective: '1000px', cursor: 'pointer' }}
             onMouseEnter={() => setIsFlipped(true)}
@@ -53,31 +52,32 @@ export default function DaoTheorySection() {
           >
             <motion.div
               animate={{ rotateY: isFlipped ? 180 : 0 }}
-              transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               style={{
                 transformStyle: 'preserve-3d',
                 position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: 'clamp(32px,5vw,56px) clamp(40px,7vw,80px)',
-                minWidth: 'clamp(260px,42vw,500px)',
+                width: 'clamp(220px, 26vw, 310px)',
+                minHeight: 'clamp(290px, 34vw, 415px)',
               }}
             >
-              {/* ── Лицевая сторона: 道学 + подпись ── */}
+              {/* ── Лицо: 道学 + подпись ── */}
               <div
                 style={{
                   backfaceVisibility: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
+                  position: 'absolute', inset: 0,
+                  display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', justifyContent: 'center',
                   textAlign: 'center',
+                  padding: '32px 28px',
+                  border: '1px solid rgba(212,168,83,0.14)',
+                  borderRadius: 4,
+                  background: 'rgba(4,8,16,0.35)',
                 }}
               >
                 <div
                   style={{
                     fontFamily: '"KNYuanmo","MFLiHei",serif',
-                    fontSize: 'clamp(2.8rem,9vw,5rem)',
+                    fontSize: 'clamp(2.6rem,7vw,4.2rem)',
                     letterSpacing: '0.18em',
                     color: '#d4a855',
                     textShadow: '0 0 40px rgba(212,168,83,0.75), 0 0 80px rgba(212,168,83,0.35)',
@@ -86,21 +86,18 @@ export default function DaoTheorySection() {
                 >
                   {t('sections.daoTheory.zh')}
                 </div>
-
                 <div
                   style={{
-                    width: 'clamp(80px,12vw,160px)',
-                    height: 1,
+                    width: 'clamp(60px,10vw,120px)', height: 1,
                     background: 'linear-gradient(90deg,transparent,#d4a85366,transparent)',
-                    margin: '20px 0',
+                    margin: '18px 0',
                   }}
                 />
-
                 <div
                   className="font-sans uppercase"
                   style={{
-                    fontSize: 'clamp(0.6rem,1.4vw,0.78rem)',
-                    color: 'rgba(200,185,140,0.6)',
+                    fontSize: 'clamp(0.55rem,1.2vw,0.72rem)',
+                    color: 'rgba(200,185,140,0.55)',
                     letterSpacing: '0.35em',
                   }}
                 >
@@ -108,41 +105,47 @@ export default function DaoTheorySection() {
                 </div>
               </div>
 
-              {/* ── Обратная сторона: «Открыть» ── */}
+              {/* ── Изнанка: фото мастера + «Читать дальше» ── */}
               <div
                 style={{
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)',
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 12,
+                  position: 'absolute', inset: 0,
+                  borderRadius: 4,
+                  overflow: 'hidden',
+                  border: '1px solid rgba(212,168,83,0.18)',
                 }}
               >
-                {/* Крупный иероглиф-пиктограмма */}
-                <div style={{
-                  fontFamily: '"STKaiti","KaiTi",serif',
-                  fontSize: 'clamp(2rem,5vw,3.5rem)',
-                  color: '#d4a855',
-                  letterSpacing: '0.15em',
-                  textShadow: '0 0 36px rgba(212,168,83,0.85), 0 0 70px rgba(212,168,83,0.35)',
-                  lineHeight: 1,
-                }}>
-                  開卷
-                </div>
-
-                {/* Русская подпись */}
-                <div style={{
-                  fontFamily: 'sans-serif',
-                  fontSize: 'clamp(0.55rem,1.1vw,0.68rem)',
-                  color: 'rgba(212,168,83,0.55)',
-                  letterSpacing: '0.45em',
-                  textTransform: 'uppercase',
-                }}>
-                  открыть
+                <img
+                  src={img('/images/master-reading.png')}
+                  alt="Мастер Чжан Чжи Шунь"
+                  draggable={false}
+                  style={{
+                    width: '100%', height: '100%',
+                    objectFit: 'cover', objectPosition: 'top center',
+                    display: 'block',
+                  }}
+                />
+                {/* Градиент снизу + надпись */}
+                <div
+                  style={{
+                    position: 'absolute', inset: 0,
+                    background: 'linear-gradient(to top,rgba(4,8,16,0.92) 0%,rgba(4,8,16,0.3) 40%,transparent 70%)',
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'flex-end',
+                    padding: '0 20px 24px',
+                  }}
+                >
+                  <div style={{
+                    fontFamily: 'sans-serif',
+                    fontSize: 'clamp(0.58rem,1.1vw,0.68rem)',
+                    color: 'rgba(212,168,83,0.75)',
+                    letterSpacing: '0.38em',
+                    textTransform: 'uppercase',
+                    textAlign: 'center',
+                  }}>
+                    Читать дальше
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -150,7 +153,6 @@ export default function DaoTheorySection() {
         </motion.div>
       </section>
 
-      {/* Полноэкранный читальный режим */}
       <DaoTreatiseModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   )
