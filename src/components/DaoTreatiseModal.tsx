@@ -202,7 +202,7 @@ export default function DaoTreatiseModal({ isOpen, onClose }: Props) {
                   lineHeight: 1,
                   marginBottom: 14,
                 }}>
-                  奇经八脉
+                  八个大动脉
                 </div>
                 <div style={{
                   width: 'clamp(50px,8vw,120px)', height: 1,
