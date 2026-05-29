@@ -8,7 +8,19 @@ import DaoTreatiseModal from './DaoTreatiseModal'
 export default function DaoTheorySection() {
   const { t } = useTranslation()
   const [isOpen, setIsOpen]       = useState(false)
-  const [isFlipped, setIsFlipped] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+
+  const goldColor = '#d4a855'
+  const cyanColor = '#00d4ff'
+
+  const textColor      = isHovered ? cyanColor : goldColor
+  const textShadow     = isHovered
+    ? '0 0 30px rgba(0,212,255,0.9), 0 0 60px rgba(0,212,255,0.5), 0 0 100px rgba(0,212,255,0.25)'
+    : '0 0 40px rgba(212,168,83,0.75), 0 0 80px rgba(212,168,83,0.35)'
+  const dividerBg      = isHovered
+    ? 'linear-gradient(90deg,transparent,rgba(0,212,255,0.5),transparent)'
+    : 'linear-gradient(90deg,transparent,#d4a85366,transparent)'
+  const subColor       = isHovered ? 'rgba(0,212,255,0.55)' : 'rgba(200,185,140,0.55)'
 
   return (
     <>
@@ -36,7 +48,7 @@ export default function DaoTheorySection() {
           }}
         />
 
-        {/* Флип-карточка */}
+        {/* Карточка — hover меняет цвет на голубой */}
         <motion.div
           className="relative z-10"
           initial={{ opacity: 0, y: 24 }}
@@ -45,129 +57,50 @@ export default function DaoTheorySection() {
           transition={{ duration: 0.8 }}
         >
           <div
-            style={{ perspective: '1000px', cursor: 'pointer' }}
-            onMouseEnter={() => setIsFlipped(true)}
-            onMouseLeave={() => setIsFlipped(false)}
-            onClick={() => { if (isFlipped) setIsOpen(true) }}
+            style={{
+              cursor: 'pointer',
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'center',
+              textAlign: 'center',
+              padding: '32px 28px',
+              width: 'clamp(220px, 26vw, 310px)',
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={() => setIsOpen(true)}
           >
-            <motion.div
-              animate={{ rotateY: isFlipped ? 180 : 0 }}
-              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            <div
               style={{
-                transformStyle: 'preserve-3d',
-                position: 'relative',
-                width: 'clamp(220px, 26vw, 310px)',
-                minHeight: 'clamp(290px, 34vw, 415px)',
-                borderRadius: 18,
-                background: 'transparent',
+                fontFamily: '"KNYuanmo","MFLiHei",serif',
+                fontSize: 'clamp(2.6rem,7vw,4.2rem)',
+                letterSpacing: '0.18em',
+                color: textColor,
+                textShadow,
+                lineHeight: 1.1,
+                transition: 'color 0.35s ease, text-shadow 0.35s ease',
               }}
             >
-              {/* ── Лицо: 道学 + подпись — без рамки, невидимая карточка ── */}
-              <div
-                style={{
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                  background: 'transparent',
-                  position: 'absolute', inset: 0,
-                  display: 'flex', flexDirection: 'column',
-                  alignItems: 'center', justifyContent: 'center',
-                  textAlign: 'center',
-                  padding: '32px 28px',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: '"KNYuanmo","MFLiHei",serif',
-                    fontSize: 'clamp(2.6rem,7vw,4.2rem)',
-                    letterSpacing: '0.18em',
-                    color: '#d4a855',
-                    textShadow: '0 0 40px rgba(212,168,83,0.75), 0 0 80px rgba(212,168,83,0.35)',
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {t('sections.daoTheory.zh')}
-                </div>
-                <div
-                  style={{
-                    width: 'clamp(60px,10vw,120px)', height: 1,
-                    background: 'linear-gradient(90deg,transparent,#d4a85366,transparent)',
-                    margin: '18px 0',
-                  }}
-                />
-                <div
-                  className="font-sans uppercase"
-                  style={{
-                    fontSize: 'clamp(0.55rem,1.2vw,0.72rem)',
-                    color: 'rgba(200,185,140,0.55)',
-                    letterSpacing: '0.35em',
-                  }}
-                >
-                  {t('sections.daoTheory.sub')}
-                </div>
-              </div>
-
-              {/* ── Изнанка: инверсия — светлый фон + тёмный текст ── */}
-              <div
-                style={{
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                  transform: 'rotateY(180deg)',
-                  position: 'absolute', inset: 0,
-                  borderRadius: 18,
-                  overflow: 'hidden',
-                  background: '#f0e8d4',
-                  display: 'flex', flexDirection: 'column',
-                  alignItems: 'center', justifyContent: 'center',
-                  textAlign: 'center',
-                  padding: '32px 28px',
-                }}
-              >
-                {/* Тонкая фактура — фото на фоне с низкой opacity */}
-                <img
-                  src={img('/images/master-reading.png')}
-                  aria-hidden
-                  draggable={false}
-                  style={{
-                    position: 'absolute', inset: 0,
-                    width: '100%', height: '100%',
-                    objectFit: 'cover', objectPosition: 'center top',
-                    display: 'block',
-                    opacity: 0.07,
-                    filter: 'invert(1)',
-                    mixBlendMode: 'multiply',
-                  }}
-                />
-                {/* 道学 — тёмный */}
-                <div style={{
-                  position: 'relative',
-                  fontFamily: '"KNYuanmo","MFLiHei",serif',
-                  fontSize: 'clamp(2.6rem,7vw,4.2rem)',
-                  letterSpacing: '0.18em',
-                  color: '#1c0f04',
-                  lineHeight: 1.1,
-                }}>
-                  {t('sections.daoTheory.zh')}
-                </div>
-                {/* Разделитель */}
-                <div style={{
-                  position: 'relative',
-                  width: 'clamp(40px,8vw,90px)', height: 1,
-                  background: 'rgba(28,15,4,0.35)',
-                  margin: '18px 0',
-                }} />
-                {/* Подзаголовок — тёмный */}
-                <div style={{
-                  position: 'relative',
-                  fontFamily: 'sans-serif',
-                  fontSize: 'clamp(0.55rem,1.2vw,0.72rem)',
-                  color: 'rgba(28,15,4,0.55)',
-                  letterSpacing: '0.35em',
-                  textTransform: 'uppercase',
-                }}>
-                  {t('sections.daoTheory.sub')}
-                </div>
-              </div>
-            </motion.div>
+              {t('sections.daoTheory.zh')}
+            </div>
+            <div
+              style={{
+                width: 'clamp(60px,10vw,120px)', height: 1,
+                background: dividerBg,
+                margin: '18px 0',
+                transition: 'background 0.35s ease',
+              }}
+            />
+            <div
+              className="font-sans uppercase"
+              style={{
+                fontSize: 'clamp(0.55rem,1.2vw,0.72rem)',
+                color: subColor,
+                letterSpacing: '0.35em',
+                transition: 'color 0.35s ease',
+              }}
+            >
+              {t('sections.daoTheory.sub')}
+            </div>
           </div>
         </motion.div>
       </section>
