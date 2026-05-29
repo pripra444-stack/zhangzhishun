@@ -106,7 +106,7 @@ export default function DaoTheorySection() {
                 </div>
               </div>
 
-              {/* ── Изнанка: фото мастера + «Читать дальше» ── */}
+              {/* ── Изнанка: инверсия — светлый фон + тёмный текст ── */}
               <div
                 style={{
                   backfaceVisibility: 'hidden',
@@ -115,38 +115,56 @@ export default function DaoTheorySection() {
                   position: 'absolute', inset: 0,
                   borderRadius: 18,
                   overflow: 'hidden',
+                  background: '#f0e8d4',
+                  display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', justifyContent: 'center',
+                  textAlign: 'center',
+                  padding: '32px 28px',
                 }}
               >
+                {/* Тонкая фактура — фото на фоне с низкой opacity */}
                 <img
                   src={img('/images/master-reading.png')}
-                  alt="Мастер Чжан Чжи Шунь"
+                  aria-hidden
                   draggable={false}
                   style={{
+                    position: 'absolute', inset: 0,
                     width: '100%', height: '100%',
-                    objectFit: 'cover', objectPosition: 'top center',
+                    objectFit: 'cover', objectPosition: 'center top',
                     display: 'block',
+                    opacity: 0.07,
+                    filter: 'invert(1)',
+                    mixBlendMode: 'multiply',
                   }}
                 />
-                {/* Градиент снизу + надпись */}
-                <div
-                  style={{
-                    position: 'absolute', inset: 0,
-                    background: 'linear-gradient(to top,rgba(4,8,16,0.92) 0%,rgba(4,8,16,0.3) 40%,transparent 70%)',
-                    display: 'flex', flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'flex-end',
-                    padding: '0 20px 24px',
-                  }}
-                >
-                  <div style={{
-                    fontFamily: 'sans-serif',
-                    fontSize: 'clamp(0.58rem,1.1vw,0.68rem)',
-                    color: 'rgba(212,168,83,0.75)',
-                    letterSpacing: '0.38em',
-                    textTransform: 'uppercase',
-                    textAlign: 'center',
-                  }}>
-                    Читать дальше
-                  </div>
+                {/* 道学 — тёмный */}
+                <div style={{
+                  position: 'relative',
+                  fontFamily: '"KNYuanmo","MFLiHei",serif',
+                  fontSize: 'clamp(2.6rem,7vw,4.2rem)',
+                  letterSpacing: '0.18em',
+                  color: '#1c0f04',
+                  lineHeight: 1.1,
+                }}>
+                  {t('sections.daoTheory.zh')}
+                </div>
+                {/* Разделитель */}
+                <div style={{
+                  position: 'relative',
+                  width: 'clamp(40px,8vw,90px)', height: 1,
+                  background: 'rgba(28,15,4,0.35)',
+                  margin: '18px 0',
+                }} />
+                {/* Подзаголовок — тёмный */}
+                <div style={{
+                  position: 'relative',
+                  fontFamily: 'sans-serif',
+                  fontSize: 'clamp(0.55rem,1.2vw,0.72rem)',
+                  color: 'rgba(28,15,4,0.55)',
+                  letterSpacing: '0.35em',
+                  textTransform: 'uppercase',
+                }}>
+                  {t('sections.daoTheory.sub')}
                 </div>
               </div>
             </motion.div>
