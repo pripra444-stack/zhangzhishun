@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import BiographyScroll from './components/BiographyScroll'
 import PracticeSection from './components/PracticeSection'
+import MeridiansSection from './components/MeridiansSection'
 import DaoTheorySection from './components/DaoTheorySection'
 
 function Footer() {
@@ -36,6 +37,7 @@ export default function App() {
           cols={2}
         />
         <PracticeSection sectionKey="changshou" bgClass="bg-bg-deep" cols={2} />
+        <MeridiansSection />
         <DaoTheorySection />
       </main>
       <Footer />
