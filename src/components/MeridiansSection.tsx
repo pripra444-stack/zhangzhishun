@@ -22,7 +22,7 @@ function MeridianCircle({
   return (
     <motion.div
       className="flex flex-col items-center cursor-default select-none w-full"
-      style={{ opacity: 0.75 }}
+      style={{ opacity: 0.5 }}
       whileHover={{ opacity: 1, scale: 1.06 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
     >
