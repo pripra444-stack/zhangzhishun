@@ -210,6 +210,22 @@ export default function BiographyScroll() {
                   scrollbarWidth: 'none',
                 }}
               >
+                {/* Портрет мастера */}
+                <div style={{ textAlign: 'center', marginBottom: '1.2em' }}>
+                  <img
+                    src={img('/images/biography-master.png')}
+                    alt="Мастер Чжан Чжишун"
+                    draggable={false}
+                    style={{
+                      display: 'inline-block',
+                      width: '62%',
+                      maxWidth: 260,
+                      borderRadius: 4,
+                      opacity: 0.92,
+                    }}
+                  />
+                </div>
+
                 {/* Вступление */}
                 <p style={S}>
                   <strong>Чжан Чжишун</strong> (1912–2015) — китайский даосский мастер школы Цюаньчжэнь Лунмэнь, известный под даосским именем Ми Цзинцзы (Mi Jingzi). Он считался «земным бессмертным» (地仙), прожил 104 года и был почитаем как хранитель традиции внутренней алхимии и цигун в XX веке.
