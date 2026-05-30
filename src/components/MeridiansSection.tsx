@@ -6,12 +6,12 @@ import { img } from '../utils/assets'
 import { useIsMobile } from '../utils/useIsMobile'
 
 function MeridianCircle({
-  zhName, ruName, image, isBlue,
-}: { zhName: string; ruName: string; image: string; isBlue: boolean }) {
-  const frameImg   = isBlue ? img('/images/circle-frame-blue.png') : img('/images/circle-frame-gold.png')
-  const nameColor  = isBlue ? '#00D8FF' : '#d4a855'
-  const nameShadow = isBlue ? '0 0 18px rgba(0,216,255,0.35)' : 'none'
-  const ruColor    = isBlue ? 'rgba(0,216,255,0.5)' : 'rgba(255,255,255,0.5)'
+  zhName, ruName, image,
+}: { zhName: string; ruName: string; image: string }) {
+  const frameImg   = img('/images/circle-frame-orange.png')
+  const nameColor  = '#FF7700'
+  const nameShadow = '0 0 20px rgba(255,119,0,0.55)'
+  const ruColor    = 'rgba(255,119,0,0.6)'
 
   const frameShadow = [
     'drop-shadow(0 6px 18px rgba(0,4,18,0.98))',
@@ -52,7 +52,7 @@ function MeridianCircle({
             <div style={{
               width: '100%', height: '100%',
               background: 'rgba(4,8,16,0.7)',
-              border: '1px dashed rgba(212,168,83,0.12)',
+              border: '1px dashed rgba(255,119,0,0.18)',
               borderRadius: '50%',
             }} />
           )}
@@ -138,8 +138,8 @@ export default function MeridiansSection() {
             fontFamily: '"KNYuanmo","MFLiHei",serif',
             fontSize: 'clamp(2rem,8vw,3.5rem)',
             letterSpacing: '0.12em',
-            color: '#d4a855',
-            textShadow: '0 0 40px rgba(212,168,83,0.75), 0 0 80px rgba(212,168,83,0.35)',
+            color: '#FF7700',
+            textShadow: '0 0 40px rgba(255,119,0,0.75), 0 0 80px rgba(255,119,0,0.35)',
           }}>
             {t('sections.meridians.zh')}
           </div>
@@ -149,9 +149,9 @@ export default function MeridiansSection() {
         </motion.div>
 
         {/* Разделитель */}
-        <div className="w-32 h-px" style={{ background: 'linear-gradient(90deg,transparent,#d4a85366,transparent)' }} />
+        <div className="w-32 h-px" style={{ background: 'linear-gradient(90deg,transparent,rgba(255,119,0,0.45),transparent)' }} />
 
-        {/* Первые 4 — золотые рамки */}
+        {/* Первые 4 */}
         <motion.div
           className="grid grid-cols-2 mx-auto"
           style={{ width: '100%', maxWidth: '38.5vw', columnGap: '7.69vw', rowGap: '2vw' }}
@@ -166,12 +166,11 @@ export default function MeridiansSection() {
               zhName={m.zhName}
               ruName={m.ruName}
               image={m.image}
-              isBlue={false}
             />
           ))}
         </motion.div>
 
-        {/* Следующие 4 — голубые рамки */}
+        {/* Следующие 4 */}
         <motion.div
           className="grid grid-cols-2 mx-auto"
           style={{ width: '100%', maxWidth: '38.5vw', columnGap: '7.69vw', rowGap: '2vw' }}
@@ -186,7 +185,6 @@ export default function MeridiansSection() {
               zhName={m.zhName}
               ruName={m.ruName}
               image={m.image}
-              isBlue={true}
             />
           ))}
         </motion.div>
