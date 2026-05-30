@@ -11,7 +11,7 @@ function MeridianCircle({
   const frameImg   = img('/images/circle-frame-orange.png')
   const nameColor  = '#FF7700'
   const nameShadow = '0 0 20px rgba(255,119,0,0.55)'
-  const ruColor    = 'rgba(255,119,0,0.6)'
+  const ruColor    = 'rgba(255,255,255,0.5)'
 
   const frameShadow = [
     'drop-shadow(0 6px 18px rgba(0,4,18,0.98))',
@@ -34,7 +34,7 @@ function MeridianCircle({
           aria-hidden
           draggable={false}
           className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
-          style={{ zIndex: 2, filter: frameShadow }}
+          style={{ zIndex: 2, filter: frameShadow, opacity: 0.7 }}
         />
         {/* Фото */}
         <div
