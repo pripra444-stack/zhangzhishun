@@ -32,12 +32,11 @@ function MobileCarousel({ exercises, onOpen, sectionKey }: { exercises: Exercise
   const [idx, setIdx] = useState(0)
   const touchX = useRef(0)
 
-  // Ширина карточки = 68vw, пик соседей = ~16vw с каждой стороны
-  const CARD_VW = 68
-  const GAP_VW  = 4
-  // left offset карточки 0 = (100 - CARD_VW) / 2 = 16vw
-  const PEEK_VW = (100 - CARD_VW) / 2
-  const translateVw = PEEK_VW - idx * (CARD_VW + GAP_VW)
+  // Ширина карточки = 76vw, peek справа = ~10vw
+  const CARD_VW = 76
+  const GAP_VW  = 6
+  // карточка 0 начинается с левого края (0vw), справа виден следующий
+  const translateVw = -idx * (CARD_VW + GAP_VW)
 
   const go = (delta: number) => {
     const next = Math.max(0, Math.min(exercises.length - 1, idx + delta))
@@ -83,7 +82,7 @@ function MobileCarousel({ exercises, onOpen, sectionKey }: { exercises: Exercise
         onTouchEnd={onTouchEnd}
       >
         <motion.div
-          style={{ display: 'flex', gap: `${GAP_VW}vw` }}
+          style={{ display: 'flex', gap: `${GAP_VW}vw`, paddingLeft: '5vw' }}
           animate={{ x: `${translateVw}vw` }}
           transition={{ type: 'spring', stiffness: 300, damping: 32 }}
         >
@@ -93,8 +92,9 @@ function MobileCarousel({ exercises, onOpen, sectionKey }: { exercises: Exercise
               style={{
                 width: `${CARD_VW}vw`,
                 flexShrink: 0,
-                opacity: i === idx ? 1 : 0.55,
-                transform: i === idx ? 'scale(1)' : 'scale(0.86)',
+                opacity: i === idx ? 1 : 0.5,
+                transform: i === idx ? 'scale(1)' : 'scale(0.9)',
+                transformOrigin: i > idx ? 'left center' : 'right center',
                 transition: 'opacity 0.35s, transform 0.35s',
                 cursor: 'pointer',
               }}

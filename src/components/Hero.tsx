@@ -208,7 +208,7 @@ export default function Hero() {
       {/* Z:4 — текст сверху */}
       <motion.div
         className="absolute z-[4] top-0 left-0 right-0 flex flex-col items-center text-center"
-        style={{ paddingTop: 'clamp(24px, 4.5vh, 52px)' }}
+        style={{ paddingTop: 'clamp(72px, 10vh, 100px)' }}
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.12, duration: 0.8 }}
