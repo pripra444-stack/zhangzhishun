@@ -6,8 +6,8 @@ import { img } from '../utils/assets'
 import { useIsMobile } from '../utils/useIsMobile'
 
 function MeridianCircle({
-  zhName, ruName, image,
-}: { zhName: string; ruName: string; image: string }) {
+  zhName, ruName, image, isMobile = false,
+}: { zhName: string; ruName: string; image: string; isMobile?: boolean }) {
   const frameImg   = img('/images/circle-frame-orange.png')
   const nameColor  = '#FF7700'
   const nameShadow = '0 0 20px rgba(255,119,0,0.55)'
@@ -63,7 +63,7 @@ function MeridianCircle({
       <div style={{
         marginTop: 4,
         fontFamily: '"STKaiti","KaiTi","AR PL UKai CN","Noto Serif SC",serif',
-        fontSize: 'clamp(1.65rem,3.3vw,2.55rem)',
+        fontSize: isMobile ? 'clamp(1.3rem,5vw,1.8rem)' : 'clamp(1.65rem,3.3vw,2.55rem)',
         color: nameColor,
         letterSpacing: '0.1em',
         lineHeight: 1.2,
@@ -76,11 +76,11 @@ function MeridianCircle({
       {/* Русское название */}
       <div style={{
         fontFamily: 'sans-serif',
-        fontSize: 'clamp(0.63rem,1.28vw,0.98rem)',
+        fontSize: isMobile ? 'clamp(0.75rem,3vw,0.92rem)' : 'clamp(0.63rem,1.28vw,0.98rem)',
         color: ruColor,
         letterSpacing: '0.02em',
-        lineHeight: 1.35,
-        marginTop: 3,
+        lineHeight: 1.4,
+        marginTop: isMobile ? 5 : 3,
         textAlign: 'center',
         maxWidth: '120%',
         padding: '0 4px',
@@ -154,7 +154,12 @@ export default function MeridiansSection() {
         {/* Первые 4 */}
         <motion.div
           className="grid grid-cols-2 mx-auto"
-          style={{ width: '100%', maxWidth: '38.5vw', columnGap: '7.69vw', rowGap: '2vw' }}
+          style={{
+            width: '100%',
+            maxWidth: isMobile ? '88vw' : '38.5vw',
+            columnGap: isMobile ? '6vw' : '7.69vw',
+            rowGap: isMobile ? '6vw' : '2vw',
+          }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-60px' }}
@@ -166,6 +171,7 @@ export default function MeridiansSection() {
               zhName={m.zhName}
               ruName={m.ruName}
               image={m.image}
+              isMobile={isMobile}
             />
           ))}
         </motion.div>
@@ -173,7 +179,12 @@ export default function MeridiansSection() {
         {/* Следующие 4 */}
         <motion.div
           className="grid grid-cols-2 mx-auto"
-          style={{ width: '100%', maxWidth: '38.5vw', columnGap: '7.69vw', rowGap: '2vw' }}
+          style={{
+            width: '100%',
+            maxWidth: isMobile ? '88vw' : '38.5vw',
+            columnGap: isMobile ? '6vw' : '7.69vw',
+            rowGap: isMobile ? '6vw' : '2vw',
+          }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-60px' }}

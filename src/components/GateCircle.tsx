@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import type { Exercise } from '../data/exercises'
 import { img } from '../utils/assets'
+import { useIsMobile } from '../utils/useIsMobile'
 
 interface Props {
   exercise: Exercise
@@ -13,6 +14,7 @@ interface Props {
 export default function GateCircle({ exercise, onClick, sectionKey }: Props) {
   const { t } = useTranslation()
   const isChangshou = sectionKey === 'changshou'
+  const isMobile = useIsMobile()
 
   const frameImg  = isChangshou ? img('/images/circle-frame-blue.png') : img('/images/circle-frame-gold.png')
   const nameColor = isChangshou ? '#00D8FF' : '#d4a855'
@@ -65,7 +67,7 @@ export default function GateCircle({ exercise, onClick, sectionKey }: Props) {
         className="mt-1 text-center"
         style={{
           fontFamily: '"STKaiti", "KaiTi", "AR PL UKai CN", "Noto Serif SC", serif',
-          fontSize: 'clamp(1.65rem, 3.3vw, 2.55rem)',
+          fontSize: isMobile ? 'clamp(1.4rem, 5.5vw, 1.9rem)' : 'clamp(1.65rem, 3.3vw, 2.55rem)',
           color: nameColor,
           letterSpacing: '0.1em',
           lineHeight: 1.2,
@@ -79,12 +81,12 @@ export default function GateCircle({ exercise, onClick, sectionKey }: Props) {
       <div
         className="text-center font-sans px-1"
         style={{
-          fontSize: 'clamp(0.63rem, 1.28vw, 0.98rem)',
-          color: 'rgba(255,255,255,0.5)',
+          fontSize: isMobile ? 'clamp(0.78rem, 3.2vw, 0.95rem)' : 'clamp(0.63rem, 1.28vw, 0.98rem)',
+          color: 'rgba(255,255,255,0.55)',
           letterSpacing: '0.02em',
-          lineHeight: 1.35,
-          marginTop: '3px',
-          maxWidth: '120%',
+          lineHeight: 1.4,
+          marginTop: isMobile ? 6 : 3,
+          maxWidth: '130%',
         }}
       >
         {t(exercise.labelKey)}
